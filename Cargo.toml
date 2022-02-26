@@ -1,0 +1,14 @@
+[package]
+name = "ebyte-rs"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+embedded-hal = { version = "0.2.7", features = ["unproven"] }
+embedded-hal-mock = "0.8.0"
+
+[dependencies.snafu]
+version = "0.7.0"
+features = ["rust_1_46"]
