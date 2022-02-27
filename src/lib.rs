@@ -9,6 +9,7 @@ use embedded_hal::{
 use error::Error;
 use mode::{Mode, Normal, Program};
 use model_data::ModelData;
+use nb::block;
 use parameters::{
     air_baudrate::AirBaudRate,
     baudrate::BaudRate,
@@ -98,8 +99,64 @@ where
         }
     }
 
+    /// Write entire buffer to serial port
+    pub fn write_buffer(&mut self, buffer: &[u8]) -> Result<(), crate::Error> {
+        for ch in buffer {
+            let _ = block!(self.serial.write(*ch));
+        }
+        Ok(())
+    }
+
+    /// Read entire buffer from serial port
+    pub fn read_buffer(&mut self, buffer: &mut [u8]) -> Result<(), Error> {
+        let mut n = 0;
+        while n < buffer.len() {
+            if let Ok(ch) = block!(self.serial.read()) {
+                buffer[n] = ch;
+                n += 1;
+            }
+        }
+        Ok(())
+    }
+
     pub fn release(self) -> (S, M0, M1, Aux, D) {
         (self.serial, self.m0, self.m1, self.aux, self.delay)
+    }
+}
+
+impl<S, Aux, M0, M1, D> Read<u8> for Ebyte<S, Aux, M0, M1, D, Normal>
+where
+    S: Read<u8> + Write<u8>,
+    Aux: InputPin,
+    M0: OutputPin,
+    M1: OutputPin,
+    D: DelayMs<u32>,
+{
+    type Error = <S as Read<u8>>::Error;
+
+    fn read(&mut self) -> nb::Result<u8, Self::Error> {
+        self.serial.read()
+    }
+}
+
+/// Implement Write for Hc12 in normal mode.
+/// This just defers to the underlying serial implementation.
+impl<S, Aux, M0, M1, D> Write<u8> for Ebyte<S, Aux, M0, M1, D, Normal>
+where
+    S: Read<u8> + Write<u8>,
+    Aux: InputPin,
+    M0: OutputPin,
+    M1: OutputPin,
+    D: DelayMs<u32>,
+{
+    type Error = <S as Write<u8>>::Error;
+
+    fn write(&mut self, word: u8) -> nb::Result<(), Self::Error> {
+        self.serial.write(word)
+    }
+
+    fn flush(&mut self) -> nb::Result<(), Self::Error> {
+        self.serial.flush()
     }
 }
 
@@ -175,6 +232,22 @@ where
         })
     }
 
+    pub fn reset(&mut self) {
+        let _ = self.serial.write(0xC4);
+        let _ = self.serial.write(0xC4);
+        let _ = self.serial.write(0xC4);
+
+        loop {
+            // TODO timeouts?
+            match self.aux.is_low() {
+                Ok(true) => continue,
+                Ok(false) => break,
+                // TODO error handling.
+                Err(_e) => panic!("failed to wait for aux pin"),
+            }
+        }
+    }
+
     pub fn into_normal_mode(mut self) -> Ebyte<S, Aux, M0, M1, D, Normal> {
         let mode = Normal;
         mode.set_pins(&mut self.m0, &mut self.m1, &mut self.aux, &mut self.delay);
@@ -216,6 +289,10 @@ mod tests {
         let delay = delay::MockNoop;
 
         let mock = Ebyte::new(serial, m0, m1, aux, delay).unwrap();
-        let (_s, _aux, _m0, _m1, _delay) = mock.release();
+        let (mut s, mut aux, mut m0, mut m1, _delay) = mock.release();
+        s.done();
+        aux.done();
+        m0.done();
+        m1.done();
     }
 }
