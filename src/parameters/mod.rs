@@ -1,20 +1,29 @@
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
-pub struct Parameters {
-    save: u8,
-    address: u16,
-    parity: bool,
-    uart_rate: u8,
-    air_rate: u8,
-    trans: u8,
-    pullup: u8,
-    wakeup: u8,
-    fec: u8,
-    power: u8,
-}
+use crate::error::Error;
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum Parity {
-    EightNoneOne,
-    EightOddOne,
-    EightEvenOne,
+use self::{
+    air_baudrate::AirBaudRate,
+    baudrate::BaudRate,
+    option::{
+        ForwardErrorCorrectionMode, IoDriveMode, TransmissionMode, TransmissionPower, WakeupTime,
+    },
+    uart_parity::Parity,
+};
+
+pub mod air_baudrate;
+pub mod baudrate;
+pub mod option;
+pub mod uart_parity;
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Parameters {
+    pub address: u16,
+    pub channel: u8,
+    pub uart_parity: Parity,
+    pub uart_rate: BaudRate,
+    pub air_rate: AirBaudRate,
+    pub transmission_mode: TransmissionMode,
+    pub io_drive_mode: IoDriveMode,
+    pub wakeup_time: WakeupTime,
+    pub fec: ForwardErrorCorrectionMode,
+    pub transmission_power: TransmissionPower,
 }

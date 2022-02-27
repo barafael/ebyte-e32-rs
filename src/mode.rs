@@ -18,7 +18,7 @@ pub struct Monitor;
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
 pub struct Program;
 
-pub(crate) trait Mode {
+pub trait Mode {
     fn id(&self) -> u8;
 
     fn set_pins<M0, M1, Aux, D>(&self, m0: &mut M0, m1: &mut M1, aux: &mut Aux, delay: &mut D)
