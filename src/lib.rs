@@ -169,9 +169,9 @@ where
     D: DelayMs<u32>,
 {
     pub fn read_model_data(&mut self) -> Result<ModelData, Error> {
-        let _ = self.serial.write(0xC3);
-        let _ = self.serial.write(0xC3);
-        let _ = self.serial.write(0xC3);
+        self.serial.write(0xC3).map_err(|_| Error::SerialWrite)?;
+        self.serial.write(0xC3).map_err(|_| Error::SerialWrite)?;
+        self.serial.write(0xC3).map_err(|_| Error::SerialWrite)?;
 
         let save = self.serial.read().map_err(|_| Error::SerialRead)?;
         let model = self.serial.read().map_err(|_| Error::SerialRead)?;
