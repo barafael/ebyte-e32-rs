@@ -2,6 +2,9 @@
 name = "ebyte-e32"
 version = "0.1.0"
 edition = "2021"
+description = "Platform-agnostic driver for Ebyte E32 LoRa modules"
+license-file = "LICENSE"
+repository = "https://github.com/barafael/ebyte-e32-rs"
 
 [dev-dependencies]
 embedded-hal-mock = "0.8.0"
