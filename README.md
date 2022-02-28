@@ -39,3 +39,4 @@ loop {
 # Known limitations
 * Driver is completely blocking and relies on blocking delay, blocking sometimes for 40ms
 * AUX is not monitored while writing serial data. This would be important when filling the module buffer which has space for 512 bytes.
+* Transmission power, frequency, baudrate and probably some other definitions are currently specific for E32-433T30D. See datasheet for table with module specialties
