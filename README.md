@@ -35,3 +35,6 @@ loop {
     led.toggle();
 }
 ```
+
+# Known limitations
+* Driver is completely blocking and relies on blocking delay, blocking sometimes for 40ms
