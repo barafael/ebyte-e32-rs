@@ -1,16 +1,13 @@
 use crate::error::Error;
+use smart_default::SmartDefault;
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, SmartDefault)]
+#[cfg_attr(test, derive(proptest_derive::Arbitrary))]
 pub enum Parity {
+    #[default]
     None,
     Odd,
     Even,
-}
-
-impl Default for Parity {
-    fn default() -> Self {
-        Self::None
-    }
 }
 
 impl TryFrom<u8> for Parity {
@@ -22,6 +19,16 @@ impl TryFrom<u8> for Parity {
             1 => Ok(Self::Odd),
             2 => Ok(Self::Even),
             _ => Err(Error::InvalidUartParity { value }),
+        }
+    }
+}
+
+impl From<Parity> for u8 {
+    fn from(parity: Parity) -> Self {
+        match parity {
+            Parity::None => 0,
+            Parity::Odd => 1,
+            Parity::Even => 2,
         }
     }
 }

@@ -1,21 +1,18 @@
 use crate::error::Error;
+use smart_default::SmartDefault;
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, SmartDefault)]
+#[cfg_attr(test, derive(proptest_derive::Arbitrary))]
 pub enum BaudRate {
     Bps1200,
     Bps2400,
     Bps4800,
+    #[default]
     Bps9600,
     Bps19200,
     Bps38400,
     Bps57600,
     Bps115200,
-}
-
-impl Default for BaudRate {
-    fn default() -> Self {
-        Self::Bps9600
-    }
 }
 
 impl TryFrom<u8> for BaudRate {
@@ -32,6 +29,21 @@ impl TryFrom<u8> for BaudRate {
             6 => Ok(Self::Bps57600),
             7 => Ok(Self::Bps115200),
             _ => Err(Error::InvalidBaudrate { rate: value }),
+        }
+    }
+}
+
+impl From<BaudRate> for u8 {
+    fn from(rate: BaudRate) -> Self {
+        match rate {
+            BaudRate::Bps1200 => 0,
+            BaudRate::Bps2400 => 1,
+            BaudRate::Bps4800 => 2,
+            BaudRate::Bps9600 => 3,
+            BaudRate::Bps19200 => 4,
+            BaudRate::Bps38400 => 5,
+            BaudRate::Bps57600 => 6,
+            BaudRate::Bps115200 => 7,
         }
     }
 }

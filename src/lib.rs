@@ -10,20 +10,12 @@ use error::Error;
 use mode::{Mode, Normal, Program};
 use model_data::ModelData;
 use nb::block;
-use parameters::{
-    air_baudrate::AirBaudRate,
-    baudrate::BaudRate,
-    option::{
-        ForwardErrorCorrectionMode, IoDriveMode, TransmissionMode, TransmissionPower, WakeupTime,
-    },
-    uart_parity::Parity,
-    Parameters,
-};
+use parameters::{Parameters, Persistence};
 
 mod error;
 mod mode;
 mod model_data;
-mod parameters;
+pub mod parameters;
 
 pub struct Ebyte<S, Aux, M0, M1, D, M>
 where
@@ -169,16 +161,14 @@ where
     D: DelayMs<u32>,
 {
     pub fn read_model_data(&mut self) -> Result<ModelData, Error> {
-        self.serial.write(0xC3).map_err(|_| Error::SerialWrite)?;
-        self.serial.write(0xC3).map_err(|_| Error::SerialWrite)?;
-        self.serial.write(0xC3).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
 
-        let save = self.serial.read().map_err(|_| Error::SerialRead)?;
-        let model = self.serial.read().map_err(|_| Error::SerialRead)?;
-        let version = self.serial.read().map_err(|_| Error::SerialRead)?;
-        let features = self.serial.read().map_err(|_| Error::SerialRead)?;
-        let _ = self.serial.read().map_err(|_| Error::SerialRead)?;
-        let _ = self.serial.read().map_err(|_| Error::SerialRead)?;
+        let save = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        let model = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        let version = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        let features = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
 
         if save == 0xC3 {
             Ok(ModelData {
@@ -192,51 +182,57 @@ where
     }
 
     pub fn read_parameters(&mut self) -> Result<Parameters, Error> {
-        let _ = self.serial.write(0xC1);
-        let _ = self.serial.write(0xC1);
-        let _ = self.serial.write(0xC1);
+        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
 
-        let save = self.serial.read().map_err(|_| Error::SerialRead)?;
-        let address_high = self.serial.read().map_err(|_| Error::SerialRead)?;
-        let address_low = self.serial.read().map_err(|_| Error::SerialRead)?;
-        let speed = self.serial.read().map_err(|_| Error::SerialRead)?;
-        let channel = self.serial.read().map_err(|_| Error::SerialRead)?;
-        let options = self.serial.read().map_err(|_| Error::SerialRead)?;
+        let save = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
 
-        if save != 0xC1 {
+        let bytes = [0u8; 5];
+        for _ in 0..5 {
+            block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        }
+
+        if save != 0xC0 {
             return Err(Error::ReadParameters);
         }
 
-        let address = (address_high as u16) << 8 | address_low as u16;
-        let uart_parity = Parity::try_from((speed & 0xC0) >> 6)?;
-        let uart_rate = BaudRate::try_from((speed & 0x38) >> 3)?;
-        let air_rate = AirBaudRate::try_from(speed & 0x7)?;
+        let params = Parameters::from_bytes(&bytes)?;
 
-        let transmission_mode = TransmissionMode::try_from((options & 0x80) >> 7)?;
-        let io_drive_mode = IoDriveMode::try_from((options & 0x40) >> 6)?;
-        let wakeup_time = WakeupTime::try_from((options & 0x38) >> 3)?;
-        let fec = ForwardErrorCorrectionMode::try_from((options & 0x07) >> 2)?;
-        let transmission_power = TransmissionPower::try_from(options & 0x3)?;
+        Ok(params)
+    }
 
-        Ok(Parameters {
-            address,
-            channel,
-            uart_parity,
-            uart_rate,
-            air_rate,
-            transmission_mode,
-            io_drive_mode,
-            wakeup_time,
-            fec,
-            transmission_power,
-        })
+    pub fn set_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
+        let persistence = u8::from(mode);
+        block!(self.serial.write(persistence)).map_err(|_| Error::SerialWrite)?;
+
+        let bytes: [u8; 5] = params.to_bytes();
+        block!(self.serial.write(bytes[0])).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(bytes[1])).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(bytes[2])).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(bytes[3])).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(bytes[4])).map_err(|_| Error::SerialWrite)?;
+
+        for _ in 0..6 {
+            let _ = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        }
+
+        self.delay.delay_ms(40);
+
+        self.until_aux();
+
+        Ok(())
     }
 
     pub fn reset(&mut self) {
-        let _ = self.serial.write(0xC4);
-        let _ = self.serial.write(0xC4);
-        let _ = self.serial.write(0xC4);
+        let _ = block!(self.serial.write(0xC4));
+        let _ = block!(self.serial.write(0xC4));
+        let _ = block!(self.serial.write(0xC4));
 
+        self.until_aux();
+    }
+
+    fn until_aux(&mut self) {
         loop {
             // TODO timeouts?
             match self.aux.is_low() {
