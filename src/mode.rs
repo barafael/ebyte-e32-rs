@@ -21,11 +21,11 @@ pub struct Program;
 pub trait Mode {
     fn id(&self) -> u8;
 
-    fn set_pins<M0, M1, Aux, D>(&self, m0: &mut M0, m1: &mut M1, aux: &mut Aux, delay: &mut D)
+    fn set_pins<Aux, M0, M1, D>(aux: &mut Aux, m0: &mut M0, m1: &mut M1, delay: &mut D)
     where
+        Aux: InputPin,
         M0: OutputPin,
         M1: OutputPin,
-        Aux: InputPin,
         D: DelayMs<u32>;
 }
 
@@ -37,11 +37,11 @@ macro_rules! impl_mode {
                     $id
                 }
 
-                fn set_pins<M0, M1, Aux, D>(&self, m0: &mut M0, m1: &mut M1, aux: &mut Aux, delay: &mut D)
+                fn set_pins<Aux, M0, M1, D>(aux: &mut Aux, m0: &mut M0, m1: &mut M1, delay: &mut D)
                 where
+                    Aux: InputPin,
                     M0: OutputPin,
                     M1: OutputPin,
-                    Aux: InputPin,
                     D: DelayMs<u32> {
                         // TODO check if delay times can be reduced.
                             delay.delay_ms(40);
@@ -97,7 +97,6 @@ mod test {
 
     #[test]
     fn pins_normal() {
-        let mode = Normal;
         let mut m0 = Pin::new(&vec![Transaction::set(Low)]);
         let mut m1 = Pin::new(&vec![Transaction::set(Low)]);
         let mut aux = Pin::new(&vec![
@@ -105,7 +104,7 @@ mod test {
             Transaction::get(Low),
             Transaction::get(High),
         ]);
-        mode.set_pins(&mut m0, &mut m1, &mut aux, &mut MockNoop);
+        Normal::set_pins(&mut aux, &mut m0, &mut m1, &mut MockNoop);
         m0.done();
         m1.done();
         aux.done();
@@ -113,7 +112,6 @@ mod test {
 
     #[test]
     fn pins_wakeup() {
-        let mode = Wakeup;
         let mut m0 = Pin::new(&vec![Transaction::set(High)]);
         let mut m1 = Pin::new(&vec![Transaction::set(Low)]);
         let mut aux = Pin::new(&vec![
@@ -121,7 +119,7 @@ mod test {
             Transaction::get(Low),
             Transaction::get(High),
         ]);
-        mode.set_pins(&mut m0, &mut m1, &mut aux, &mut MockNoop);
+        Wakeup::set_pins(&mut aux, &mut m0, &mut m1, &mut MockNoop);
         m0.done();
         m1.done();
         aux.done();
@@ -129,7 +127,6 @@ mod test {
 
     #[test]
     fn pins_powerdown() {
-        let mode = Monitor;
         let mut m0 = Pin::new(&vec![Transaction::set(Low)]);
         let mut m1 = Pin::new(&vec![Transaction::set(High)]);
         let mut aux = Pin::new(&vec![
@@ -137,7 +134,7 @@ mod test {
             Transaction::get(Low),
             Transaction::get(High),
         ]);
-        mode.set_pins(&mut m0, &mut m1, &mut aux, &mut MockNoop);
+        Monitor::set_pins(&mut aux, &mut m0, &mut m1, &mut MockNoop);
         m0.done();
         m1.done();
         aux.done();
@@ -145,7 +142,6 @@ mod test {
 
     #[test]
     fn pins_program() {
-        let mode = Program;
         let mut m0 = Pin::new(&vec![Transaction::set(High)]);
         let mut m1 = Pin::new(&vec![Transaction::set(High)]);
         let mut aux = Pin::new(&vec![
@@ -153,7 +149,7 @@ mod test {
             Transaction::get(Low),
             Transaction::get(High),
         ]);
-        mode.set_pins(&mut m0, &mut m1, &mut aux, &mut MockNoop);
+        Program::set_pins(&mut aux, &mut m0, &mut m1, &mut MockNoop);
         m0.done();
         m1.done();
         aux.done();

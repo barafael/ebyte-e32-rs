@@ -17,6 +17,7 @@ pub mod option;
 pub mod uart_parity;
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, SmartDefault)]
+#[cfg_attr(test, derive(proptest_derive::Arbitrary))]
 pub enum Persistence {
     #[default]
     Temporary,
@@ -115,6 +116,14 @@ impl Parameters {
         })
     }
 }
+
+/*
+/// Only valid for 433MHz modules.
+pub fn channel_to_freq_mhz(channel: u8) -> u32 {
+    assert!((0..31).contains(&channel));
+    410 + channel as u32
+}
+*/
 
 #[cfg(test)]
 mod test {

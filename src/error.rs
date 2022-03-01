@@ -8,6 +8,9 @@ pub enum Error {
     #[snafu(display("Failed to read parameters"))]
     ReadParameters,
 
+    #[snafu(display("Failed to set parameters"))]
+    SetParameters,
+
     #[snafu(display("Failed to read serial port"))]
     SerialRead,
 

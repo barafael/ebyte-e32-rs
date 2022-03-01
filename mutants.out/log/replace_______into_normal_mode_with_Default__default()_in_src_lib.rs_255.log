@@ -1,0 +1,37 @@
+
+*** replace <??>::into_normal_mode with Default::default() in src/lib.rs:255
+*** --- src/lib.rs
++++ replace <??>::into_normal_mode with Default::default()
+@@ -248,19 +248,11 @@
+                 Ok(false) => break,
+                 // TODO error handling.
+                 Err(_e) => panic!("failed to wait for aux pin"),
+             }
+         }
+     }
+ 
+     pub fn into_normal_mode(mut self) -> Ebyte<S, Aux, M0, M1, D, Normal> {
+-        Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+-        Ebyte {
+-            serial: self.serial,
+-            aux: self.aux,
+-            m0: self.m0,
+-            m1: self.m1,
+-            delay: self.delay,
+-            mode: PhantomData::<Normal>,
+-        }
+-    }
++Default::default() /* ~ changed by cargo-mutants ~ */
++}
+ }
+
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(101) in 0.251sJFXww7)
+error[E0277]: the trait bound `Ebyte<S, Aux, M0, M1, D, mode::Normal>: std::default::Default` is not satisfied
+   --> src/lib.rs:256:1
+    |
+256 | Default::default() /* ~ changed by cargo-mutants ~ */
+    | ^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `Ebyte<S, Aux, M0, M1, D, mode::Normal>`
+
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `ebyte-e32` due to previous error

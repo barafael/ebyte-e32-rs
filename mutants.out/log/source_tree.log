@@ -1,0 +1,6 @@
+
+*** source tree
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.032s
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 0.032snfo] target(s) in 0.01s

@@ -1,0 +1,7 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc 3ecbdba2d652399f0f20a51d6d7cf306f2b9a64a9fbbfb4d7059e7ccab9cfba6 # shrinks to parameters = Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }, persistence = Temporary

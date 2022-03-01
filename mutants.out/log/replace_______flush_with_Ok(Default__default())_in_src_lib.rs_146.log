@@ -1,0 +1,68 @@
+
+*** replace <??>::flush with Ok(Default::default()) in src/lib.rs:146
+*** --- src/lib.rs
++++ replace <??>::flush with Ok(Default::default())
+@@ -139,18 +139,18 @@
+ {
+     type Error = <S as Write<u8>>::Error;
+ 
+     fn write(&mut self, word: u8) -> nb::Result<(), Self::Error> {
+         self.serial.write(word)
+     }
+ 
+     fn flush(&mut self) -> nb::Result<(), Self::Error> {
+-        self.serial.flush()
+-    }
++Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
++}
+ }
+ 
+ // TODO consider moving those methods to normal mode,
+ // then do the mode switch inside the method.
+ // Switching modes for the user right now involves a little too much typestate things.
+ impl<S, Aux, M0, M1, D> Ebyte<S, Aux, M0, M1, D, Program>
+ where
+     S: Read<u8> + Write<u8>,
+
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.251s
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 0.953s
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(101) in 3.189sJFXww7)
+    Finished test [unoptimized + debuginfo] target(s) in 0.18s
+     Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
+
+running 18 tests
+test mode::test::pins_program ... ok
+test mode::test::pins_powerdown ... ok
+test mode::test::id ... ok
+test mode::test::pins_normal ... ok
+test test::acquire_release ... ok
+test mode::test::pins_wakeup ... ok
+test test::flushes ... FAILED
+test test::resets ... ok
+test test::reads_byte ... ok
+test model_data::test::model_data_from_to_bytes_roundtrip ... ok
+test test::reads_buffer ... ok
+test test::writes_buffer ... ok
+test test::writes_byte ... ok
+test test::read_model::reads_model_data ... ok
+test parameters::test::from_to_bytes_roundtrip ... ok
+test test::parameters::read_params::reads_parameters ... ok
+test test::parameters::read_params::sets_parameters ... ok
+test test::parameters::set_params::sets_parameters ... ok
+
+failures:
+
+---- test::flushes stdout ----
+thread 'test::flushes' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    test::flushes
+
+test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.99s
+
+error: test failed, to rerun pass '--lib'

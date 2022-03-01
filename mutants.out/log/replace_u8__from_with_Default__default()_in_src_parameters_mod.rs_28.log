@@ -1,0 +1,89 @@
+
+*** replace u8::from with Default::default() in src/parameters/mod.rs:28
+*** --- src/parameters/mod.rs
++++ replace u8::from with Default::default()
+@@ -21,21 +21,18 @@
+ pub enum Persistence {
+     #[default]
+     Temporary,
+     Permanent,
+ }
+ 
+ impl From<Persistence> for u8 {
+     fn from(mode: Persistence) -> Self {
+-        match mode {
+-            Persistence::Temporary => 0xC2,
+-            Persistence::Permanent => 0xC0,
+-        }
+-    }
++Default::default() /* ~ changed by cargo-mutants ~ */
++}
+ }
+ 
+ #[derive(Clone, Debug, PartialEq, Eq, TypedBuilder)]
+ #[cfg_attr(test, derive(proptest_derive::Arbitrary))]
+ pub struct Parameters {
+     pub address: u16,
+     pub channel: u8,
+     #[builder(default)]
+
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.333s
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 1.619s
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(0) in 3.454swarning: `ebyte-e32` (lib test) generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 0.32s
+   Compiling ebyte-e32 v0.1.0 (/tmp/.tmpJFXww7)
+warning: unused variable: `mode`
+  --> src/parameters/mod.rs:28:13
+   |
+28 |     fn from(mode: Persistence) -> Self {
+   |             ^^^^ help: if this is intentional, prefix it with an underscore: `_mode`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: `ebyte-e32` (lib test) generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 1.61s
+   Compiling ebyte-e32 v0.1.0 (/tmp/.tmpJFXww7)
+warning: unused variable: `mode`
+  --> src/parameters/mod.rs:28:13
+   |
+28 |     fn from(mode: Persistence) -> Self {
+   |             ^^^^ help: if this is intentional, prefix it with an underscore: `_mode`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: `ebyte-e32` (lib test) generated 1 warning
+warning: `ebyte-e32` (lib) generated 1 warning (1 duplicate)
+    Finished test [unoptimized + debuginfo] target(s) in 0.23s
+     Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
+
+running 18 tests
+test mode::test::id ... ok
+test mode::test::pins_normal ... ok
+test mode::test::pins_powerdown ... ok
+test mode::test::pins_wakeup ... ok
+test mode::test::pins_program ... ok
+test test::acquire_release ... ok
+test test::flushes ... ok
+test test::resets ... ok
+test test::writes_byte ... ok
+test model_data::test::model_data_from_to_bytes_roundtrip ... ok
+test test::reads_byte ... ok
+test test::reads_buffer ... ok
+test test::writes_buffer ... ok
+test test::read_model::reads_model_data ... ok
+test parameters::test::from_to_bytes_roundtrip ... ok
+test test::parameters::read_params::sets_parameters ... ok
+test test::parameters::read_params::reads_parameters ... ok
+test test::parameters::set_params::sets_parameters ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.07s
+
+   Doc-tests ebyte-e32
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

@@ -1,0 +1,65 @@
+
+*** replace Parameters::from_bytes with Ok(Default::default()) in src/parameters/mod.rs:88
+*** --- src/parameters/mod.rs
++++ replace Parameters::from_bytes with Ok(Default::default())
+@@ -81,45 +81,18 @@
+             | (fec << 2)
+             | transmission_power;
+         bytes[4] = options;
+ 
+         bytes
+     }
+ 
+     pub fn from_bytes(bytes: &[u8; 5]) -> Result<Self, Error> {
+-        let address_high = bytes[0];
+-        let address_low = bytes[1];
+-        let speed = bytes[2];
+-        let channel = bytes[3];
+-        let options = bytes[4];
+-        let address = (address_high as u16) << 8 | address_low as u16;
+-        let uart_parity = Parity::try_from((speed & 0xC0) >> 6)?;
+-        let uart_rate = BaudRate::try_from((speed & 0x38) >> 3)?;
+-        let air_rate = AirBaudRate::try_from(speed & 0x7)?;
+-
+-        let transmission_mode = TransmissionMode::try_from((options & 0x80) >> 7)?;
+-        let io_drive_mode = IoDriveMode::try_from((options & 0x40) >> 6)?;
+-        let wakeup_time = WakeupTime::try_from((options & 0x38) >> 3)?;
+-        let fec = ForwardErrorCorrectionMode::try_from((options & 0x07) >> 2)?;
+-        let transmission_power = TransmissionPower::try_from(options & 0x3)?;
+-
+-        Ok(Self {
+-            address,
+-            channel,
+-            uart_parity,
+-            uart_rate,
+-            air_rate,
+-            transmission_mode,
+-            io_drive_mode,
+-            wakeup_time,
+-            fec,
+-            transmission_power,
+-        })
+-    }
++Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
++}
+ }
+ 
+ /*
+ /// Only valid for 433MHz modules.
+ pub fn channel_to_freq_mhz(channel: u8) -> u32 {
+     assert!((0..31).contains(&channel));
+     410 + channel as u32
+ }
+
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(101) in 0.301sJFXww7)
+error[E0277]: the trait bound `parameters::Parameters: std::default::Default` is not satisfied
+  --> src/parameters/mod.rs:89:4
+   |
+89 | Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
+   | -- ^^^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `parameters::Parameters`
+   | |
+   | required by a bound introduced by this call
+
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `ebyte-e32` due to previous error

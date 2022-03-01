@@ -10,27 +10,28 @@ I tested so far with an E32-433T30D, but they seem to be pretty similar across t
 // m0: OutputPin
 // m1: OutputPin
 // serial: Serial port
-let ebyte = Ebyte::new(serial, m0, m1, aux, delay).unwrap();
+let ebyte = Ebyte::new(serial, aux, m0, m1, delay).unwrap();
 let mut ebyte = ebyte.into_program_mode();
+let model_data = ebyte.read_model_data().unwrap();
 let mut params = ebyte.read_parameters().unwrap();
-let ebyte = ebyte.into_normal_mode();
 
-rprintln!("{:?}", params);
+rprintln!("{:#?}", model_data);
+rprintln!("{:#?}", params);
+
 params.air_rate = AirBaudRate::Bps300;
+params.channel = 23;
 
-let mut ebyte = ebyte.into_program_mode();
 ebyte
     .set_parameters(&params, Persistence::Temporary)
     .unwrap();
-let ebyte = ebyte.into_normal_mode();
 
-let mut ebyte = ebyte.into_program_mode();
 let params = ebyte.read_parameters().unwrap();
 let mut ebyte = ebyte.into_normal_mode();
-rprintln!("{:?}", params);
+rprintln!("{:#?}", params);
 
 loop {
     delay_tim5.delay_ms(5000u32);
+    rprintln!("Sending it!");
     ebyte.write_buffer(b"buffer").unwrap();
     led.toggle();
 }

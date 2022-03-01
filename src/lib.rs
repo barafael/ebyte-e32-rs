@@ -16,6 +16,8 @@ mod error;
 mod mode;
 mod model_data;
 pub mod parameters;
+#[cfg(test)]
+mod test;
 
 pub struct Ebyte<S, Aux, M0, M1, D, M>
 where
@@ -26,9 +28,9 @@ where
     D: DelayMs<u32>,
 {
     serial: S,
+    aux: Aux,
     m0: M0,
     m1: M1,
-    aux: Aux,
     delay: D,
     mode: PhantomData<M>,
 }
@@ -43,49 +45,47 @@ where
 {
     pub fn new(
         serial: S,
+        mut aux: Aux,
         mut m0: M0,
         mut m1: M1,
-        mut aux: Aux,
         mut delay: D,
     ) -> Result<Self, Error> {
         // // Let pins settle.
         //delay.delay_ms(10);
 
-        let mode = Normal;
-        mode.set_pins(&mut m0, &mut m1, &mut aux, &mut delay);
+        Normal::set_pins(&mut aux, &mut m0, &mut m1, &mut delay);
 
         let ebyte = Self {
             serial,
+            aux,
             m0,
             m1,
-            aux,
             delay,
             mode: PhantomData::<Normal>,
         };
 
-        let mut ebyte = ebyte.into_program_mode();
+        //let mut ebyte = ebyte.into_program_mode();
 
         // Supposedly these have to be queried on startup.
         // TODO is this true?
-        let _model_data = ebyte.read_model_data()?;
+        //let _model_data = ebyte.read_model_data()?;
 
-        let ebyte = ebyte.into_normal_mode();
-        let mut ebyte = ebyte.into_program_mode();
+        //let ebyte = ebyte.into_normal_mode();
+        //let mut ebyte = ebyte.into_program_mode();
 
-        let _parameters = ebyte.read_parameters()?;
-        let ebyte = ebyte.into_normal_mode();
+        //let _parameters = ebyte.read_parameters()?;
+        //let ebyte = ebyte.into_normal_mode();
 
         Ok(ebyte)
     }
 
     pub fn into_program_mode(mut self) -> Ebyte<S, Aux, M0, M1, D, Program> {
-        let mode = Program;
-        mode.set_pins(&mut self.m0, &mut self.m1, &mut self.aux, &mut self.delay);
+        Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
         Ebyte {
             serial: self.serial,
+            aux: self.aux,
             m0: self.m0,
             m1: self.m1,
-            aux: self.aux,
             delay: self.delay,
             mode: PhantomData::<Program>,
         }
@@ -94,25 +94,21 @@ where
     /// Write entire buffer to serial port
     pub fn write_buffer(&mut self, buffer: &[u8]) -> Result<(), crate::Error> {
         for ch in buffer {
-            let _ = block!(self.serial.write(*ch));
+            block!(self.serial.write(*ch)).map_err(|_| Error::SerialWrite)?;
         }
         Ok(())
     }
 
     /// Read entire buffer from serial port
     pub fn read_buffer(&mut self, buffer: &mut [u8]) -> Result<(), Error> {
-        let mut n = 0;
-        while n < buffer.len() {
-            if let Ok(ch) = block!(self.serial.read()) {
-                buffer[n] = ch;
-                n += 1;
-            }
+        for byte in buffer {
+            *byte = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
         }
         Ok(())
     }
 
-    pub fn release(self) -> (S, M0, M1, Aux, D) {
-        (self.serial, self.m0, self.m1, self.aux, self.delay)
+    pub fn release(self) -> (S, Aux, M0, M1, D) {
+        (self.serial, self.aux, self.m0, self.m1, self.delay)
     }
 }
 
@@ -152,6 +148,9 @@ where
     }
 }
 
+// TODO consider moving those methods to normal mode,
+// then do the mode switch inside the method.
+// Switching modes for the user right now involves a little too much typestate things.
 impl<S, Aux, M0, M1, D> Ebyte<S, Aux, M0, M1, D, Program>
 where
     S: Read<u8> + Write<u8>,
@@ -188,9 +187,9 @@ where
 
         let save = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
 
-        let bytes = [0u8; 5];
-        for _ in 0..5 {
-            block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        let mut bytes = [0u8; 5];
+        for byte in &mut bytes {
+            *byte = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
         }
 
         if save != 0xC0 {
@@ -213,8 +212,17 @@ where
         block!(self.serial.write(bytes[3])).map_err(|_| Error::SerialWrite)?;
         block!(self.serial.write(bytes[4])).map_err(|_| Error::SerialWrite)?;
 
-        for _ in 0..6 {
-            let _ = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        let response_prefix = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        let mut response = [0u8; 5];
+        for byte in &mut response {
+            *byte = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        }
+        if response_prefix != 0xC0 {
+            return Err(Error::SetParameters);
+        }
+
+        if response != bytes {
+            return Err(Error::SetParameters);
         }
 
         self.delay.delay_ms(40);
@@ -245,50 +253,14 @@ where
     }
 
     pub fn into_normal_mode(mut self) -> Ebyte<S, Aux, M0, M1, D, Normal> {
-        let mode = Normal;
-        mode.set_pins(&mut self.m0, &mut self.m1, &mut self.aux, &mut self.delay);
+        Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
         Ebyte {
             serial: self.serial,
+            aux: self.aux,
             m0: self.m0,
             m1: self.m1,
-            aux: self.aux,
             delay: self.delay,
             mode: PhantomData::<Normal>,
         }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::Ebyte;
-    use embedded_hal_mock::{
-        delay,
-        pin::{
-            Mock as Pin,
-            State::{High, Low},
-            Transaction as PinTransaction,
-        },
-        serial::Mock as Serial,
-    };
-
-    #[test]
-    #[ignore = "I/O performed is not implemented in unit test"]
-    fn acquire_release() {
-        let aux = Pin::new(&vec![
-            PinTransaction::get(Low),
-            PinTransaction::get(Low),
-            PinTransaction::get(High),
-        ]);
-        let m0 = Pin::new(&vec![PinTransaction::set(Low)]);
-        let m1 = Pin::new(&vec![PinTransaction::set(Low)]);
-        let serial = Serial::<u8>::new(&[]);
-        let delay = delay::MockNoop;
-
-        let mock = Ebyte::new(serial, m0, m1, aux, delay).unwrap();
-        let (mut s, mut aux, mut m0, mut m1, _delay) = mock.release();
-        s.done();
-        aux.done();
-        m0.done();
-        m1.done();
     }
 }
