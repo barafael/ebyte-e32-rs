@@ -29,28 +29,28 @@
                  // TODO error handling.
 
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(0) in 0.301s
+*** cargo result: Exited(0) in 0.267s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
-*** cargo result: Exited(0) in 1.168s
+*** cargo result: Exited(0) in 0.984s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(101) in 3.244sJFXww7)
-    Finished test [unoptimized + debuginfo] target(s) in 0.20s
+*** cargo result: Exited(101) in 3.014spZEA6P)
+    Finished test [unoptimized + debuginfo] target(s) in 0.19s
      Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
 
 running 18 tests
 test mode::test::id ... ok
-test mode::test::pins_powerdown ... ok
-test mode::test::pins_wakeup ... ok
 test mode::test::pins_normal ... ok
-test test::flushes ... ok
-test test::acquire_release ... ok
+test mode::test::pins_powerdown ... ok
 test mode::test::pins_program ... ok
+test mode::test::pins_wakeup ... ok
+test test::acquire_release ... ok
+test test::flushes ... ok
 test test::resets ... FAILED
-test test::reads_byte ... ok
+test test::writes_byte ... ok
 test model_data::test::model_data_from_to_bytes_roundtrip ... ok
 test test::reads_buffer ... ok
-test test::writes_byte ... ok
 test test::writes_buffer ... ok
+test test::reads_byte ... ok
 test test::read_model::reads_model_data ... ok
 test parameters::test::from_to_bytes_roundtrip ... ok
 test test::parameters::read_params::reads_parameters ... ok
@@ -67,6 +67,6 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 failures:
     test::resets
 
-test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.03s
+test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.82s
 
 error: test failed, to rerun pass '--lib'

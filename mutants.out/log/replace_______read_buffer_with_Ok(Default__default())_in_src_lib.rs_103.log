@@ -28,16 +28,16 @@
  where
 
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(0) in 0.301s
+*** cargo result: Exited(0) in 0.267s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
-*** cargo result: Exited(0) in 1.084s
+*** cargo result: Exited(0) in 1.010s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(101) in 3.222s|
+*** cargo result: Exited(101) in 2.964s|
     = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 0.28s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmpJFXww7)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.25s
+   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
 warning: unused variable: `buffer`
    --> src/lib.rs:103:35
     |
@@ -47,8 +47,8 @@ warning: unused variable: `buffer`
     = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 1.07s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmpJFXww7)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.00s
+   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
 warning: unused variable: `buffer`
    --> src/lib.rs:103:35
     |
@@ -59,15 +59,15 @@ warning: unused variable: `buffer`
 
 warning: `ebyte-e32` (lib test) generated 1 warning
 warning: `ebyte-e32` (lib) generated 1 warning (1 duplicate)
-    Finished test [unoptimized + debuginfo] target(s) in 0.20s
+    Finished test [unoptimized + debuginfo] target(s) in 0.18s
      Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
 
 running 18 tests
 test mode::test::id ... ok
 test mode::test::pins_powerdown ... ok
 test mode::test::pins_normal ... ok
-test mode::test::pins_program ... ok
 test mode::test::pins_wakeup ... ok
+test mode::test::pins_program ... ok
 test test::acquire_release ... ok
 test test::flushes ... ok
 test test::resets ... ok
@@ -445,6 +445,6 @@ thread 'test::reads_buffer' panicked at 'Test failed: serial mock has unsatisfie
 failures:
     test::reads_buffer
 
-test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.01s
+test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.77s
 
 error: test failed, to rerun pass '--lib'

@@ -47,7 +47,7 @@
      })]
 
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(101) in 0.251sJFXww7)
+*** cargo result: Exited(101) in 0.208spZEA6P)
 warning: unused imports: `High`, `Low`, `Mock as Pin`, `Transaction as SerialTransaction`
   --> src/test/read_model.rs:6:9
    |

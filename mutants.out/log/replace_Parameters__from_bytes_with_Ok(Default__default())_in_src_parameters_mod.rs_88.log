@@ -52,7 +52,7 @@
  }
 
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(101) in 0.301sJFXww7)
+*** cargo result: Exited(101) in 0.251spZEA6P)
 error[E0277]: the trait bound `parameters::Parameters: std::default::Default` is not satisfied
   --> src/parameters/mod.rs:89:4
    |

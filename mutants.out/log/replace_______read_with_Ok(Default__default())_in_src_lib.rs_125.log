@@ -25,26 +25,26 @@
      Aux: InputPin,
 
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(0) in 0.333s
+*** cargo result: Exited(0) in 0.283s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
-*** cargo result: Exited(0) in 1.103s
+*** cargo result: Exited(0) in 1.003s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(101) in 3.257sJFXww7)
-    Finished test [unoptimized + debuginfo] target(s) in 0.21s
+*** cargo result: Exited(101) in 3.038spZEA6P)
+    Finished test [unoptimized + debuginfo] target(s) in 0.20s
      Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
 
 running 18 tests
 test mode::test::id ... ok
 test mode::test::pins_normal ... ok
 test test::acquire_release ... ok
-test mode::test::pins_wakeup ... ok
-test mode::test::pins_program ... ok
 test mode::test::pins_powerdown ... ok
+test mode::test::pins_program ... ok
 test test::flushes ... ok
+test mode::test::pins_wakeup ... ok
 test test::resets ... ok
 test test::reads_byte ... FAILED
-test model_data::test::model_data_from_to_bytes_roundtrip ... ok
 test test::writes_byte ... ok
+test model_data::test::model_data_from_to_bytes_roundtrip ... ok
 test test::writes_buffer ... ok
 test test::reads_buffer ... ok
 test test::read_model::reads_model_data ... ok
@@ -92,6 +92,6 @@ thread 'test::reads_byte' panicked at 'Test failed: serial mock has unsatisfied 
 failures:
     test::reads_byte
 
-test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.02s
+test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.82s
 
 error: test failed, to rerun pass '--lib'

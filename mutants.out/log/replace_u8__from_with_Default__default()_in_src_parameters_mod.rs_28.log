@@ -28,13 +28,13 @@
      #[builder(default)]
 
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(0) in 0.333s
+*** cargo result: Exited(0) in 0.301s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
-*** cargo result: Exited(0) in 1.619s
+*** cargo result: Exited(0) in 1.404s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(0) in 3.454swarning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 0.32s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmpJFXww7)
+*** cargo result: Exited(0) in 3.107swarning: `ebyte-e32` (lib test) generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 0.28s
+   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
 warning: unused variable: `mode`
   --> src/parameters/mod.rs:28:13
    |
@@ -44,8 +44,8 @@ warning: unused variable: `mode`
    = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 1.61s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmpJFXww7)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.39s
+   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
 warning: unused variable: `mode`
   --> src/parameters/mod.rs:28:13
    |
@@ -56,30 +56,30 @@ warning: unused variable: `mode`
 
 warning: `ebyte-e32` (lib test) generated 1 warning
 warning: `ebyte-e32` (lib) generated 1 warning (1 duplicate)
-    Finished test [unoptimized + debuginfo] target(s) in 0.23s
+    Finished test [unoptimized + debuginfo] target(s) in 0.21s
      Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
 
 running 18 tests
 test mode::test::id ... ok
-test mode::test::pins_normal ... ok
-test mode::test::pins_powerdown ... ok
 test mode::test::pins_wakeup ... ok
 test mode::test::pins_program ... ok
+test mode::test::pins_powerdown ... ok
+test mode::test::pins_normal ... ok
 test test::acquire_release ... ok
 test test::flushes ... ok
 test test::resets ... ok
-test test::writes_byte ... ok
 test model_data::test::model_data_from_to_bytes_roundtrip ... ok
-test test::reads_byte ... ok
-test test::reads_buffer ... ok
 test test::writes_buffer ... ok
+test test::reads_buffer ... ok
+test test::reads_byte ... ok
+test test::writes_byte ... ok
 test test::read_model::reads_model_data ... ok
 test parameters::test::from_to_bytes_roundtrip ... ok
-test test::parameters::read_params::sets_parameters ... ok
 test test::parameters::read_params::reads_parameters ... ok
+test test::parameters::read_params::sets_parameters ... ok
 test test::parameters::set_params::sets_parameters ... ok
 
-test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.07s
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.77s
 
    Doc-tests ebyte-e32
 

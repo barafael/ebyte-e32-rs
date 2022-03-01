@@ -21,15 +21,15 @@
  }
 
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(0) in 0.251s
+*** cargo result: Exited(0) in 0.233s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
-*** cargo result: Exited(0) in 0.952s
+*** cargo result: Exited(0) in 0.806s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(101) in 3.073son by default
+*** cargo result: Exited(101) in 2.807son by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 0.24s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmpJFXww7)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.21s
+   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
 warning: unused variable: `mode`
   --> src/parameters/option/io_drive_mode.rs:25:13
    |
@@ -39,8 +39,8 @@ warning: unused variable: `mode`
    = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 0.93s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmpJFXww7)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.80s
+   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
 warning: unused variable: `mode`
   --> src/parameters/option/io_drive_mode.rs:25:13
    |
@@ -51,26 +51,26 @@ warning: unused variable: `mode`
 
 warning: `ebyte-e32` (lib test) generated 1 warning
 warning: `ebyte-e32` (lib) generated 1 warning (1 duplicate)
-    Finished test [unoptimized + debuginfo] target(s) in 0.18s
+    Finished test [unoptimized + debuginfo] target(s) in 0.17s
      Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
 
 running 18 tests
 test mode::test::id ... ok
-test mode::test::pins_program ... ok
 test mode::test::pins_powerdown ... ok
+test mode::test::pins_normal ... ok
+test mode::test::pins_program ... ok
 test mode::test::pins_wakeup ... ok
 test test::acquire_release ... ok
-test test::flushes ... ok
-test mode::test::pins_normal ... ok
 test test::resets ... ok
+test test::flushes ... ok
 test parameters::test::from_to_bytes_roundtrip ... FAILED
-test test::parameters::read_params::sets_parameters ... FAILED
 test test::parameters::read_params::reads_parameters ... FAILED
+test test::parameters::read_params::sets_parameters ... FAILED
 test model_data::test::model_data_from_to_bytes_roundtrip ... ok
-test test::writes_byte ... ok
 test test::reads_byte ... ok
-test test::writes_buffer ... ok
+test test::writes_byte ... ok
 test test::reads_buffer ... ok
+test test::writes_buffer ... ok
 test test::read_model::reads_model_data ... ok
 test test::parameters::set_params::sets_parameters ... ok
 
@@ -185,211 +185,115 @@ thread 'parameters::test::from_to_bytes_roundtrip' panicked at 'Test failed: ass
 	global rejects: 0
 ', src/parameters/mod.rs:133:5
 
----- test::parameters::read_params::sets_parameters stdout ----
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 57371, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 57371, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 28685, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 28685, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 14342, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 14342, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 7171, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 7171, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 3585, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 3585, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 1792, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 1792, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 896, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 896, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 448, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 448, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 224, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 224, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 112, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 112, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 56, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 56, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 28, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 28, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 14, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 14, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 7, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 7, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 3, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 3, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 1, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 1, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 144, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 72, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 72, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 36, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 36, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 18, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 18, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 9, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 9, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 4, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 4, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 2, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 2, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 1, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 1, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: Odd, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps2400, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps2400, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps1200, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps1200, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Fixed, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Fixed, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
-thread 'test::parameters::read_params::sets_parameters' panicked at 'Test failed: assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }`; minimal failing input: parameters = Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }
-	successes: 5
-	local rejects: 0
-	global rejects: 0
-', src/test/parameters/read_params.rs:52:1
-
 ---- test::parameters::read_params::reads_parameters stdout ----
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 27613, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 27613, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 38344, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 38344, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 13806, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 13806, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 19172, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 19172, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 6903, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 6903, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 9586, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 9586, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 3451, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 3451, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 4793, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 4793, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 1725, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 1725, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 2396, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 2396, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 862, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 862, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 1198, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 1198, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 431, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 431, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 599, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 599, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 215, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 215, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 299, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 299, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 107, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 107, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 149, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 149, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 53, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 53, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 74, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 74, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 26, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 26, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 37, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 37, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 13, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 13, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 18, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 18, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 6, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 6, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 9, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 9, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 3, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 3, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 4, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 4, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 1, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 1, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 2, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 2, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 13, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 1, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 1, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 6, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 6, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 3, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 3, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 69, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 69, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 1, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 1, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 34, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 34, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: Even, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 17, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 17, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: Odd, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: Odd, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 8, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 8, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 4, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 4, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps57600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps57600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 2, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 2, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps38400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps38400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 1, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 1, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps19200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps19200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps9600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps9600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps57600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps57600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps4800, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps4800, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps38400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps38400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps2400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps2400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps19200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps19200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps9600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps9600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps9600, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps9600, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps4800, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps4800, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps2400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps2400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps2400, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps2400, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps1200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps1200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps9600, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps9600, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
-  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`,
- right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms500, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps2400, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps2400, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps1200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps1200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
 thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
   left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
  right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:78:9
@@ -408,7 +312,139 @@ thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion 
 thread 'test::parameters::read_params::reads_parameters' panicked at 'Test failed: assertion failed: `(left == right)`
   left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }`,
  right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }`; minimal failing input: parameters = Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }
-	successes: 2
+	successes: 0
+	local rejects: 0
+	global rejects: 0
+', src/test/parameters/read_params.rs:52:1
+
+---- test::parameters::read_params::sets_parameters stdout ----
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 38344, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 38344, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 19172, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 19172, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 9586, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 9586, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 4793, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 4793, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 2396, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 2396, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 1198, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 1198, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 599, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 599, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 299, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 299, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 149, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 149, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 74, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 74, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 37, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 37, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 18, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 18, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 9, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 9, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 4, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 4, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 2, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 2, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 1, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 1, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 139, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 69, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 69, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 34, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 34, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 17, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 17, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 8, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 8, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 4, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 4, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 2, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 2, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 1, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 1, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps115200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps57600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps57600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps38400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps38400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps19200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps19200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps9600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps9600, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps4800, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps4800, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps2400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps2400, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps19200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps9600, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps9600, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps4800, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps2400, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps2400, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps1200, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps1200, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: Off, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: On, transmission_power: Dbm21 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm21 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: On, transmission_power: Dbm24 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm24 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: On, transmission_power: Dbm27 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm27 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }`', src/test/parameters/read_params.rs:107:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'Test failed: assertion failed: `(left == right)`
+  left: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: OpenCollector, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }`,
+ right: `Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }`; minimal failing input: parameters = Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }
+	successes: 0
 	local rejects: 0
 	global rejects: 0
 ', src/test/parameters/read_params.rs:52:1
@@ -419,6 +455,6 @@ failures:
     test::parameters::read_params::reads_parameters
     test::parameters::read_params::sets_parameters
 
-test result: FAILED. 15 passed; 3 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.87s
+test result: FAILED. 15 passed; 3 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.62s
 
 error: test failed, to rerun pass '--lib'

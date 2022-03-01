@@ -25,15 +25,15 @@
  // then do the mode switch inside the method.
 
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(0) in 0.251s
+*** cargo result: Exited(0) in 0.217s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
-*** cargo result: Exited(0) in 1.084s
+*** cargo result: Exited(0) in 0.853s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(101) in 3.207ssed_variables)]` on by default
+*** cargo result: Exited(101) in 2.988ssed_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 0.23s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmpJFXww7)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.21s
+   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
 warning: unused variable: `word`
    --> src/lib.rs:142:25
     |
@@ -43,8 +43,8 @@ warning: unused variable: `word`
     = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 1.06s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmpJFXww7)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.83s
+   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
 warning: unused variable: `word`
    --> src/lib.rs:142:25
     |
@@ -55,27 +55,27 @@ warning: unused variable: `word`
 
 warning: `ebyte-e32` (lib test) generated 1 warning
 warning: `ebyte-e32` (lib) generated 1 warning (1 duplicate)
-    Finished test [unoptimized + debuginfo] target(s) in 0.20s
+    Finished test [unoptimized + debuginfo] target(s) in 0.17s
      Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
 
 running 18 tests
 test mode::test::id ... ok
-test mode::test::pins_normal ... ok
-test mode::test::pins_powerdown ... ok
-test mode::test::pins_wakeup ... ok
 test mode::test::pins_program ... ok
-test test::acquire_release ... ok
+test mode::test::pins_powerdown ... ok
+test mode::test::pins_normal ... ok
+test mode::test::pins_wakeup ... ok
 test test::flushes ... ok
+test test::acquire_release ... ok
 test test::resets ... ok
 test test::writes_byte ... FAILED
-test model_data::test::model_data_from_to_bytes_roundtrip ... ok
 test test::reads_byte ... ok
-test test::reads_buffer ... ok
+test model_data::test::model_data_from_to_bytes_roundtrip ... ok
 test test::writes_buffer ... ok
+test test::reads_buffer ... ok
 test test::read_model::reads_model_data ... ok
 test parameters::test::from_to_bytes_roundtrip ... ok
-test test::parameters::read_params::reads_parameters ... ok
 test test::parameters::read_params::sets_parameters ... ok
+test test::parameters::read_params::reads_parameters ... ok
 test test::parameters::set_params::sets_parameters ... ok
 
 failures:
@@ -101,6 +101,6 @@ thread 'test::writes_byte' panicked at 'Test failed: serial mock has unsatisfied
 failures:
     test::writes_byte
 
-test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.99s
+test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.80s
 
 error: test failed, to rerun pass '--lib'
