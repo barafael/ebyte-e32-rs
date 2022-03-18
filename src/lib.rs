@@ -148,9 +148,6 @@ where
     }
 }
 
-// TODO consider moving those methods to normal mode,
-// then do the mode switch inside the method.
-// Switching modes for the user right now involves a little too much typestate things.
 impl<S, Aux, M0, M1, D> Ebyte<S, Aux, M0, M1, D, Program>
 where
     S: Read<u8> + Write<u8>,
