@@ -56,8 +56,8 @@
          .. ProptestConfig::default()
      })]
 
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(101) in 0.208spZEA6P)
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(101) in 0.283sW8Sm9N)
 warning: unused imports: `High`, `Low`, `Mock as Pin`, `Transaction as SerialTransaction`
   --> src/test/parameters/set_params.rs:10:9
    |

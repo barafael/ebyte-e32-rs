@@ -41,8 +41,8 @@
          block!(self.serial.write(bytes[0])).map_err(|_| Error::SerialWrite)?;
          block!(self.serial.write(bytes[1])).map_err(|_| Error::SerialWrite)?;
 
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(101) in 0.267spZEA6P)
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(101) in 0.302sW8Sm9N)
 error[E0277]: the trait bound `parameters::Parameters: std::default::Default` is not satisfied
    --> src/lib.rs:184:4
     |

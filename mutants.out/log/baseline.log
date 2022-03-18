@@ -1,34 +1,34 @@
 
 *** baseline
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
 *** cargo result: Exited(0) in 0.032s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo build --tests
 *** cargo result: Exited(0) in 0.032s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(0) in 2.957sinfo] target(s) in 0.01s
-     Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(0) in 2.888sinfo] target(s) in 0.01s
+     Running unittests (target/debug/deps/ebyte_e32-fa871f114a226b67)
 
 running 18 tests
 test mode::test::id ... ok
+test mode::test::pins_normal ... ok
 test mode::test::pins_powerdown ... ok
 test mode::test::pins_program ... ok
-test mode::test::pins_normal ... ok
 test mode::test::pins_wakeup ... ok
 test test::acquire_release ... ok
 test test::flushes ... ok
 test test::resets ... ok
 test model_data::test::model_data_from_to_bytes_roundtrip ... ok
+test test::writes_buffer ... ok
+test test::reads_buffer ... ok
 test test::reads_byte ... ok
 test test::writes_byte ... ok
-test test::reads_buffer ... ok
-test test::writes_buffer ... ok
 test test::read_model::reads_model_data ... ok
 test parameters::test::from_to_bytes_roundtrip ... ok
 test test::parameters::read_params::sets_parameters ... ok
 test test::parameters::read_params::reads_parameters ... ok
 test test::parameters::set_params::sets_parameters ... ok
 
-test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.81s
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.74s
 
    Doc-tests ebyte-e32
 

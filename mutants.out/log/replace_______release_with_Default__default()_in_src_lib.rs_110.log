@@ -24,8 +24,8 @@
      M0: OutputPin,
      M1: OutputPin,
 
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(101) in 0.251spZEA6P)
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(101) in 0.267sW8Sm9N)
 error[E0277]: the trait bound `S: std::default::Default` is not satisfied
    --> src/lib.rs:111:1
     |

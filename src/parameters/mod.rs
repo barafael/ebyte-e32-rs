@@ -24,6 +24,7 @@ pub enum Persistence {
     Permanent,
 }
 
+#[mutants::skip]
 impl From<Persistence> for u8 {
     fn from(mode: Persistence) -> Self {
         match mode {

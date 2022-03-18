@@ -27,17 +27,17 @@
          Ok(())
      }
 
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(0) in 0.402s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
-*** cargo result: Exited(0) in 1.605s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(101) in 3.072s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.333s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 1.369s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(101) in 3.007s |
    = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 0.39s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.32s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpW8Sm9N)
 warning: unused variable: `buffer`
   --> src/lib.rs:95:36
    |
@@ -47,8 +47,8 @@ warning: unused variable: `buffer`
    = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 1.59s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.35s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpW8Sm9N)
 warning: unused variable: `buffer`
   --> src/lib.rs:95:36
    |
@@ -59,27 +59,27 @@ warning: unused variable: `buffer`
 
 warning: `ebyte-e32` (lib test) generated 1 warning
 warning: `ebyte-e32` (lib) generated 1 warning (1 duplicate)
-    Finished test [unoptimized + debuginfo] target(s) in 0.28s
-     Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
+    Finished test [unoptimized + debuginfo] target(s) in 0.24s
+     Running unittests (target/debug/deps/ebyte_e32-fa871f114a226b67)
 
 running 18 tests
 test mode::test::id ... ok
-test mode::test::pins_powerdown ... ok
 test mode::test::pins_normal ... ok
-test test::acquire_release ... ok
-test mode::test::pins_wakeup ... ok
+test mode::test::pins_powerdown ... ok
 test mode::test::pins_program ... ok
+test mode::test::pins_wakeup ... ok
+test test::acquire_release ... ok
 test test::flushes ... ok
 test test::resets ... ok
 test test::writes_buffer ... FAILED
 test model_data::test::model_data_from_to_bytes_roundtrip ... ok
-test test::reads_byte ... ok
 test test::writes_byte ... ok
+test test::reads_byte ... ok
 test test::reads_buffer ... ok
 test test::read_model::reads_model_data ... ok
 test parameters::test::from_to_bytes_roundtrip ... ok
-test test::parameters::read_params::sets_parameters ... ok
 test test::parameters::read_params::reads_parameters ... ok
+test test::parameters::read_params::sets_parameters ... ok
 test test::parameters::set_params::sets_parameters ... ok
 
 failures:
@@ -213,6 +213,6 @@ thread 'test::writes_buffer' panicked at 'Test failed: serial mock has unsatisfi
 failures:
     test::writes_buffer
 
-test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.78s
+test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.74s
 
 error: test failed, to rerun pass '--lib'

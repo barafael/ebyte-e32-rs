@@ -141,21 +141,14 @@
   },
   {
     "file": "src/parameters/mod.rs",
-    "line": 28,
-    "function": "u8::from",
-    "return_type": "-> Self",
-    "replacement": "Default::default()"
-  },
-  {
-    "file": "src/parameters/mod.rs",
-    "line": 60,
+    "line": 61,
     "function": "Parameters::to_bytes",
     "return_type": "-> [u8 ; 5]",
     "replacement": "Default::default()"
   },
   {
     "file": "src/parameters/mod.rs",
-    "line": 88,
+    "line": 89,
     "function": "Parameters::from_bytes",
     "return_type": "-> Result < Self , Error >",
     "replacement": "Ok(Default::default())"

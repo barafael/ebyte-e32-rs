@@ -28,13 +28,13 @@
      #[builder(default)]
 
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(0) in 0.301s
+*** cargo result: Exited(0) in 0.283s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
 *** cargo result: Exited(0) in 1.404s
 *** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
 *** cargo result: Exited(0) in 3.107swarning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 0.28s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.27s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmp2qSz5l)
 warning: unused variable: `mode`
   --> src/parameters/mod.rs:28:13
    |
@@ -44,8 +44,8 @@ warning: unused variable: `mode`
    = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 1.39s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.38s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmp2qSz5l)
 warning: unused variable: `mode`
   --> src/parameters/mod.rs:28:13
    |
@@ -57,22 +57,22 @@ warning: unused variable: `mode`
 warning: `ebyte-e32` (lib test) generated 1 warning
 warning: `ebyte-e32` (lib) generated 1 warning (1 duplicate)
     Finished test [unoptimized + debuginfo] target(s) in 0.21s
-     Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
+     Running unittests (target/debug/deps/ebyte_e32-d32ca24a8eb391c6)
 
 running 18 tests
 test mode::test::id ... ok
-test mode::test::pins_wakeup ... ok
-test mode::test::pins_program ... ok
 test mode::test::pins_powerdown ... ok
 test mode::test::pins_normal ... ok
+test mode::test::pins_program ... ok
+test mode::test::pins_wakeup ... ok
 test test::acquire_release ... ok
 test test::flushes ... ok
 test test::resets ... ok
 test model_data::test::model_data_from_to_bytes_roundtrip ... ok
+test test::writes_byte ... ok
 test test::writes_buffer ... ok
 test test::reads_buffer ... ok
 test test::reads_byte ... ok
-test test::writes_byte ... ok
 test test::read_model::reads_model_data ... ok
 test parameters::test::from_to_bytes_roundtrip ... ok
 test test::parameters::read_params::reads_parameters ... ok

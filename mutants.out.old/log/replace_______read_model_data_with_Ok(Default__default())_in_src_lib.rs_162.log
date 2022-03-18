@@ -1,0 +1,159 @@
+
+*** replace <??>::read_model_data with Ok(Default::default()) in src/lib.rs:162
+*** --- src/lib.rs
++++ replace <??>::read_model_data with Ok(Default::default())
+@@ -155,35 +155,18 @@
+ where
+     S: Read<u8> + Write<u8>,
+     Aux: InputPin,
+     M0: OutputPin,
+     M1: OutputPin,
+     D: DelayMs<u32>,
+ {
+     pub fn read_model_data(&mut self) -> Result<ModelData, Error> {
+-        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
+-        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
+-        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
+-
+-        let save = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+-        let model = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+-        let version = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+-        let features = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+-
+-        if save == 0xC3 {
+-            Ok(ModelData {
+-                model,
+-                version,
+-                features,
+-            })
+-        } else {
+-            Err(Error::ReadModelData)
+-        }
+-    }
++Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
++}
+ 
+     pub fn read_parameters(&mut self) -> Result<Parameters, Error> {
+         block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
+         block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
+         block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
+ 
+         let save = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+ 
+
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.258s
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 1.003s
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(101) in 2.938s2qSz5l)
+    Finished test [unoptimized + debuginfo] target(s) in 0.18s
+     Running unittests (target/debug/deps/ebyte_e32-d32ca24a8eb391c6)
+
+running 18 tests
+test mode::test::id ... ok
+test mode::test::pins_program ... ok
+test mode::test::pins_normal ... ok
+test mode::test::pins_powerdown ... ok
+test mode::test::pins_wakeup ... ok
+test test::acquire_release ... ok
+test test::flushes ... ok
+test test::resets ... ok
+test test::read_model::reads_model_data ... FAILED
+test model_data::test::model_data_from_to_bytes_roundtrip ... ok
+test test::reads_byte ... ok
+test test::writes_byte ... ok
+test test::writes_buffer ... ok
+test test::reads_buffer ... ok
+test parameters::test::from_to_bytes_roundtrip ... ok
+test test::parameters::read_params::sets_parameters ... ok
+test test::parameters::read_params::reads_parameters ... ok
+test test::parameters::set_params::sets_parameters ... ok
+
+failures:
+
+---- test::read_model::reads_model_data stdout ----
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 178, version: 55, features: 224 }`', src/test/read_model.rs:76:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 89, version: 55, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 44, version: 55, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 22, version: 55, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 11, version: 55, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 5, version: 55, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 2, version: 55, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 1, version: 55, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 55, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 27, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 13, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 6, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 3, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 1, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 0, features: 224 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 0, features: 112 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 0, features: 56 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 0, features: 28 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 0, features: 14 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 0, features: 7 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 0, features: 3 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 0 }`,
+ right: `ModelData { model: 0, version: 0, features: 1 }`', src/test/read_model.rs:76:9
+thread 'test::read_model::reads_model_data' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+proptest: Saving this and future failures in /tmp/.tmp2qSz5l/proptest-regressions/test/read_model.txt
+proptest: If this test was run on a CI system, you may wish to add the following line to your copy of the file. (You may need to create it.)
+cc 7681399d38dd8d1eb2989882a9e6dd1e1e4f401a6684acf88b97dd02ee3b51d7
+thread 'test::read_model::reads_model_data' panicked at 'Test failed: serial mock has unsatisfied expectations after call to done; minimal failing input: model_data = ModelData { model: 0, version: 0, features: 0 }
+	successes: 0
+	local rejects: 0
+	global rejects: 0
+', src/test/read_model.rs:50:1
+
+
+failures:
+    test::read_model::reads_model_data
+
+test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.74s
+
+error: test failed, to rerun pass '--lib'

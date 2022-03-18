@@ -19,3 +19,4 @@ snafu = { version = "0.7.0", features = [
 ], default-features = false }
 typed-builder = "0.10.0"
 smart-default = "0.6.0"
+mutants = "0.0.3"

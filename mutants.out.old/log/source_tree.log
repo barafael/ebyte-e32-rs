@@ -1,0 +1,31 @@
+
+*** source tree
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.333s
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 6.115sg ppv-lite86 v0.2.16
+   Compiling remove_dir_all v0.5.3
+   Compiling fastrand v1.7.0
+   Compiling fnv v1.0.7
+   Compiling bit-vec v0.6.3
+   Compiling quick-error v1.2.3
+   Compiling quick-error v2.0.1
+   Compiling byteorder v1.4.3
+   Compiling bitflags v1.3.2
+   Compiling regex-syntax v0.6.25
+   Compiling lazy_static v1.4.0
+   Compiling libc v0.2.119
+   Compiling num-traits v0.2.14
+   Compiling embedded-hal-mock v0.8.0
+   Compiling bit-set v0.5.2
+   Compiling getrandom v0.2.5
+   Compiling wait-timeout v0.2.0
+   Compiling tempfile v3.3.0
+   Compiling rand_core v0.6.3
+   Compiling rusty-fork v0.3.0
+   Compiling rand_chacha v0.3.1
+   Compiling rand_xorshift v0.3.0
+   Compiling rand v0.8.5
+   Compiling proptest v1.0.0
+   Compiling ebyte-e32 v0.2.0 (/home/rafaelbachmann/ebyte-e32-rs)
+    Finished dev [unoptimized + debuginfo] target(s) in 6.10s

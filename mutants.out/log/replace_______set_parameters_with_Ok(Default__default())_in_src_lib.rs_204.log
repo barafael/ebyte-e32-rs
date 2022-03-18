@@ -51,12 +51,12 @@
          self.until_aux();
      }
 
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(0) in 0.266s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
-*** cargo result: Exited(0) in 0.984s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(101) in 2.807s underscore: `_params`
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.333s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 1.386s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(101) in 2.838san underscore: `_params`
     |
     = note: `#[warn(unused_variables)]` on by default
 
@@ -67,8 +67,8 @@ warning: unused variable: `mode`
     |                                                           ^^^^ help: if this is intentional, prefix it with an underscore: `_mode`
 
 warning: `ebyte-e32` (lib test) generated 2 warnings
-    Finished dev [unoptimized + debuginfo] target(s) in 0.25s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.31s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpW8Sm9N)
 warning: unused variable: `params`
    --> src/lib.rs:204:38
     |
@@ -84,8 +84,8 @@ warning: unused variable: `mode`
     |                                                           ^^^^ help: if this is intentional, prefix it with an underscore: `_mode`
 
 warning: `ebyte-e32` (lib test) generated 2 warnings
-    Finished dev [unoptimized + debuginfo] target(s) in 0.97s
-   Compiling ebyte-e32 v0.1.0 (/tmp/.tmppZEA6P)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.36s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpW8Sm9N)
 warning: unused variable: `params`
    --> src/lib.rs:204:38
     |
@@ -102,28 +102,28 @@ warning: unused variable: `mode`
 
 warning: `ebyte-e32` (lib test) generated 2 warnings
 warning: `ebyte-e32` (lib) generated 2 warnings (2 duplicates)
-    Finished test [unoptimized + debuginfo] target(s) in 0.18s
-     Running unittests (target/debug/deps/ebyte_e32-067a195f1d2bde63)
+    Finished test [unoptimized + debuginfo] target(s) in 0.23s
+     Running unittests (target/debug/deps/ebyte_e32-fa871f114a226b67)
 
 running 18 tests
 test mode::test::id ... ok
 test mode::test::pins_normal ... ok
-test mode::test::pins_powerdown ... ok
 test mode::test::pins_program ... ok
 test mode::test::pins_wakeup ... ok
-test test::acquire_release ... ok
+test mode::test::pins_powerdown ... ok
 test test::flushes ... ok
+test test::acquire_release ... ok
 test test::resets ... ok
 test test::parameters::set_params::sets_parameters ... FAILED
-test model_data::test::model_data_from_to_bytes_roundtrip ... ok
-test test::writes_byte ... ok
 test test::reads_byte ... ok
-test test::writes_buffer ... ok
+test test::writes_byte ... ok
+test model_data::test::model_data_from_to_bytes_roundtrip ... ok
 test test::reads_buffer ... ok
+test test::writes_buffer ... ok
 test test::read_model::reads_model_data ... ok
 test parameters::test::from_to_bytes_roundtrip ... ok
-test test::parameters::read_params::reads_parameters ... ok
 test test::parameters::read_params::sets_parameters ... ok
+test test::parameters::read_params::reads_parameters ... ok
 
 failures:
 
@@ -176,6 +176,6 @@ thread 'test::parameters::set_params::sets_parameters' panicked at 'Test failed:
 failures:
     test::parameters::set_params::sets_parameters
 
-test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.61s
+test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.59s
 
 error: test failed, to rerun pass '--lib'

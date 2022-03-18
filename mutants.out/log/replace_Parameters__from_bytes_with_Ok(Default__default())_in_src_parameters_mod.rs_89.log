@@ -1,8 +1,8 @@
 
-*** replace Parameters::from_bytes with Ok(Default::default()) in src/parameters/mod.rs:88
+*** replace Parameters::from_bytes with Ok(Default::default()) in src/parameters/mod.rs:89
 *** --- src/parameters/mod.rs
 +++ replace Parameters::from_bytes with Ok(Default::default())
-@@ -81,45 +81,18 @@
+@@ -82,45 +82,18 @@
              | (fec << 2)
              | transmission_power;
          bytes[4] = options;
@@ -51,12 +51,12 @@
      410 + channel as u32
  }
 
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(101) in 0.251spZEA6P)
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(101) in 0.267sW8Sm9N)
 error[E0277]: the trait bound `parameters::Parameters: std::default::Default` is not satisfied
-  --> src/parameters/mod.rs:89:4
+  --> src/parameters/mod.rs:90:4
    |
-89 | Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
+90 | Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
    | -- ^^^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `parameters::Parameters`
    | |
    | required by a bound introduced by this call

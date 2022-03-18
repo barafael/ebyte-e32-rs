@@ -8,7 +8,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 351444689
+            "nanos": 351954570
           },
           "cargo_result": "Success"
         },
@@ -16,7 +16,7 @@
           "phase": "Build",
           "duration": {
             "secs": 0,
-            "nanos": 31942131
+            "nanos": 31991328
           },
           "cargo_result": "Success"
         }
@@ -30,7 +30,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 31728960
+            "nanos": 31819982
           },
           "cargo_result": "Success"
         },
@@ -38,7 +38,7 @@
           "phase": "Build",
           "duration": {
             "secs": 0,
-            "nanos": 31824794
+            "nanos": 32124079
           },
           "cargo_result": "Success"
         },
@@ -46,7 +46,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 956846851
+            "nanos": 887750460
           },
           "cargo_result": "Success"
         }
@@ -64,7 +64,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 0,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -72,7 +72,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 316790884
+            "nanos": 282961592
           },
           "cargo_result": "Failure"
         }
@@ -90,7 +90,7 @@
             "replacement": "Default::default()"
           },
           "i_mutation": 1,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -98,7 +98,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 316924805
+            "nanos": 282618031
           },
           "cargo_result": "Failure"
         }
@@ -116,7 +116,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 2,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -124,7 +124,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 401688802
+            "nanos": 332975967
           },
           "cargo_result": "Success"
         },
@@ -132,7 +132,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 604677200
+            "nanos": 369137601
           },
           "cargo_result": "Success"
         },
@@ -140,7 +140,7 @@
           "phase": "Test",
           "duration": {
             "secs": 3,
-            "nanos": 71963813
+            "nanos": 6974432
           },
           "cargo_result": "Failure"
         }
@@ -158,7 +158,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 3,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -166,7 +166,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 266658290
+            "nanos": 333507812
           },
           "cargo_result": "Success"
         },
@@ -174,7 +174,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 10059491
+            "nanos": 369147129
           },
           "cargo_result": "Success"
         },
@@ -182,7 +182,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 963771529
+            "nanos": 964205941
           },
           "cargo_result": "Failure"
         }
@@ -200,7 +200,7 @@
             "replacement": "Default::default()"
           },
           "i_mutation": 4,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -208,7 +208,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 251324528
+            "nanos": 266775160
           },
           "cargo_result": "Failure"
         }
@@ -226,7 +226,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 5,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -234,7 +234,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 282993599
+            "nanos": 332673935
           },
           "cargo_result": "Success"
         },
@@ -242,7 +242,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 3063882
+            "nanos": 385327326
           },
           "cargo_result": "Success"
         },
@@ -250,7 +250,7 @@
           "phase": "Test",
           "duration": {
             "secs": 3,
-            "nanos": 38059057
+            "nanos": 22109022
           },
           "cargo_result": "Failure"
         }
@@ -268,7 +268,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 6,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -276,15 +276,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 216602114
+            "nanos": 332872301
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 852550716
+            "secs": 1,
+            "nanos": 360827507
           },
           "cargo_result": "Success"
         },
@@ -292,7 +292,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 988424811
+            "nanos": 956439662
           },
           "cargo_result": "Failure"
         }
@@ -310,7 +310,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 7,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -318,23 +318,23 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 251837625
+            "nanos": 351651295
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 933952999
+            "secs": 1,
+            "nanos": 368649147
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Test",
           "duration": {
-            "secs": 3,
-            "nanos": 8193427
+            "secs": 2,
+            "nanos": 971808421
           },
           "cargo_result": "Failure"
         }
@@ -352,7 +352,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 8,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -360,15 +360,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 266473374
+            "nanos": 332782982
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 968092646
+            "secs": 1,
+            "nanos": 353581610
           },
           "cargo_result": "Success"
         },
@@ -376,7 +376,7 @@
           "phase": "Test",
           "duration": {
             "secs": 3,
-            "nanos": 43525288
+            "nanos": 14216005
           },
           "cargo_result": "Failure"
         }
@@ -394,7 +394,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 9,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -402,7 +402,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 266837098
+            "nanos": 302157428
           },
           "cargo_result": "Failure"
         }
@@ -420,7 +420,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 10,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -428,15 +428,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 266494629
+            "nanos": 332871180
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 984124407
+            "secs": 1,
+            "nanos": 385867638
           },
           "cargo_result": "Success"
         },
@@ -444,7 +444,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 806584719
+            "nanos": 837879584
           },
           "cargo_result": "Failure"
         }
@@ -462,7 +462,7 @@
             "replacement": "()"
           },
           "i_mutation": 11,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -470,15 +470,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 266654994
+            "nanos": 332742224
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 984284830
+            "secs": 1,
+            "nanos": 385176472
           },
           "cargo_result": "Success"
         },
@@ -486,7 +486,7 @@
           "phase": "Test",
           "duration": {
             "secs": 3,
-            "nanos": 13726879
+            "nanos": 6241628
           },
           "cargo_result": "Failure"
         }
@@ -504,7 +504,7 @@
             "replacement": "()"
           },
           "i_mutation": 12,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -512,15 +512,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 282906200
+            "nanos": 332750865
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 902645768
+            "secs": 1,
+            "nanos": 385071553
           },
           "cargo_result": "Success"
         },
@@ -528,7 +528,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 821972661
+            "nanos": 856737632
           },
           "cargo_result": "Failure"
         }
@@ -546,7 +546,7 @@
             "replacement": "Default::default()"
           },
           "i_mutation": 13,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -554,7 +554,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 232654010
+            "nanos": 266863682
           },
           "cargo_result": "Failure"
         }
@@ -572,7 +572,7 @@
             "replacement": "Default::default()"
           },
           "i_mutation": 14,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -580,15 +580,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 251399894
+            "nanos": 333060580
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 852214375
+            "secs": 1,
+            "nanos": 404418920
           },
           "cargo_result": "Success"
         },
@@ -596,7 +596,7 @@
           "phase": "Test",
           "duration": {
             "secs": 3,
-            "nanos": 21484476
+            "nanos": 38288508
           },
           "cargo_result": "Failure"
         }
@@ -614,7 +614,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 15,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -622,7 +622,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 232648677
+            "nanos": 332783147
           },
           "cargo_result": "Success"
         },
@@ -630,7 +630,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 303692908
+            "nanos": 384924590
           },
           "cargo_result": "Success"
         },
@@ -638,7 +638,7 @@
           "phase": "Test",
           "duration": {
             "secs": 3,
-            "nanos": 7026279
+            "nanos": 63035306
           },
           "cargo_result": "Failure"
         }
@@ -656,7 +656,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 16,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -664,7 +664,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 251248843
+            "nanos": 351801949
           },
           "cargo_result": "Success"
         },
@@ -672,7 +672,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 303514514
+            "nanos": 411095352
           },
           "cargo_result": "Success"
         },
@@ -680,7 +680,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 871421887
+            "nanos": 957108160
           },
           "cargo_result": "Failure"
         }
@@ -698,7 +698,7 @@
             "replacement": "Default::default()"
           },
           "i_mutation": 17,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -706,15 +706,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 232854438
+            "nanos": 332986546
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 834099584
+            "secs": 1,
+            "nanos": 368826178
           },
           "cargo_result": "Success"
         },
@@ -722,7 +722,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 838202663
+            "nanos": 906818680
           },
           "cargo_result": "Failure"
         }
@@ -740,7 +740,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 18,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -748,15 +748,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 232341530
+            "nanos": 332906708
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 867828723
+            "secs": 1,
+            "nanos": 360716667
           },
           "cargo_result": "Success"
         },
@@ -764,7 +764,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 972011049
+            "nanos": 888059955
           },
           "cargo_result": "Failure"
         }
@@ -782,7 +782,7 @@
             "replacement": "Default::default()"
           },
           "i_mutation": 19,
-          "n_mutations": 38
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -790,49 +790,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 251167919
-          },
-          "cargo_result": "Success"
-        },
-        {
-          "phase": "Build",
-          "duration": {
-            "secs": 0,
-            "nanos": 902536185
-          },
-          "cargo_result": "Success"
-        },
-        {
-          "phase": "Test",
-          "duration": {
-            "secs": 2,
-            "nanos": 888358071
-          },
-          "cargo_result": "Failure"
-        }
-      ]
-    },
-    {
-      "log_path": "./mutants.out/log/replace_u8__from_with_Default__default()_in_src_parameters_mod.rs_28.log",
-      "scenario": {
-        "Mutant": {
-          "mutation": {
-            "file": "src/parameters/mod.rs",
-            "line": 28,
-            "function": "u8::from",
-            "return_type": "-> Self",
-            "replacement": "Default::default()"
-          },
-          "i_mutation": 20,
-          "n_mutations": 38
-        }
-      },
-      "phase_results": [
-        {
-          "phase": "Check",
-          "duration": {
-            "secs": 0,
-            "nanos": 301390902
+            "nanos": 332869771
           },
           "cargo_result": "Success"
         },
@@ -840,33 +798,33 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 403566682
+            "nanos": 356765749
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Test",
           "duration": {
-            "secs": 3,
-            "nanos": 107241101
+            "secs": 2,
+            "nanos": 856734629
           },
-          "cargo_result": "Success"
+          "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_Parameters__to_bytes_with_Default__default()_in_src_parameters_mod.rs_60.log",
+      "log_path": "./mutants.out/log/replace_Parameters__to_bytes_with_Default__default()_in_src_parameters_mod.rs_61.log",
       "scenario": {
         "Mutant": {
           "mutation": {
             "file": "src/parameters/mod.rs",
-            "line": 60,
+            "line": 61,
             "function": "Parameters::to_bytes",
             "return_type": "-> [u8 ; 5]",
             "replacement": "Default::default()"
           },
-          "i_mutation": 21,
-          "n_mutations": 38
+          "i_mutation": 20,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -874,7 +832,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 301397986
+            "nanos": 332801143
           },
           "cargo_result": "Success"
         },
@@ -882,7 +840,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 369340125
+            "nanos": 404265722
           },
           "cargo_result": "Success"
         },
@@ -890,25 +848,25 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 859657400
+            "nanos": 837801591
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_Parameters__from_bytes_with_Ok(Default__default())_in_src_parameters_mod.rs_88.log",
+      "log_path": "./mutants.out/log/replace_Parameters__from_bytes_with_Ok(Default__default())_in_src_parameters_mod.rs_89.log",
       "scenario": {
         "Mutant": {
           "mutation": {
             "file": "src/parameters/mod.rs",
-            "line": 88,
+            "line": 89,
             "function": "Parameters::from_bytes",
             "return_type": "-> Result < Self , Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 22,
-          "n_mutations": 38
+          "i_mutation": 21,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -916,7 +874,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 251252253
+            "nanos": 266893655
           },
           "cargo_result": "Failure"
         }
@@ -933,8 +891,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 23,
-          "n_mutations": 38
+          "i_mutation": 22,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -942,7 +900,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 282900878
+            "nanos": 351534021
           },
           "cargo_result": "Success"
         },
@@ -950,7 +908,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 335027203
+            "nanos": 410837118
           },
           "cargo_result": "Success"
         },
@@ -958,7 +916,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 787803463
+            "nanos": 938517265
           },
           "cargo_result": "Failure"
         }
@@ -975,8 +933,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 24,
-          "n_mutations": 38
+          "i_mutation": 23,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -984,15 +942,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 216445917
+            "nanos": 332863607
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 802179353
+            "secs": 1,
+            "nanos": 384806235
           },
           "cargo_result": "Success"
         },
@@ -1000,7 +958,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 805505634
+            "nanos": 856600275
           },
           "cargo_result": "Failure"
         }
@@ -1017,8 +975,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 25,
-          "n_mutations": 38
+          "i_mutation": 24,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1026,15 +984,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 232565457
+            "nanos": 367362199
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 852907126
+            "secs": 1,
+            "nanos": 406735029
           },
           "cargo_result": "Success"
         },
@@ -1042,7 +1000,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 838422111
+            "nanos": 921877750
           },
           "cargo_result": "Failure"
         }
@@ -1059,8 +1017,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 26,
-          "n_mutations": 38
+          "i_mutation": 25,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1068,15 +1026,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 233439602
+            "nanos": 332759676
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 805769884
+            "secs": 1,
+            "nanos": 385417093
           },
           "cargo_result": "Success"
         },
@@ -1084,7 +1042,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 806731428
+            "nanos": 856529468
           },
           "cargo_result": "Failure"
         }
@@ -1101,8 +1059,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 27,
-          "n_mutations": 38
+          "i_mutation": 26,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1110,15 +1068,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 232408006
+            "nanos": 351740657
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 805657335
+            "secs": 1,
+            "nanos": 434661096
           },
           "cargo_result": "Success"
         },
@@ -1126,7 +1084,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 838037060
+            "nanos": 956732888
           },
           "cargo_result": "Failure"
         }
@@ -1143,8 +1101,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 28,
-          "n_mutations": 38
+          "i_mutation": 27,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1152,15 +1110,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 216599381
+            "nanos": 332756314
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 834042240
+            "secs": 1,
+            "nanos": 385111720
           },
           "cargo_result": "Success"
         },
@@ -1168,7 +1126,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 821649966
+            "nanos": 856715817
           },
           "cargo_result": "Failure"
         }
@@ -1185,8 +1143,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 29,
-          "n_mutations": 38
+          "i_mutation": 28,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1194,15 +1152,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 216536593
+            "nanos": 351821654
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 805479023
+            "secs": 1,
+            "nanos": 453677356
           },
           "cargo_result": "Success"
         },
@@ -1210,7 +1168,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 771793981
+            "nanos": 956953762
           },
           "cargo_result": "Failure"
         }
@@ -1227,8 +1185,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 30,
-          "n_mutations": 38
+          "i_mutation": 29,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1236,15 +1194,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 216807663
+            "nanos": 332616333
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 805518392
+            "secs": 1,
+            "nanos": 368917110
           },
           "cargo_result": "Success"
         },
@@ -1252,7 +1210,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 806337516
+            "nanos": 888203854
           },
           "cargo_result": "Failure"
         }
@@ -1269,8 +1227,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 31,
-          "n_mutations": 38
+          "i_mutation": 30,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1278,15 +1236,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 216440406
+            "nanos": 351303591
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 805343410
+            "secs": 1,
+            "nanos": 403734145
           },
           "cargo_result": "Success"
         },
@@ -1294,7 +1252,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 788081737
+            "nanos": 938542681
           },
           "cargo_result": "Failure"
         }
@@ -1311,8 +1269,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 32,
-          "n_mutations": 38
+          "i_mutation": 31,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1320,15 +1278,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 216251068
+            "nanos": 332601055
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 817737446
+            "secs": 1,
+            "nanos": 403809823
           },
           "cargo_result": "Success"
         },
@@ -1336,7 +1294,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 806704695
+            "nanos": 872142441
           },
           "cargo_result": "Failure"
         }
@@ -1353,8 +1311,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 33,
-          "n_mutations": 38
+          "i_mutation": 32,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1362,15 +1320,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 232816847
+            "nanos": 332901012
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 833844462
+            "secs": 1,
+            "nanos": 356698189
           },
           "cargo_result": "Success"
         },
@@ -1378,7 +1336,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 822252272
+            "nanos": 906990465
           },
           "cargo_result": "Failure"
         }
@@ -1395,8 +1353,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 34,
-          "n_mutations": 38
+          "i_mutation": 33,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1404,15 +1362,15 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 232540914
+            "nanos": 332485472
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Build",
           "duration": {
-            "secs": 0,
-            "nanos": 809494368
+            "secs": 1,
+            "nanos": 368772755
           },
           "cargo_result": "Success"
         },
@@ -1420,7 +1378,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 838125259
+            "nanos": 871964583
           },
           "cargo_result": "Failure"
         }
@@ -1437,8 +1395,8 @@
             "return_type": "-> ReadParameterExpectations",
             "replacement": "Default::default()"
           },
-          "i_mutation": 35,
-          "n_mutations": 38
+          "i_mutation": 34,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1446,7 +1404,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 216761001
+            "nanos": 282416213
           },
           "cargo_result": "Failure"
         }
@@ -1463,8 +1421,8 @@
             "return_type": "-> SetParameterExpectations",
             "replacement": "Default::default()"
           },
-          "i_mutation": 36,
-          "n_mutations": 38
+          "i_mutation": 35,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1472,7 +1430,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 208387693
+            "nanos": 282590062
           },
           "cargo_result": "Failure"
         }
@@ -1489,8 +1447,8 @@
             "return_type": "-> ReadModelDataExpectations",
             "replacement": "Default::default()"
           },
-          "i_mutation": 37,
-          "n_mutations": 38
+          "i_mutation": 36,
+          "n_mutations": 37
         }
       },
       "phase_results": [
@@ -1498,7 +1456,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 208312393
+            "nanos": 266403974
           },
           "cargo_result": "Failure"
         }

@@ -1,0 +1,218 @@
+
+*** replace <??>::write_buffer with Ok(Default::default()) in src/lib.rs:95
+*** --- src/lib.rs
++++ replace <??>::write_buffer with Ok(Default::default())
+@@ -88,21 +88,18 @@
+             m1: self.m1,
+             delay: self.delay,
+             mode: PhantomData::<Program>,
+         }
+     }
+ 
+     /// Write entire buffer to serial port
+     pub fn write_buffer(&mut self, buffer: &[u8]) -> Result<(), crate::Error> {
+-        for ch in buffer {
+-            block!(self.serial.write(*ch)).map_err(|_| Error::SerialWrite)?;
+-        }
+-        Ok(())
+-    }
++Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
++}
+ 
+     /// Read entire buffer from serial port
+     pub fn read_buffer(&mut self, buffer: &mut [u8]) -> Result<(), Error> {
+         for byte in buffer {
+             *byte = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+         }
+         Ok(())
+     }
+
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.383s
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 1.570s
+*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(101) in 3.006s
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: `ebyte-e32` (lib test) generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 0.37s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmp2qSz5l)
+warning: unused variable: `buffer`
+  --> src/lib.rs:95:36
+   |
+95 |     pub fn write_buffer(&mut self, buffer: &[u8]) -> Result<(), crate::Error> {
+   |                                    ^^^^^^ help: if this is intentional, prefix it with an underscore: `_buffer`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: `ebyte-e32` (lib test) generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 1.56s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmp2qSz5l)
+warning: unused variable: `buffer`
+  --> src/lib.rs:95:36
+   |
+95 |     pub fn write_buffer(&mut self, buffer: &[u8]) -> Result<(), crate::Error> {
+   |                                    ^^^^^^ help: if this is intentional, prefix it with an underscore: `_buffer`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: `ebyte-e32` (lib test) generated 1 warning
+warning: `ebyte-e32` (lib) generated 1 warning (1 duplicate)
+    Finished test [unoptimized + debuginfo] target(s) in 0.27s
+     Running unittests (target/debug/deps/ebyte_e32-d32ca24a8eb391c6)
+
+running 18 tests
+test mode::test::id ... ok
+test mode::test::pins_powerdown ... ok
+test mode::test::pins_normal ... ok
+test mode::test::pins_program ... ok
+test mode::test::pins_wakeup ... ok
+test test::acquire_release ... ok
+test test::flushes ... ok
+test test::resets ... ok
+test test::writes_buffer ... FAILED
+test model_data::test::model_data_from_to_bytes_roundtrip ... ok
+test test::reads_byte ... ok
+test test::writes_byte ... ok
+test test::reads_buffer ... ok
+test test::read_model::reads_model_data ... ok
+test parameters::test::from_to_bytes_roundtrip ... ok
+test test::parameters::read_params::sets_parameters ... ok
+test test::parameters::read_params::reads_parameters ... ok
+test test::parameters::set_params::sets_parameters ... ok
+
+failures:
+
+---- test::writes_buffer stdout ----
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::writes_buffer' panicked at 'Test failed: serial mock has unsatisfied expectations after call to done; minimal failing input: buffer = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	successes: 0
+	local rejects: 0
+	global rejects: 0
+', src/test/mod.rs:104:1
+
+
+failures:
+    test::writes_buffer
+
+test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.72s
+
+error: test failed, to rerun pass '--lib'
