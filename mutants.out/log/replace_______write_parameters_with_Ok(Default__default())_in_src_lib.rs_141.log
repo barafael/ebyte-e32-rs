@@ -1,0 +1,171 @@
+
+*** replace <??>::write_parameters with Ok(Default::default()) in src/lib.rs:141
+*** --- src/lib.rs
++++ replace <??>::write_parameters with Ok(Default::default())
+@@ -134,43 +134,18 @@
+     pub fn set_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
+         Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         let result = self.write_parameters(params, mode);
+         Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         result
+     }
+ 
+     fn write_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
+-        let persistence = u8::from(mode);
+-        block!(self.serial.write(persistence)).map_err(|_| Error::SerialWrite)?;
+-
+-        let bytes: [u8; 5] = params.to_bytes();
+-        block!(self.serial.write(bytes[0])).map_err(|_| Error::SerialWrite)?;
+-        block!(self.serial.write(bytes[1])).map_err(|_| Error::SerialWrite)?;
+-        block!(self.serial.write(bytes[2])).map_err(|_| Error::SerialWrite)?;
+-        block!(self.serial.write(bytes[3])).map_err(|_| Error::SerialWrite)?;
+-        block!(self.serial.write(bytes[4])).map_err(|_| Error::SerialWrite)?;
+-
+-        let response_prefix = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+-        let mut response = [0u8; 5];
+-        for byte in &mut response {
+-            *byte = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+-        }
+-        if response_prefix != 0xC0 {
+-            return Err(Error::SetParameters);
+-        }
+-
+-        if response != bytes {
+-            return Err(Error::SetParameters);
+-        }
+-
+-        self.delay.delay_ms(40);
+-
+-        Ok(())
+-    }
++Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
++}
+ 
+     pub fn reset(&mut self) -> Result<(), Error> {
+         Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         let result = self.perform_reset();
+         Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         result
+     }
+ 
+
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.333s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 1.304s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(101) in 2.806snderscore: `_params`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `mode`
+   --> src/lib.rs:141:57
+    |
+141 |     fn write_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
+    |                                                         ^^^^ help: if this is intentional, prefix it with an underscore: `_mode`
+
+warning: `ebyte-e32` (lib test) generated 2 warnings
+    Finished dev [unoptimized + debuginfo] target(s) in 0.32s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpOK8bDN)
+warning: unused variable: `params`
+   --> src/lib.rs:141:36
+    |
+141 |     fn write_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
+    |                                    ^^^^^^ help: if this is intentional, prefix it with an underscore: `_params`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `mode`
+   --> src/lib.rs:141:57
+    |
+141 |     fn write_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
+    |                                                         ^^^^ help: if this is intentional, prefix it with an underscore: `_mode`
+
+warning: `ebyte-e32` (lib test) generated 2 warnings
+    Finished dev [unoptimized + debuginfo] target(s) in 1.29s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpOK8bDN)
+warning: unused variable: `params`
+   --> src/lib.rs:141:36
+    |
+141 |     fn write_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
+    |                                    ^^^^^^ help: if this is intentional, prefix it with an underscore: `_params`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `mode`
+   --> src/lib.rs:141:57
+    |
+141 |     fn write_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
+    |                                                         ^^^^ help: if this is intentional, prefix it with an underscore: `_mode`
+
+warning: `ebyte-e32` (lib test) generated 2 warnings
+warning: `ebyte-e32` (lib) generated 2 warnings (2 duplicates)
+    Finished test [unoptimized + debuginfo] target(s) in 0.23s
+     Running unittests (target/debug/deps/ebyte_e32-fa871f114a226b67)
+
+running 17 tests
+test mode::test::id ... ok
+test mode::test::pins_normal ... ok
+test mode::test::pins_powerdown ... ok
+test mode::test::pins_program ... ok
+test mode::test::pins_wakeup ... ok
+test test::acquire_release ... ok
+test test::flushes ... ok
+test test::resets ... ok
+test test::parameters::write::sets_parameters ... FAILED
+test test::reads_byte ... ok
+test model_data::test::model_data_from_to_bytes_roundtrip ... ok
+test test::writes_buffer ... ok
+test test::writes_byte ... ok
+test test::reads_buffer ... ok
+test test::read_model::reads_model_data ... ok
+test parameters::test::from_to_bytes_roundtrip ... ok
+test test::parameters::read::reads_parameters ... ok
+
+failures:
+
+---- test::parameters::write::sets_parameters stdout ----
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+thread 'test::parameters::write::sets_parameters' panicked at 'Test failed: serial mock has unsatisfied expectations after call to done; minimal failing input: parameters = Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }, persistence = Temporary
+	successes: 0
+	local rejects: 0
+	global rejects: 0
+', src/test/parameters/write.rs:67:1
+
+
+failures:
+    test::parameters::write::sets_parameters
+
+test result: FAILED. 16 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.55s
+
+error: test failed, to rerun pass '--lib'

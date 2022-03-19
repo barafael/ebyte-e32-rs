@@ -1,0 +1,71 @@
+
+*** replace <??>::perform_reset with Ok(Default::default()) in src/lib.rs:177
+*** --- src/lib.rs
++++ replace <??>::perform_reset with Ok(Default::default())
+@@ -170,22 +170,18 @@
+     pub fn reset(&mut self) -> Result<(), Error> {
+         Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         let result = self.perform_reset();
+         Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         result
+     }
+ 
+     fn perform_reset(&mut self) -> Result<(), Error> {
+-        block!(self.serial.write(0xC4)).map_err(|_| Error::SerialWrite)?;
+-        block!(self.serial.write(0xC4)).map_err(|_| Error::SerialWrite)?;
+-        block!(self.serial.write(0xC4)).map_err(|_| Error::SerialWrite)?;
+-
+-        Ok(())
+-    }
++Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
++}
+ 
+     pub fn release(self) -> (S, Aux, M0, M1, D) {
+         (self.serial, self.aux, self.m0, self.m1, self.delay)
+     }
+ }
+ 
+ impl<S, Aux, M0, M1, D> Read<u8> for Ebyte<S, Aux, M0, M1, D, Normal>
+ where
+
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.333s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 1.319s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(101) in 3.007sOK8bDN)
+    Finished test [unoptimized + debuginfo] target(s) in 0.24s
+     Running unittests (target/debug/deps/ebyte_e32-fa871f114a226b67)
+
+running 17 tests
+test mode::test::id ... ok
+test mode::test::pins_powerdown ... ok
+test mode::test::pins_normal ... ok
+test mode::test::pins_program ... ok
+test mode::test::pins_wakeup ... ok
+test test::acquire_release ... ok
+test test::flushes ... ok
+test test::resets ... FAILED
+test test::reads_byte ... ok
+test model_data::test::model_data_from_to_bytes_roundtrip ... ok
+test test::writes_buffer ... ok
+test test::writes_byte ... ok
+test test::reads_buffer ... ok
+test test::read_model::reads_model_data ... ok
+test parameters::test::from_to_bytes_roundtrip ... ok
+test test::parameters::read::reads_parameters ... ok
+test test::parameters::write::sets_parameters ... ok
+
+failures:
+
+---- test::resets stdout ----
+thread 'test::resets' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    test::resets
+
+test result: FAILED. 16 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.74s
+
+error: test failed, to rerun pass '--lib'

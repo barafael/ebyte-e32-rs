@@ -1,38 +1,569 @@
 
 *** baseline
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
 *** cargo result: Exited(0) in 0.032s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo build --tests
 *** cargo result: Exited(0) in 0.032s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(0) in 2.856sinfo] target(s) in 0.01s
-     Running unittests (target/debug/deps/ebyte_e32-d32ca24a8eb391c6)
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(101) in 2.337sng: unused import: `Program`
+ --> src/test/parameters/read_params.rs:2:20
+  |
+2 |     mode::{Normal, Program},
+  |                    ^^^^^^^
+
+warning: unused import: `Program`
+ --> src/test/parameters/set_params.rs:2:20
+  |
+2 |     mode::{Normal, Program},
+  |                    ^^^^^^^
+
+warning: unused import: `Program`
+ --> src/test/read_model.rs:2:20
+  |
+2 |     mode::{Normal, Program},
+  |                    ^^^^^^^
+
+warning: `ebyte-e32` (lib test) generated 4 warnings
+    Finished dev [unoptimized + debuginfo] target(s) in 0.02s
+warning: unused import: `Program`
+  --> src/test/mod.rs:2:20
+   |
+2  |     mode::{Normal, Program},
+   |                    ^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+help: consider adding a `#[cfg(test)]` to the containing module
+  --> src/lib.rs:20:1
+   |
+20 | mod test;
+   | ^^^^^^^^^
+
+warning: unused import: `Program`
+ --> src/test/parameters/read_params.rs:2:20
+  |
+2 |     mode::{Normal, Program},
+  |                    ^^^^^^^
+
+warning: unused import: `Program`
+ --> src/test/parameters/set_params.rs:2:20
+  |
+2 |     mode::{Normal, Program},
+  |                    ^^^^^^^
+
+warning: unused import: `Program`
+ --> src/test/read_model.rs:2:20
+  |
+2 |     mode::{Normal, Program},
+  |                    ^^^^^^^
+
+warning: `ebyte-e32` (lib test) generated 4 warnings
+    Finished dev [unoptimized + debuginfo] target(s) in 0.02s
+warning: unused import: `Program`
+  --> src/test/mod.rs:2:20
+   |
+2  |     mode::{Normal, Program},
+   |                    ^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+help: consider adding a `#[cfg(test)]` to the containing module
+  --> src/lib.rs:20:1
+   |
+20 | mod test;
+   | ^^^^^^^^^
+
+warning: unused import: `Program`
+ --> src/test/parameters/read_params.rs:2:20
+  |
+2 |     mode::{Normal, Program},
+  |                    ^^^^^^^
+
+warning: unused import: `Program`
+ --> src/test/parameters/set_params.rs:2:20
+  |
+2 |     mode::{Normal, Program},
+  |                    ^^^^^^^
+
+warning: unused import: `Program`
+ --> src/test/read_model.rs:2:20
+  |
+2 |     mode::{Normal, Program},
+  |                    ^^^^^^^
+
+warning: `ebyte-e32` (lib test) generated 4 warnings
+    Finished test [unoptimized + debuginfo] target(s) in 0.01s
+     Running unittests (target/debug/deps/ebyte_e32-fa871f114a226b67)
 
 running 18 tests
-test mode::test::id ... ok
-test mode::test::pins_normal ... ok
 test mode::test::pins_powerdown ... ok
-test mode::test::pins_program ... ok
+test mode::test::pins_normal ... ok
 test mode::test::pins_wakeup ... ok
+test mode::test::pins_program ... ok
+test mode::test::id ... ok
 test test::acquire_release ... ok
 test test::flushes ... ok
-test test::resets ... ok
+test test::resets ... FAILED
+test test::read_model::reads_model_data ... FAILED
+test test::parameters::read_params::reads_parameters ... FAILED
+test test::parameters::read_params::sets_parameters ... FAILED
+test test::parameters::set_params::sets_parameters ... FAILED
 test model_data::test::model_data_from_to_bytes_roundtrip ... ok
-test test::writes_byte ... ok
-test test::reads_buffer ... ok
 test test::reads_byte ... ok
+test test::writes_byte ... ok
 test test::writes_buffer ... ok
-test test::read_model::reads_model_data ... ok
+test test::reads_buffer ... ok
 test parameters::test::from_to_bytes_roundtrip ... ok
-test test::parameters::read_params::reads_parameters ... ok
-test test::parameters::read_params::sets_parameters ... ok
-test test::parameters::set_params::sets_parameters ... ok
 
-test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.72s
+failures:
 
-   Doc-tests ebyte-e32
+---- test::resets stdout ----
+thread 'test::resets' panicked at 'assertion failed: `(left == right)`
+  left: `2`,
+ right: `4`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
-running 0 tests
+---- test::read_model::reads_model_data stdout ----
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::read_model::reads_model_data' panicked at 'Test failed: assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match; minimal failing input: model_data = ModelData { model: 0, version: 0, features: 0 }
+	successes: 0
+	local rejects: 0
+	global rejects: 0
+', src/test/read_model.rs:54:1
 
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+---- test::parameters::read_params::reads_parameters stdout ----
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::reads_parameters' panicked at 'Test failed: assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match; minimal failing input: parameters = Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }
+	successes: 0
+	local rejects: 0
+	global rejects: 0
+', src/test/parameters/read_params.rs:56:1
 
+---- test::parameters::read_params::sets_parameters stdout ----
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/common.rs:56:9
+thread 'test::parameters::read_params::sets_parameters' panicked at 'Test failed: assertion failed: `(left == right)`
+  left: `0`,
+ right: `5`: Mock call number(left) and expectations(right) do not match; minimal failing input: parameters = Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }
+	successes: 0
+	local rejects: 0
+	global rejects: 0
+', src/test/parameters/read_params.rs:56:1
+
+---- test::parameters::set_params::sets_parameters stdout ----
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/pin.rs:138:9
+thread 'test::parameters::set_params::sets_parameters' panicked at 'Test failed: assertion failed: `(left == right)`
+  left: `Set(Low)`,
+ right: `Set(High)`: expected pin::set_high; minimal failing input: parameters = Parameters { address: 0, channel: 0, uart_parity: None, uart_rate: Bps1200, air_rate: Bps300, transmission_mode: Transparent, io_drive_mode: PushPull, wakeup_time: Ms250, fec: On, transmission_power: Dbm30 }, persistence = Temporary
+	successes: 0
+	local rejects: 0
+	global rejects: 0
+', src/test/parameters/set_params.rs:67:1
+
+
+failures:
+    test::parameters::read_params::reads_parameters
+    test::parameters::read_params::sets_parameters
+    test::parameters::set_params::sets_parameters
+    test::read_model::reads_model_data
+    test::resets
+
+test result: FAILED. 13 passed; 5 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.31s
+
+error: test failed, to rerun pass '--lib'

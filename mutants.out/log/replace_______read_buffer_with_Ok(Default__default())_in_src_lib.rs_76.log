@@ -1,8 +1,8 @@
 
-*** replace <??>::read_buffer with Ok(Default::default()) in src/lib.rs:103
+*** replace <??>::read_buffer with Ok(Default::default()) in src/lib.rs:76
 *** --- src/lib.rs
 +++ replace <??>::read_buffer with Ok(Default::default())
-@@ -96,21 +96,18 @@
+@@ -69,21 +69,18 @@
          for ch in buffer {
              block!(self.serial.write(*ch)).map_err(|_| Error::SerialWrite)?;
          }
@@ -19,432 +19,430 @@
 +Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
 +}
  
-     pub fn release(self) -> (S, Aux, M0, M1, D) {
-         (self.serial, self.aux, self.m0, self.m1, self.delay)
+     pub fn model_data(&mut self) -> Result<ModelData, Error> {
+         Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         let result = self.read_model_data();
+         Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         result
      }
- }
  
- impl<S, Aux, M0, M1, D> Read<u8> for Ebyte<S, Aux, M0, M1, D, Normal>
- where
 
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(0) in 0.252s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
-*** cargo result: Exited(0) in 1.003s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(101) in 2.921s|
-    = note: `#[warn(unused_variables)]` on by default
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.367s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 1.635s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(101) in 3.161s = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 0.24s
-   Compiling ebyte-e32 v0.2.0 (/tmp/.tmp2qSz5l)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.35s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpOK8bDN)
 warning: unused variable: `buffer`
-   --> src/lib.rs:103:35
-    |
-103 |     pub fn read_buffer(&mut self, buffer: &mut [u8]) -> Result<(), Error> {
-    |                                   ^^^^^^ help: if this is intentional, prefix it with an underscore: `_buffer`
-    |
-    = note: `#[warn(unused_variables)]` on by default
+  --> src/lib.rs:76:35
+   |
+76 |     pub fn read_buffer(&mut self, buffer: &mut [u8]) -> Result<(), Error> {
+   |                                   ^^^^^^ help: if this is intentional, prefix it with an underscore: `_buffer`
+   |
+   = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 0.98s
-   Compiling ebyte-e32 v0.2.0 (/tmp/.tmp2qSz5l)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.62s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpOK8bDN)
 warning: unused variable: `buffer`
-   --> src/lib.rs:103:35
-    |
-103 |     pub fn read_buffer(&mut self, buffer: &mut [u8]) -> Result<(), Error> {
-    |                                   ^^^^^^ help: if this is intentional, prefix it with an underscore: `_buffer`
-    |
-    = note: `#[warn(unused_variables)]` on by default
+  --> src/lib.rs:76:35
+   |
+76 |     pub fn read_buffer(&mut self, buffer: &mut [u8]) -> Result<(), Error> {
+   |                                   ^^^^^^ help: if this is intentional, prefix it with an underscore: `_buffer`
+   |
+   = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
 warning: `ebyte-e32` (lib) generated 1 warning (1 duplicate)
-    Finished test [unoptimized + debuginfo] target(s) in 0.18s
-     Running unittests (target/debug/deps/ebyte_e32-d32ca24a8eb391c6)
+    Finished test [unoptimized + debuginfo] target(s) in 0.25s
+     Running unittests (target/debug/deps/ebyte_e32-fa871f114a226b67)
 
-running 18 tests
+running 17 tests
 test mode::test::id ... ok
+test mode::test::pins_wakeup ... ok
 test mode::test::pins_normal ... ok
 test mode::test::pins_program ... ok
-test mode::test::pins_wakeup ... ok
 test mode::test::pins_powerdown ... ok
 test test::acquire_release ... ok
 test test::flushes ... ok
 test test::resets ... ok
 test test::reads_buffer ... FAILED
 test model_data::test::model_data_from_to_bytes_roundtrip ... ok
-test test::writes_buffer ... ok
 test test::reads_byte ... ok
 test test::writes_byte ... ok
+test test::writes_buffer ... ok
 test test::read_model::reads_model_data ... ok
 test parameters::test::from_to_bytes_roundtrip ... ok
-test test::parameters::read_params::reads_parameters ... ok
-test test::parameters::read_params::sets_parameters ... ok
-test test::parameters::set_params::sets_parameters ... ok
+test test::parameters::read::reads_parameters ... ok
+test test::parameters::write::sets_parameters ... ok
 
 failures:
 
 ---- test::reads_buffer stdout ----
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[189, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[189, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[94, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[94, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[47, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[47, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[23, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[23, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[11, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[11, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[5, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[5, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[2, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[2, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[1, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[1, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 172, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 86, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 86, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 43, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 43, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 21, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 21, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 10, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 10, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 5, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 5, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 2, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 2, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 1, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 1, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 197, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 98, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 98, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 49, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 49, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 24, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 24, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 12, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 12, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 6, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 6, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 3, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 3, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 1, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 1, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 211, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 105, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 105, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 52, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 52, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 26, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 26, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 13, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 13, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 6, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 6, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 3, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 3, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 1, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 1, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 224, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 112, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 112, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 56, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 56, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 28, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 28, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 14, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 14, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 7, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 7, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 3, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 3, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 1, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 1, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 209, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 104, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 104, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 52, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 52, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 26, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 26, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 13, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 13, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 6, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 6, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 3, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 3, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 1, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 1, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 255, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 127, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 127, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 63, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 63, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 31, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 31, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 15, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 15, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 7, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 7, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 3, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 3, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 1, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 1, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 91, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 45, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 45, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 22, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 22, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 11, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 11, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 5, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 5, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 2, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 2, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 1, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 1, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 53, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 26, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 26, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 13, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 13, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 6, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 6, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 3, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 3, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 1, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 1, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 58, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 98, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 227, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 227, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 113, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 113, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 109, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 109, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 54, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 54, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'assertion failed: `(left == right)`
   left: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`,
- right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]`', src/test/mod.rs:181:9
+ right: `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]`', src/test/mod.rs:177:9
 thread 'test::reads_buffer' panicked at 'serial mock has unsatisfied expectations after call to done', /home/rafaelbachmann/.cargo/registry/src/github.com-1ecc6299db9ec823/embedded-hal-mock-0.8.0/src/serial.rs:340:9
 thread 'test::reads_buffer' panicked at 'Test failed: serial mock has unsatisfied expectations after call to done; minimal failing input: buffer = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	successes: 0
 	local rejects: 0
 	global rejects: 0
-', src/test/mod.rs:104:1
+', src/test/mod.rs:100:1
 
 
 failures:
     test::reads_buffer
 
-test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.72s
+test result: FAILED. 16 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.89s
 
 error: test failed, to rerun pass '--lib'

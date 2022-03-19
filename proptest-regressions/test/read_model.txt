@@ -1,0 +1,7 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc d1c9e1b930175a444e692ac2669c6ee6c2c521e95f49633791361b9c491f211d # shrinks to model_data = ModelData { model: 0, version: 0, features: 0 }

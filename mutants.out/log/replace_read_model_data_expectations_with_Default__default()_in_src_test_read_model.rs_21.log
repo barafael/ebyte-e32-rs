@@ -2,7 +2,7 @@
 *** replace read_model_data_expectations with Default::default() in src/test/read_model.rs:21
 *** --- src/test/read_model.rs
 +++ replace read_model_data_expectations with Default::default()
-@@ -14,41 +14,17 @@
+@@ -14,43 +14,17 @@
  struct ReadModelDataExpectations {
      serial: Serial<u8>,
      aux: Generic<PinTransaction>,
@@ -27,9 +27,11 @@
 -        PinTransaction::get(Low),
 -        PinTransaction::get(Low),
 -        PinTransaction::get(High),
+-        PinTransaction::get(Low),
+-        PinTransaction::get(High),
 -    ]);
--    let m0 = Pin::new(&vec![PinTransaction::set(Low)]);
--    let m1 = Pin::new(&vec![PinTransaction::set(Low)]);
+-    let m0 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
+-    let m1 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
 -    ReadModelDataExpectations {
 -        serial,
 -        aux,
@@ -47,7 +49,7 @@
      })]
 
 *** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(101) in 0.266sW8Sm9N)
+*** cargo result: Exited(101) in 0.283sOK8bDN)
 warning: unused imports: `High`, `Low`, `Mock as Pin`, `Transaction as SerialTransaction`
   --> src/test/read_model.rs:6:9
    |

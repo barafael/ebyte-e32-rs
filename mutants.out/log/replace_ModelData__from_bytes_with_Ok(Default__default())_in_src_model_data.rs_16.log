@@ -31,13 +31,13 @@
 *** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
 *** cargo result: Exited(0) in 0.333s
 *** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo build --tests
-*** cargo result: Exited(0) in 1.385s
+*** cargo result: Exited(0) in 1.335s
 *** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(101) in 3.063ssed_variables)]` on by default
+*** cargo result: Exited(101) in 3.039ssed_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
     Finished dev [unoptimized + debuginfo] target(s) in 0.32s
-   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpW8Sm9N)
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpOK8bDN)
 warning: unused variable: `bytes`
   --> src/model_data.rs:16:23
    |
@@ -47,8 +47,8 @@ warning: unused variable: `bytes`
    = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 1.36s
-   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpW8Sm9N)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.31s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpOK8bDN)
 warning: unused variable: `bytes`
   --> src/model_data.rs:16:23
    |
@@ -59,80 +59,91 @@ warning: unused variable: `bytes`
 
 warning: `ebyte-e32` (lib test) generated 1 warning
 warning: `ebyte-e32` (lib) generated 1 warning (1 duplicate)
-    Finished test [unoptimized + debuginfo] target(s) in 0.24s
+    Finished test [unoptimized + debuginfo] target(s) in 0.26s
      Running unittests (target/debug/deps/ebyte_e32-fa871f114a226b67)
 
-running 18 tests
+running 17 tests
 test mode::test::id ... ok
 test mode::test::pins_normal ... ok
 test mode::test::pins_program ... ok
-test mode::test::pins_powerdown ... ok
 test mode::test::pins_wakeup ... ok
+test mode::test::pins_powerdown ... ok
 test test::acquire_release ... ok
 test test::flushes ... ok
 test test::resets ... ok
 test model_data::test::model_data_from_to_bytes_roundtrip ... FAILED
-test test::reads_byte ... ok
 test test::writes_byte ... ok
-test test::reads_buffer ... ok
 test test::writes_buffer ... ok
+test test::reads_buffer ... ok
+test test::reads_byte ... ok
 test test::read_model::reads_model_data ... ok
 test parameters::test::from_to_bytes_roundtrip ... ok
-test test::parameters::read_params::reads_parameters ... ok
-test test::parameters::read_params::sets_parameters ... ok
-test test::parameters::set_params::sets_parameters ... ok
+test test::parameters::read::reads_parameters ... ok
+test test::parameters::write::sets_parameters ... ok
 
 failures:
 
 ---- model_data::test::model_data_from_to_bytes_roundtrip stdout ----
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 22, version: 190, features: 33 }`,
+  left: `ModelData { model: 99, version: 186, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 11, version: 190, features: 33 }`,
+  left: `ModelData { model: 49, version: 186, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 5, version: 190, features: 33 }`,
+  left: `ModelData { model: 24, version: 186, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 2, version: 190, features: 33 }`,
+  left: `ModelData { model: 12, version: 186, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 1, version: 190, features: 33 }`,
+  left: `ModelData { model: 6, version: 186, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 0, version: 190, features: 33 }`,
+  left: `ModelData { model: 3, version: 186, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 0, version: 95, features: 33 }`,
+  left: `ModelData { model: 1, version: 186, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 0, version: 47, features: 33 }`,
+  left: `ModelData { model: 0, version: 186, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 0, version: 23, features: 33 }`,
+  left: `ModelData { model: 0, version: 93, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 0, version: 11, features: 33 }`,
+  left: `ModelData { model: 0, version: 46, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 0, version: 5, features: 33 }`,
+  left: `ModelData { model: 0, version: 23, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 0, version: 2, features: 33 }`,
+  left: `ModelData { model: 0, version: 11, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 0, version: 1, features: 33 }`,
+  left: `ModelData { model: 0, version: 5, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 0, version: 0, features: 33 }`,
+  left: `ModelData { model: 0, version: 2, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 0, version: 0, features: 16 }`,
+  left: `ModelData { model: 0, version: 1, features: 155 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
-  left: `ModelData { model: 0, version: 0, features: 8 }`,
+  left: `ModelData { model: 0, version: 0, features: 155 }`,
+ right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
+thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 77 }`,
+ right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
+thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 38 }`,
+ right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
+thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 19 }`,
+ right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
+thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
+  left: `ModelData { model: 0, version: 0, features: 9 }`,
  right: `ModelData { model: 0, version: 0, features: 0 }`', src/model_data.rs:31:13
 thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'assertion failed: `(left == right)`
   left: `ModelData { model: 0, version: 0, features: 4 }`,
@@ -158,6 +169,6 @@ thread 'model_data::test::model_data_from_to_bytes_roundtrip' panicked at 'Test 
 failures:
     model_data::test::model_data_from_to_bytes_roundtrip
 
-test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.81s
+test result: FAILED. 16 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.76s
 
 error: test failed, to rerun pass '--lib'

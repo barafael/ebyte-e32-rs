@@ -8,7 +8,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 351954570
+            "nanos": 31903598
           },
           "cargo_result": "Success"
         },
@@ -16,7 +16,7 @@
           "phase": "Build",
           "duration": {
             "secs": 0,
-            "nanos": 31991328
+            "nanos": 31727372
           },
           "cargo_result": "Success"
         }
@@ -30,7 +30,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 31819982
+            "nanos": 32192384
           },
           "cargo_result": "Success"
         },
@@ -38,7 +38,7 @@
           "phase": "Build",
           "duration": {
             "secs": 0,
-            "nanos": 32124079
+            "nanos": 32029143
           },
           "cargo_result": "Success"
         },
@@ -46,7 +46,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 887750460
+            "nanos": 906628988
           },
           "cargo_result": "Success"
         }
@@ -64,7 +64,7 @@
             "replacement": "Ok(Default::default())"
           },
           "i_mutation": 0,
-          "n_mutations": 37
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -72,51 +72,25 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 282961592
+            "nanos": 304369827
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_______into_program_mode_with_Default__default()_in_src_lib.rs_82.log",
+      "log_path": "./mutants.out/log/replace_______write_buffer_with_Ok(Default__default())_in_src_lib.rs_68.log",
       "scenario": {
         "Mutant": {
           "mutation": {
             "file": "src/lib.rs",
-            "line": 82,
-            "function": "<??>::into_program_mode",
-            "return_type": "-> Ebyte < S , Aux , M0 , M1 , D , Program >",
-            "replacement": "Default::default()"
-          },
-          "i_mutation": 1,
-          "n_mutations": 37
-        }
-      },
-      "phase_results": [
-        {
-          "phase": "Check",
-          "duration": {
-            "secs": 0,
-            "nanos": 282618031
-          },
-          "cargo_result": "Failure"
-        }
-      ]
-    },
-    {
-      "log_path": "./mutants.out/log/replace_______write_buffer_with_Ok(Default__default())_in_src_lib.rs_95.log",
-      "scenario": {
-        "Mutant": {
-          "mutation": {
-            "file": "src/lib.rs",
-            "line": 95,
+            "line": 68,
             "function": "<??>::write_buffer",
             "return_type": "-> Result < () , crate :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 2,
-          "n_mutations": 37
+          "i_mutation": 1,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -124,7 +98,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332975967
+            "nanos": 351623174
           },
           "cargo_result": "Success"
         },
@@ -132,7 +106,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 369137601
+            "nanos": 385218612
           },
           "cargo_result": "Success"
         },
@@ -140,25 +114,25 @@
           "phase": "Test",
           "duration": {
             "secs": 3,
-            "nanos": 6974432
+            "nanos": 153946277
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_______read_buffer_with_Ok(Default__default())_in_src_lib.rs_103.log",
+      "log_path": "./mutants.out/log/replace_______read_buffer_with_Ok(Default__default())_in_src_lib.rs_76.log",
       "scenario": {
         "Mutant": {
           "mutation": {
             "file": "src/lib.rs",
-            "line": 103,
+            "line": 76,
             "function": "<??>::read_buffer",
             "return_type": "-> Result < () , Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 3,
-          "n_mutations": 37
+          "i_mutation": 2,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -166,7 +140,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 333507812
+            "nanos": 367456067
           },
           "cargo_result": "Success"
         },
@@ -174,75 +148,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 369147129
-          },
-          "cargo_result": "Success"
-        },
-        {
-          "phase": "Test",
-          "duration": {
-            "secs": 2,
-            "nanos": 964205941
-          },
-          "cargo_result": "Failure"
-        }
-      ]
-    },
-    {
-      "log_path": "./mutants.out/log/replace_______release_with_Default__default()_in_src_lib.rs_110.log",
-      "scenario": {
-        "Mutant": {
-          "mutation": {
-            "file": "src/lib.rs",
-            "line": 110,
-            "function": "<??>::release",
-            "return_type": "-> (S , Aux , M0 , M1 , D)",
-            "replacement": "Default::default()"
-          },
-          "i_mutation": 4,
-          "n_mutations": 37
-        }
-      },
-      "phase_results": [
-        {
-          "phase": "Check",
-          "duration": {
-            "secs": 0,
-            "nanos": 266775160
-          },
-          "cargo_result": "Failure"
-        }
-      ]
-    },
-    {
-      "log_path": "./mutants.out/log/replace_______read_with_Ok(Default__default())_in_src_lib.rs_125.log",
-      "scenario": {
-        "Mutant": {
-          "mutation": {
-            "file": "src/lib.rs",
-            "line": 125,
-            "function": "<??>::read",
-            "return_type": "-> nb :: Result < u8 , Self :: Error >",
-            "replacement": "Ok(Default::default())"
-          },
-          "i_mutation": 5,
-          "n_mutations": 37
-        }
-      },
-      "phase_results": [
-        {
-          "phase": "Check",
-          "duration": {
-            "secs": 0,
-            "nanos": 332673935
-          },
-          "cargo_result": "Success"
-        },
-        {
-          "phase": "Build",
-          "duration": {
-            "secs": 1,
-            "nanos": 385327326
+            "nanos": 635521388
           },
           "cargo_result": "Success"
         },
@@ -250,25 +156,25 @@
           "phase": "Test",
           "duration": {
             "secs": 3,
-            "nanos": 22109022
+            "nanos": 160985274
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_______write_with_Ok(Default__default())_in_src_lib.rs_142.log",
+      "log_path": "./mutants.out/log/replace_______model_data_with_Ok(Default__default())_in_src_lib.rs_83.log",
       "scenario": {
         "Mutant": {
           "mutation": {
             "file": "src/lib.rs",
-            "line": 142,
-            "function": "<??>::write",
-            "return_type": "-> nb :: Result < () , Self :: Error >",
+            "line": 83,
+            "function": "<??>::model_data",
+            "return_type": "-> Result < ModelData , Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 6,
-          "n_mutations": 37
+          "i_mutation": 3,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -276,7 +182,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332872301
+            "nanos": 352014194
           },
           "cargo_result": "Success"
         },
@@ -284,75 +190,33 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 360827507
+            "nanos": 318971342
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Test",
           "duration": {
-            "secs": 2,
-            "nanos": 956439662
+            "secs": 3,
+            "nanos": 38691810
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_______flush_with_Ok(Default__default())_in_src_lib.rs_146.log",
+      "log_path": "./mutants.out/log/replace_______read_model_data_with_Ok(Default__default())_in_src_lib.rs_90.log",
       "scenario": {
         "Mutant": {
           "mutation": {
             "file": "src/lib.rs",
-            "line": 146,
-            "function": "<??>::flush",
-            "return_type": "-> nb :: Result < () , Self :: Error >",
-            "replacement": "Ok(Default::default())"
-          },
-          "i_mutation": 7,
-          "n_mutations": 37
-        }
-      },
-      "phase_results": [
-        {
-          "phase": "Check",
-          "duration": {
-            "secs": 0,
-            "nanos": 351651295
-          },
-          "cargo_result": "Success"
-        },
-        {
-          "phase": "Build",
-          "duration": {
-            "secs": 1,
-            "nanos": 368649147
-          },
-          "cargo_result": "Success"
-        },
-        {
-          "phase": "Test",
-          "duration": {
-            "secs": 2,
-            "nanos": 971808421
-          },
-          "cargo_result": "Failure"
-        }
-      ]
-    },
-    {
-      "log_path": "./mutants.out/log/replace_______read_model_data_with_Ok(Default__default())_in_src_lib.rs_162.log",
-      "scenario": {
-        "Mutant": {
-          "mutation": {
-            "file": "src/lib.rs",
-            "line": 162,
+            "line": 90,
             "function": "<??>::read_model_data",
             "return_type": "-> Result < ModelData , Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 8,
-          "n_mutations": 37
+          "i_mutation": 4,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -360,7 +224,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332782982
+            "nanos": 332999503
           },
           "cargo_result": "Success"
         },
@@ -368,33 +232,59 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 353581610
+            "nanos": 303976645
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Test",
           "duration": {
-            "secs": 3,
-            "nanos": 14216005
+            "secs": 2,
+            "nanos": 970678344
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_______read_parameters_with_Ok(Default__default())_in_src_lib.rs_183.log",
+      "log_path": "./mutants.out/log/replace_______parameters_with_Ok(Default__default())_in_src_lib.rs_111.log",
       "scenario": {
         "Mutant": {
           "mutation": {
             "file": "src/lib.rs",
-            "line": 183,
+            "line": 111,
+            "function": "<??>::parameters",
+            "return_type": "-> Result < Parameters , Error >",
+            "replacement": "Ok(Default::default())"
+          },
+          "i_mutation": 5,
+          "n_mutations": 38
+        }
+      },
+      "phase_results": [
+        {
+          "phase": "Check",
+          "duration": {
+            "secs": 0,
+            "nanos": 282930395
+          },
+          "cargo_result": "Failure"
+        }
+      ]
+    },
+    {
+      "log_path": "./mutants.out/log/replace_______read_parameters_with_Ok(Default__default())_in_src_lib.rs_118.log",
+      "scenario": {
+        "Mutant": {
+          "mutation": {
+            "file": "src/lib.rs",
+            "line": 118,
             "function": "<??>::read_parameters",
             "return_type": "-> Result < Parameters , Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 9,
-          "n_mutations": 37
+          "i_mutation": 6,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -402,25 +292,25 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 302157428
+            "nanos": 266821439
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_______set_parameters_with_Ok(Default__default())_in_src_lib.rs_204.log",
+      "log_path": "./mutants.out/log/replace_______set_parameters_with_Ok(Default__default())_in_src_lib.rs_134.log",
       "scenario": {
         "Mutant": {
           "mutation": {
             "file": "src/lib.rs",
-            "line": 204,
+            "line": 134,
             "function": "<??>::set_parameters",
             "return_type": "-> Result < () , Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 10,
-          "n_mutations": 37
+          "i_mutation": 7,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -428,7 +318,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332871180
+            "nanos": 333029881
           },
           "cargo_result": "Success"
         },
@@ -436,7 +326,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 385867638
+            "nanos": 304838552
           },
           "cargo_result": "Success"
         },
@@ -444,25 +334,25 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 837879584
+            "nanos": 756410134
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_______reset_with_()_in_src_lib.rs_235.log",
+      "log_path": "./mutants.out/log/replace_______write_parameters_with_Ok(Default__default())_in_src_lib.rs_141.log",
       "scenario": {
         "Mutant": {
           "mutation": {
             "file": "src/lib.rs",
-            "line": 235,
-            "function": "<??>::reset",
-            "return_type": "",
-            "replacement": "()"
+            "line": 141,
+            "function": "<??>::write_parameters",
+            "return_type": "-> Result < () , Error >",
+            "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 11,
-          "n_mutations": 37
+          "i_mutation": 8,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -470,7 +360,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332742224
+            "nanos": 333112754
           },
           "cargo_result": "Success"
         },
@@ -478,7 +368,49 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 385176472
+            "nanos": 303856752
+          },
+          "cargo_result": "Success"
+        },
+        {
+          "phase": "Test",
+          "duration": {
+            "secs": 2,
+            "nanos": 806585603
+          },
+          "cargo_result": "Failure"
+        }
+      ]
+    },
+    {
+      "log_path": "./mutants.out/log/replace_______reset_with_Ok(Default__default())_in_src_lib.rs_170.log",
+      "scenario": {
+        "Mutant": {
+          "mutation": {
+            "file": "src/lib.rs",
+            "line": 170,
+            "function": "<??>::reset",
+            "return_type": "-> Result < () , Error >",
+            "replacement": "Ok(Default::default())"
+          },
+          "i_mutation": 9,
+          "n_mutations": 38
+        }
+      },
+      "phase_results": [
+        {
+          "phase": "Check",
+          "duration": {
+            "secs": 0,
+            "nanos": 332988381
+          },
+          "cargo_result": "Success"
+        },
+        {
+          "phase": "Build",
+          "duration": {
+            "secs": 1,
+            "nanos": 335159196
           },
           "cargo_result": "Success"
         },
@@ -486,25 +418,25 @@
           "phase": "Test",
           "duration": {
             "secs": 3,
-            "nanos": 6241628
+            "nanos": 5793066
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_______until_aux_with_()_in_src_lib.rs_243.log",
+      "log_path": "./mutants.out/log/replace_______perform_reset_with_Ok(Default__default())_in_src_lib.rs_177.log",
       "scenario": {
         "Mutant": {
           "mutation": {
             "file": "src/lib.rs",
-            "line": 243,
-            "function": "<??>::until_aux",
-            "return_type": "",
-            "replacement": "()"
+            "line": 177,
+            "function": "<??>::perform_reset",
+            "return_type": "-> Result < () , Error >",
+            "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 12,
-          "n_mutations": 37
+          "i_mutation": 10,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -512,7 +444,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332750865
+            "nanos": 333075817
           },
           "cargo_result": "Success"
         },
@@ -520,33 +452,33 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 385071553
+            "nanos": 318833235
           },
           "cargo_result": "Success"
         },
         {
           "phase": "Test",
           "duration": {
-            "secs": 2,
-            "nanos": 856737632
+            "secs": 3,
+            "nanos": 7074843
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_______into_normal_mode_with_Default__default()_in_src_lib.rs_255.log",
+      "log_path": "./mutants.out/log/replace_______release_with_Default__default()_in_src_lib.rs_185.log",
       "scenario": {
         "Mutant": {
           "mutation": {
             "file": "src/lib.rs",
-            "line": 255,
-            "function": "<??>::into_normal_mode",
-            "return_type": "-> Ebyte < S , Aux , M0 , M1 , D , Normal >",
+            "line": 185,
+            "function": "<??>::release",
+            "return_type": "-> (S , Aux , M0 , M1 , D)",
             "replacement": "Default::default()"
           },
-          "i_mutation": 13,
-          "n_mutations": 37
+          "i_mutation": 11,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -554,7 +486,133 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 266863682
+            "nanos": 283592104
+          },
+          "cargo_result": "Failure"
+        }
+      ]
+    },
+    {
+      "log_path": "./mutants.out/log/replace_______read_with_Ok(Default__default())_in_src_lib.rs_200.log",
+      "scenario": {
+        "Mutant": {
+          "mutation": {
+            "file": "src/lib.rs",
+            "line": 200,
+            "function": "<??>::read",
+            "return_type": "-> nb :: Result < u8 , Self :: Error >",
+            "replacement": "Ok(Default::default())"
+          },
+          "i_mutation": 12,
+          "n_mutations": 38
+        }
+      },
+      "phase_results": [
+        {
+          "phase": "Check",
+          "duration": {
+            "secs": 0,
+            "nanos": 332917439
+          },
+          "cargo_result": "Success"
+        },
+        {
+          "phase": "Build",
+          "duration": {
+            "secs": 1,
+            "nanos": 335005301
+          },
+          "cargo_result": "Success"
+        },
+        {
+          "phase": "Test",
+          "duration": {
+            "secs": 3,
+            "nanos": 10234732
+          },
+          "cargo_result": "Failure"
+        }
+      ]
+    },
+    {
+      "log_path": "./mutants.out/log/replace_______write_with_Ok(Default__default())_in_src_lib.rs_217.log",
+      "scenario": {
+        "Mutant": {
+          "mutation": {
+            "file": "src/lib.rs",
+            "line": 217,
+            "function": "<??>::write",
+            "return_type": "-> nb :: Result < () , Self :: Error >",
+            "replacement": "Ok(Default::default())"
+          },
+          "i_mutation": 13,
+          "n_mutations": 38
+        }
+      },
+      "phase_results": [
+        {
+          "phase": "Check",
+          "duration": {
+            "secs": 0,
+            "nanos": 333465786
+          },
+          "cargo_result": "Success"
+        },
+        {
+          "phase": "Build",
+          "duration": {
+            "secs": 1,
+            "nanos": 310527041
+          },
+          "cargo_result": "Success"
+        },
+        {
+          "phase": "Test",
+          "duration": {
+            "secs": 3,
+            "nanos": 7166319
+          },
+          "cargo_result": "Failure"
+        }
+      ]
+    },
+    {
+      "log_path": "./mutants.out/log/replace_______flush_with_Ok(Default__default())_in_src_lib.rs_221.log",
+      "scenario": {
+        "Mutant": {
+          "mutation": {
+            "file": "src/lib.rs",
+            "line": 221,
+            "function": "<??>::flush",
+            "return_type": "-> nb :: Result < () , Self :: Error >",
+            "replacement": "Ok(Default::default())"
+          },
+          "i_mutation": 14,
+          "n_mutations": 38
+        }
+      },
+      "phase_results": [
+        {
+          "phase": "Check",
+          "duration": {
+            "secs": 0,
+            "nanos": 332793042
+          },
+          "cargo_result": "Success"
+        },
+        {
+          "phase": "Build",
+          "duration": {
+            "secs": 1,
+            "nanos": 303749022
+          },
+          "cargo_result": "Success"
+        },
+        {
+          "phase": "Test",
+          "duration": {
+            "secs": 3,
+            "nanos": 14327957
           },
           "cargo_result": "Failure"
         }
@@ -571,8 +629,8 @@
             "return_type": "-> [u8 ; 3]",
             "replacement": "Default::default()"
           },
-          "i_mutation": 14,
-          "n_mutations": 37
+          "i_mutation": 15,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -580,7 +638,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 333060580
+            "nanos": 351870752
           },
           "cargo_result": "Success"
         },
@@ -588,7 +646,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 404418920
+            "nanos": 310945385
           },
           "cargo_result": "Success"
         },
@@ -596,7 +654,7 @@
           "phase": "Test",
           "duration": {
             "secs": 3,
-            "nanos": 38288508
+            "nanos": 691081461
           },
           "cargo_result": "Failure"
         }
@@ -613,8 +671,8 @@
             "return_type": "-> Result < Self , Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 15,
-          "n_mutations": 37
+          "i_mutation": 16,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -622,7 +680,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332783147
+            "nanos": 332806839
           },
           "cargo_result": "Success"
         },
@@ -630,7 +688,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 384924590
+            "nanos": 335096354
           },
           "cargo_result": "Success"
         },
@@ -638,7 +696,7 @@
           "phase": "Test",
           "duration": {
             "secs": 3,
-            "nanos": 63035306
+            "nanos": 39504287
           },
           "cargo_result": "Failure"
         }
@@ -655,8 +713,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 16,
-          "n_mutations": 37
+          "i_mutation": 17,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -664,7 +722,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 351801949
+            "nanos": 333035744
           },
           "cargo_result": "Success"
         },
@@ -672,7 +730,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 411095352
+            "nanos": 311166705
           },
           "cargo_result": "Success"
         },
@@ -680,7 +738,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 957108160
+            "nanos": 906734921
           },
           "cargo_result": "Failure"
         }
@@ -697,8 +755,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 17,
-          "n_mutations": 37
+          "i_mutation": 18,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -706,7 +764,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332986546
+            "nanos": 332817500
           },
           "cargo_result": "Success"
         },
@@ -714,7 +772,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 368826178
+            "nanos": 306630984
           },
           "cargo_result": "Success"
         },
@@ -722,7 +780,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 906818680
+            "nanos": 871013858
           },
           "cargo_result": "Failure"
         }
@@ -739,8 +797,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 18,
-          "n_mutations": 37
+          "i_mutation": 19,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -748,7 +806,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332906708
+            "nanos": 333331697
           },
           "cargo_result": "Success"
         },
@@ -756,7 +814,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 360716667
+            "nanos": 306768754
           },
           "cargo_result": "Success"
         },
@@ -764,7 +822,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 888059955
+            "nanos": 871960773
           },
           "cargo_result": "Failure"
         }
@@ -781,8 +839,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 19,
-          "n_mutations": 37
+          "i_mutation": 20,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -790,7 +848,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332869771
+            "nanos": 333106794
           },
           "cargo_result": "Success"
         },
@@ -798,7 +856,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 356765749
+            "nanos": 319194879
           },
           "cargo_result": "Success"
         },
@@ -806,7 +864,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 856734629
+            "nanos": 888172846
           },
           "cargo_result": "Failure"
         }
@@ -823,8 +881,8 @@
             "return_type": "-> [u8 ; 5]",
             "replacement": "Default::default()"
           },
-          "i_mutation": 20,
-          "n_mutations": 37
+          "i_mutation": 21,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -832,7 +890,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332801143
+            "nanos": 332922132
           },
           "cargo_result": "Success"
         },
@@ -840,7 +898,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 404265722
+            "nanos": 311109811
           },
           "cargo_result": "Success"
         },
@@ -848,7 +906,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 837801591
+            "nanos": 856515035
           },
           "cargo_result": "Failure"
         }
@@ -865,8 +923,8 @@
             "return_type": "-> Result < Self , Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 21,
-          "n_mutations": 37
+          "i_mutation": 22,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -874,7 +932,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 266893655
+            "nanos": 282795539
           },
           "cargo_result": "Failure"
         }
@@ -891,8 +949,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 22,
-          "n_mutations": 37
+          "i_mutation": 23,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -900,7 +958,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 351534021
+            "nanos": 333082286
           },
           "cargo_result": "Success"
         },
@@ -908,7 +966,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 410837118
+            "nanos": 307028497
           },
           "cargo_result": "Success"
         },
@@ -916,7 +974,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 938517265
+            "nanos": 859991864
           },
           "cargo_result": "Failure"
         }
@@ -933,8 +991,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 23,
-          "n_mutations": 37
+          "i_mutation": 24,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -942,7 +1000,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332863607
+            "nanos": 351400087
           },
           "cargo_result": "Success"
         },
@@ -950,7 +1008,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 384806235
+            "nanos": 311999279
           },
           "cargo_result": "Success"
         },
@@ -958,7 +1016,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 856600275
+            "nanos": 856519445
           },
           "cargo_result": "Failure"
         }
@@ -975,8 +1033,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 24,
-          "n_mutations": 37
+          "i_mutation": 25,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -984,7 +1042,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 367362199
+            "nanos": 351664327
           },
           "cargo_result": "Success"
         },
@@ -992,7 +1050,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 406735029
+            "nanos": 353310693
           },
           "cargo_result": "Success"
         },
@@ -1000,7 +1058,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 921877750
+            "nanos": 906887866
           },
           "cargo_result": "Failure"
         }
@@ -1017,8 +1075,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 25,
-          "n_mutations": 37
+          "i_mutation": 26,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1026,7 +1084,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332759676
+            "nanos": 332905374
           },
           "cargo_result": "Success"
         },
@@ -1034,7 +1092,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 385417093
+            "nanos": 335122554
           },
           "cargo_result": "Success"
         },
@@ -1042,7 +1100,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 856529468
+            "nanos": 888312822
           },
           "cargo_result": "Failure"
         }
@@ -1059,8 +1117,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 26,
-          "n_mutations": 37
+          "i_mutation": 27,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1068,7 +1126,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 351740657
+            "nanos": 333252129
           },
           "cargo_result": "Success"
         },
@@ -1076,7 +1134,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 434661096
+            "nanos": 354061891
           },
           "cargo_result": "Success"
         },
@@ -1084,7 +1142,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 956732888
+            "nanos": 905521940
           },
           "cargo_result": "Failure"
         }
@@ -1101,8 +1159,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 27,
-          "n_mutations": 37
+          "i_mutation": 28,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1110,7 +1168,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332756314
+            "nanos": 332725996
           },
           "cargo_result": "Success"
         },
@@ -1118,7 +1176,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 385111720
+            "nanos": 311004414
           },
           "cargo_result": "Success"
         },
@@ -1126,7 +1184,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 856715817
+            "nanos": 872102544
           },
           "cargo_result": "Failure"
         }
@@ -1143,8 +1201,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 28,
-          "n_mutations": 37
+          "i_mutation": 29,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1152,7 +1210,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 351821654
+            "nanos": 332740980
           },
           "cargo_result": "Success"
         },
@@ -1160,7 +1218,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 453677356
+            "nanos": 303526533
           },
           "cargo_result": "Success"
         },
@@ -1168,7 +1226,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 956953762
+            "nanos": 925263142
           },
           "cargo_result": "Failure"
         }
@@ -1185,8 +1243,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 29,
-          "n_mutations": 37
+          "i_mutation": 30,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1194,7 +1252,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332616333
+            "nanos": 332861939
           },
           "cargo_result": "Success"
         },
@@ -1202,7 +1260,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 368917110
+            "nanos": 303323262
           },
           "cargo_result": "Success"
         },
@@ -1210,7 +1268,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 888203854
+            "nanos": 872231570
           },
           "cargo_result": "Failure"
         }
@@ -1227,8 +1285,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 30,
-          "n_mutations": 37
+          "i_mutation": 31,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1236,7 +1294,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 351303591
+            "nanos": 333054103
           },
           "cargo_result": "Success"
         },
@@ -1244,7 +1302,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 403734145
+            "nanos": 306861729
           },
           "cargo_result": "Success"
         },
@@ -1252,7 +1310,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 938542681
+            "nanos": 906980649
           },
           "cargo_result": "Failure"
         }
@@ -1269,8 +1327,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 31,
-          "n_mutations": 37
+          "i_mutation": 32,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1278,7 +1336,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332601055
+            "nanos": 333184849
           },
           "cargo_result": "Success"
         },
@@ -1286,7 +1344,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 403809823
+            "nanos": 303881303
           },
           "cargo_result": "Success"
         },
@@ -1294,7 +1352,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 872142441
+            "nanos": 888367266
           },
           "cargo_result": "Failure"
         }
@@ -1311,8 +1369,8 @@
             "return_type": "-> Result < Self , Self :: Error >",
             "replacement": "Ok(Default::default())"
           },
-          "i_mutation": 32,
-          "n_mutations": 37
+          "i_mutation": 33,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1320,7 +1378,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332901012
+            "nanos": 351598740
           },
           "cargo_result": "Success"
         },
@@ -1328,7 +1386,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 356698189
+            "nanos": 319142201
           },
           "cargo_result": "Success"
         },
@@ -1336,7 +1394,7 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 906990465
+            "nanos": 888518841
           },
           "cargo_result": "Failure"
         }
@@ -1353,8 +1411,8 @@
             "return_type": "-> Self",
             "replacement": "Default::default()"
           },
-          "i_mutation": 33,
-          "n_mutations": 37
+          "i_mutation": 34,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1362,7 +1420,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 332485472
+            "nanos": 332860600
           },
           "cargo_result": "Success"
         },
@@ -1370,7 +1428,7 @@
           "phase": "Build",
           "duration": {
             "secs": 1,
-            "nanos": 368772755
+            "nanos": 310778981
           },
           "cargo_result": "Success"
         },
@@ -1378,25 +1436,25 @@
           "phase": "Test",
           "duration": {
             "secs": 2,
-            "nanos": 871964583
+            "nanos": 888028736
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_read_parameters_expectations_with_Default__default()_in_src_test_parameters_read_params.rs_21.log",
+      "log_path": "./mutants.out/log/replace_read_parameters_expectations_with_Default__default()_in_src_test_parameters_read.rs_21.log",
       "scenario": {
         "Mutant": {
           "mutation": {
-            "file": "src/test/parameters/read_params.rs",
+            "file": "src/test/parameters/read.rs",
             "line": 21,
             "function": "read_parameters_expectations",
             "return_type": "-> ReadParameterExpectations",
             "replacement": "Default::default()"
           },
-          "i_mutation": 34,
-          "n_mutations": 37
+          "i_mutation": 35,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1404,25 +1462,25 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 282416213
+            "nanos": 282782038
           },
           "cargo_result": "Failure"
         }
       ]
     },
     {
-      "log_path": "./mutants.out/log/replace_set_parameters_expectations_with_Default__default()_in_src_test_parameters_set_params.rs_28.log",
+      "log_path": "./mutants.out/log/replace_set_parameters_expectations_with_Default__default()_in_src_test_parameters_write.rs_28.log",
       "scenario": {
         "Mutant": {
           "mutation": {
-            "file": "src/test/parameters/set_params.rs",
+            "file": "src/test/parameters/write.rs",
             "line": 28,
             "function": "set_parameters_expectations",
             "return_type": "-> SetParameterExpectations",
             "replacement": "Default::default()"
           },
-          "i_mutation": 35,
-          "n_mutations": 37
+          "i_mutation": 36,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1430,7 +1488,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 282590062
+            "nanos": 266613493
           },
           "cargo_result": "Failure"
         }
@@ -1447,8 +1505,8 @@
             "return_type": "-> ReadModelDataExpectations",
             "replacement": "Default::default()"
           },
-          "i_mutation": 36,
-          "n_mutations": 37
+          "i_mutation": 37,
+          "n_mutations": 38
         }
       },
       "phase_results": [
@@ -1456,7 +1514,7 @@
           "phase": "Check",
           "duration": {
             "secs": 0,
-            "nanos": 266403974
+            "nanos": 282824977
           },
           "cargo_result": "Failure"
         }

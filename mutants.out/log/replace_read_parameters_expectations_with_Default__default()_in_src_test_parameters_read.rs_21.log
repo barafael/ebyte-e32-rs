@@ -1,25 +1,27 @@
 
-*** replace read_model_data_expectations with Default::default() in src/test/read_model.rs:21
-*** --- src/test/read_model.rs
-+++ replace read_model_data_expectations with Default::default()
-@@ -14,41 +14,17 @@
- struct ReadModelDataExpectations {
+*** replace read_parameters_expectations with Default::default() in src/test/parameters/read.rs:21
+*** --- src/test/parameters/read.rs
++++ replace read_parameters_expectations with Default::default()
+@@ -14,45 +14,17 @@
+ struct ReadParameterExpectations {
      serial: Serial<u8>,
      aux: Generic<PinTransaction>,
      m0: Generic<PinTransaction>,
      m1: Generic<PinTransaction>,
  }
  
- fn read_model_data_expectations(model_data: ModelData) -> ReadModelDataExpectations {
--    let bytes = model_data.to_bytes();
+ fn read_parameters_expectations(parameters: &Parameters) -> ReadParameterExpectations {
+-    let bytes = parameters.to_bytes();
 -    let serial = Serial::<u8>::new(&[
--        SerialTransaction::write(0xC3),
--        SerialTransaction::write(0xC3),
--        SerialTransaction::write(0xC3),
--        SerialTransaction::read(0xC3),
+-        SerialTransaction::write(0xC1),
+-        SerialTransaction::write(0xC1),
+-        SerialTransaction::write(0xC1),
+-        SerialTransaction::read(0xC0),
 -        SerialTransaction::read(bytes[0]),
 -        SerialTransaction::read(bytes[1]),
 -        SerialTransaction::read(bytes[2]),
+-        SerialTransaction::read(bytes[3]),
+-        SerialTransaction::read(bytes[4]),
 -    ]);
 -    let aux = Pin::new(&vec![
 -        PinTransaction::get(Low),
@@ -27,10 +29,12 @@
 -        PinTransaction::get(Low),
 -        PinTransaction::get(Low),
 -        PinTransaction::get(High),
+-        PinTransaction::get(Low),
+-        PinTransaction::get(High),
 -    ]);
--    let m0 = Pin::new(&vec![PinTransaction::set(Low)]);
--    let m1 = Pin::new(&vec![PinTransaction::set(Low)]);
--    ReadModelDataExpectations {
+-    let m0 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
+-    let m1 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
+-    ReadParameterExpectations {
 -        serial,
 -        aux,
 -        m0,
@@ -46,10 +50,10 @@
          .. ProptestConfig::default()
      })]
 
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(101) in 0.204s2qSz5l)
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(101) in 0.283sOK8bDN)
 warning: unused imports: `High`, `Low`, `Mock as Pin`, `Transaction as SerialTransaction`
-  --> src/test/read_model.rs:6:9
+  --> src/test/parameters/read.rs:6:9
    |
 6  |         Mock as Pin,
    |         ^^^^^^^^^^^
@@ -61,11 +65,11 @@ warning: unused imports: `High`, `Low`, `Mock as Pin`, `Transaction as SerialTra
    |
    = note: `#[warn(unused_imports)]` on by default
 
-error[E0277]: the trait bound `ReadModelDataExpectations: std::default::Default` is not satisfied
-  --> src/test/read_model.rs:22:1
+error[E0277]: the trait bound `ReadParameterExpectations: std::default::Default` is not satisfied
+  --> src/test/parameters/read.rs:22:1
    |
 22 | Default::default() /* ~ changed by cargo-mutants ~ */
-   | ^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `ReadModelDataExpectations`
+   | ^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `ReadParameterExpectations`
 
 For more information about this error, try `rustc --explain E0277`.
 warning: `ebyte-e32` (lib test) generated 1 warning

@@ -8,94 +8,101 @@
   },
   {
     "file": "src/lib.rs",
-    "line": 82,
-    "function": "<??>::into_program_mode",
-    "return_type": "-> Ebyte < S , Aux , M0 , M1 , D , Program >",
-    "replacement": "Default::default()"
-  },
-  {
-    "file": "src/lib.rs",
-    "line": 95,
+    "line": 68,
     "function": "<??>::write_buffer",
     "return_type": "-> Result < () , crate :: Error >",
     "replacement": "Ok(Default::default())"
   },
   {
     "file": "src/lib.rs",
-    "line": 103,
+    "line": 76,
     "function": "<??>::read_buffer",
     "return_type": "-> Result < () , Error >",
     "replacement": "Ok(Default::default())"
   },
   {
     "file": "src/lib.rs",
-    "line": 110,
-    "function": "<??>::release",
-    "return_type": "-> (S , Aux , M0 , M1 , D)",
-    "replacement": "Default::default()"
-  },
-  {
-    "file": "src/lib.rs",
-    "line": 125,
-    "function": "<??>::read",
-    "return_type": "-> nb :: Result < u8 , Self :: Error >",
+    "line": 83,
+    "function": "<??>::model_data",
+    "return_type": "-> Result < ModelData , Error >",
     "replacement": "Ok(Default::default())"
   },
   {
     "file": "src/lib.rs",
-    "line": 142,
-    "function": "<??>::write",
-    "return_type": "-> nb :: Result < () , Self :: Error >",
-    "replacement": "Ok(Default::default())"
-  },
-  {
-    "file": "src/lib.rs",
-    "line": 146,
-    "function": "<??>::flush",
-    "return_type": "-> nb :: Result < () , Self :: Error >",
-    "replacement": "Ok(Default::default())"
-  },
-  {
-    "file": "src/lib.rs",
-    "line": 162,
+    "line": 90,
     "function": "<??>::read_model_data",
     "return_type": "-> Result < ModelData , Error >",
     "replacement": "Ok(Default::default())"
   },
   {
     "file": "src/lib.rs",
-    "line": 183,
+    "line": 111,
+    "function": "<??>::parameters",
+    "return_type": "-> Result < Parameters , Error >",
+    "replacement": "Ok(Default::default())"
+  },
+  {
+    "file": "src/lib.rs",
+    "line": 118,
     "function": "<??>::read_parameters",
     "return_type": "-> Result < Parameters , Error >",
     "replacement": "Ok(Default::default())"
   },
   {
     "file": "src/lib.rs",
-    "line": 204,
+    "line": 134,
     "function": "<??>::set_parameters",
     "return_type": "-> Result < () , Error >",
     "replacement": "Ok(Default::default())"
   },
   {
     "file": "src/lib.rs",
-    "line": 235,
+    "line": 141,
+    "function": "<??>::write_parameters",
+    "return_type": "-> Result < () , Error >",
+    "replacement": "Ok(Default::default())"
+  },
+  {
+    "file": "src/lib.rs",
+    "line": 170,
     "function": "<??>::reset",
-    "return_type": "",
-    "replacement": "()"
+    "return_type": "-> Result < () , Error >",
+    "replacement": "Ok(Default::default())"
   },
   {
     "file": "src/lib.rs",
-    "line": 243,
-    "function": "<??>::until_aux",
-    "return_type": "",
-    "replacement": "()"
+    "line": 177,
+    "function": "<??>::perform_reset",
+    "return_type": "-> Result < () , Error >",
+    "replacement": "Ok(Default::default())"
   },
   {
     "file": "src/lib.rs",
-    "line": 255,
-    "function": "<??>::into_normal_mode",
-    "return_type": "-> Ebyte < S , Aux , M0 , M1 , D , Normal >",
+    "line": 185,
+    "function": "<??>::release",
+    "return_type": "-> (S , Aux , M0 , M1 , D)",
     "replacement": "Default::default()"
+  },
+  {
+    "file": "src/lib.rs",
+    "line": 200,
+    "function": "<??>::read",
+    "return_type": "-> nb :: Result < u8 , Self :: Error >",
+    "replacement": "Ok(Default::default())"
+  },
+  {
+    "file": "src/lib.rs",
+    "line": 217,
+    "function": "<??>::write",
+    "return_type": "-> nb :: Result < () , Self :: Error >",
+    "replacement": "Ok(Default::default())"
+  },
+  {
+    "file": "src/lib.rs",
+    "line": 221,
+    "function": "<??>::flush",
+    "return_type": "-> nb :: Result < () , Self :: Error >",
+    "replacement": "Ok(Default::default())"
   },
   {
     "file": "src/model_data.rs",
@@ -238,14 +245,14 @@
     "replacement": "Default::default()"
   },
   {
-    "file": "src/test/parameters/read_params.rs",
+    "file": "src/test/parameters/read.rs",
     "line": 21,
     "function": "read_parameters_expectations",
     "return_type": "-> ReadParameterExpectations",
     "replacement": "Default::default()"
   },
   {
-    "file": "src/test/parameters/set_params.rs",
+    "file": "src/test/parameters/write.rs",
     "line": 28,
     "function": "set_parameters_expectations",
     "return_type": "-> SetParameterExpectations",

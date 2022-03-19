@@ -1,52 +1,47 @@
 
-*** replace <??>::read_parameters with Ok(Default::default()) in src/lib.rs:183
+*** replace <??>::read_parameters with Ok(Default::default()) in src/lib.rs:118
 *** --- src/lib.rs
 +++ replace <??>::read_parameters with Ok(Default::default())
-@@ -176,35 +176,18 @@
-                 features,
-             })
-         } else {
-             Err(Error::ReadModelData)
-         }
+@@ -111,30 +111,18 @@
+     pub fn parameters(&mut self) -> Result<Parameters, Error> {
+         Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         let result = self.read_parameters();
+         Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         result
      }
  
-     pub fn read_parameters(&mut self) -> Result<Parameters, Error> {
+     fn read_parameters(&mut self) -> Result<Parameters, Error> {
 -        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
 -        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
 -        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
--
 -        let save = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
--
 -        let mut bytes = [0u8; 5];
 -        for byte in &mut bytes {
 -            *byte = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
 -        }
--
 -        if save != 0xC0 {
 -            return Err(Error::ReadParameters);
 -        }
--
 -        let params = Parameters::from_bytes(&bytes)?;
--
 -        Ok(params)
 -    }
 +Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
 +}
  
      pub fn set_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
-         let persistence = u8::from(mode);
-         block!(self.serial.write(persistence)).map_err(|_| Error::SerialWrite)?;
+         Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         let result = self.write_parameters(params, mode);
+         Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+         result
+     }
  
-         let bytes: [u8; 5] = params.to_bytes();
-         block!(self.serial.write(bytes[0])).map_err(|_| Error::SerialWrite)?;
-         block!(self.serial.write(bytes[1])).map_err(|_| Error::SerialWrite)?;
 
 *** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(101) in 0.302sW8Sm9N)
+*** cargo result: Exited(101) in 0.267sOK8bDN)
 error[E0277]: the trait bound `parameters::Parameters: std::default::Default` is not satisfied
-   --> src/lib.rs:184:4
+   --> src/lib.rs:119:4
     |
-184 | Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
+119 | Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
     | -- ^^^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `parameters::Parameters`
     | |
     | required by a bound introduced by this call

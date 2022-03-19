@@ -1,6 +1,6 @@
 
-*** replace set_parameters_expectations with Default::default() in src/test/parameters/set_params.rs:28
-*** --- src/test/parameters/set_params.rs
+*** replace set_parameters_expectations with Default::default() in src/test/parameters/write.rs:28
+*** --- src/test/parameters/write.rs
 +++ replace set_parameters_expectations with Default::default()
 @@ -21,51 +21,17 @@
      m0: Generic<PinTransaction>,
@@ -38,8 +38,8 @@
 -        PinTransaction::get(Low),
 -        PinTransaction::get(High),
 -    ]);
--    let m0 = Pin::new(&vec![PinTransaction::set(Low)]);
--    let m1 = Pin::new(&vec![PinTransaction::set(Low)]);
+-    let m0 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
+-    let m1 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
 -    SetParameterExpectations {
 -        serial,
 -        aux,
@@ -56,10 +56,10 @@
          .. ProptestConfig::default()
      })]
 
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(101) in 0.202s2qSz5l)
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(101) in 0.267sOK8bDN)
 warning: unused imports: `High`, `Low`, `Mock as Pin`, `Transaction as SerialTransaction`
-  --> src/test/parameters/set_params.rs:10:9
+  --> src/test/parameters/write.rs:10:9
    |
 10 |         Mock as Pin,
    |         ^^^^^^^^^^^
@@ -72,7 +72,7 @@ warning: unused imports: `High`, `Low`, `Mock as Pin`, `Transaction as SerialTra
    = note: `#[warn(unused_imports)]` on by default
 
 error[E0277]: the trait bound `SetParameterExpectations: std::default::Default` is not satisfied
-  --> src/test/parameters/set_params.rs:29:1
+  --> src/test/parameters/write.rs:29:1
    |
 29 | Default::default() /* ~ changed by cargo-mutants ~ */
    | ^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `SetParameterExpectations`

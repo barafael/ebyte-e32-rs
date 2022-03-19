@@ -1,0 +1,41 @@
+
+*** replace <??>::parameters with Ok(Default::default()) in src/lib.rs:111
+*** --- src/lib.rs
++++ replace <??>::parameters with Ok(Default::default())
+@@ -104,21 +104,18 @@
+                 features,
+             })
+         } else {
+             Err(Error::ReadModelData)
+         }
+     }
+ 
+     pub fn parameters(&mut self) -> Result<Parameters, Error> {
+-        Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+-        let result = self.read_parameters();
+-        Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+-        result
+-    }
++Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
++}
+ 
+     fn read_parameters(&mut self) -> Result<Parameters, Error> {
+         block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
+         block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
+         block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
+         let save = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+         let mut bytes = [0u8; 5];
+         for byte in &mut bytes {
+
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(101) in 0.283sOK8bDN)
+error[E0277]: the trait bound `parameters::Parameters: std::default::Default` is not satisfied
+   --> src/lib.rs:112:4
+    |
+112 | Ok(Default::default()) /* ~ changed by cargo-mutants ~ */
+    | -- ^^^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `parameters::Parameters`
+    | |
+    | required by a bound introduced by this call
+
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `ebyte-e32` due to previous error

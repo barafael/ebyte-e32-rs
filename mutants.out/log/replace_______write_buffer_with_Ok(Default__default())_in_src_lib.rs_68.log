@@ -1,12 +1,12 @@
 
-*** replace <??>::write_buffer with Ok(Default::default()) in src/lib.rs:95
+*** replace <??>::write_buffer with Ok(Default::default()) in src/lib.rs:68
 *** --- src/lib.rs
 +++ replace <??>::write_buffer with Ok(Default::default())
-@@ -88,21 +88,18 @@
-             m1: self.m1,
-             delay: self.delay,
-             mode: PhantomData::<Program>,
-         }
+@@ -61,21 +61,18 @@
+             mode: PhantomData::<Normal>,
+         };
+ 
+         Ok(ebyte)
      }
  
      /// Write entire buffer to serial port
@@ -27,60 +27,59 @@
          Ok(())
      }
 
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo check --tests
-*** cargo result: Exited(0) in 0.383s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo build --tests
-*** cargo result: Exited(0) in 1.570s
-*** run /home/rafaelbachmann/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/cargo test
-*** cargo result: Exited(101) in 3.006s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo check --tests
+*** cargo result: Exited(0) in 0.352s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo build --tests
+*** cargo result: Exited(0) in 1.385s
+*** run /home/rafaelbachmann/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo test
+*** cargo result: Exited(101) in 3.154s |
    = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 0.37s
-   Compiling ebyte-e32 v0.2.0 (/tmp/.tmp2qSz5l)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.34s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpOK8bDN)
 warning: unused variable: `buffer`
-  --> src/lib.rs:95:36
+  --> src/lib.rs:68:36
    |
-95 |     pub fn write_buffer(&mut self, buffer: &[u8]) -> Result<(), crate::Error> {
+68 |     pub fn write_buffer(&mut self, buffer: &[u8]) -> Result<(), crate::Error> {
    |                                    ^^^^^^ help: if this is intentional, prefix it with an underscore: `_buffer`
    |
    = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
-    Finished dev [unoptimized + debuginfo] target(s) in 1.56s
-   Compiling ebyte-e32 v0.2.0 (/tmp/.tmp2qSz5l)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.36s
+   Compiling ebyte-e32 v0.2.0 (/tmp/.tmpOK8bDN)
 warning: unused variable: `buffer`
-  --> src/lib.rs:95:36
+  --> src/lib.rs:68:36
    |
-95 |     pub fn write_buffer(&mut self, buffer: &[u8]) -> Result<(), crate::Error> {
+68 |     pub fn write_buffer(&mut self, buffer: &[u8]) -> Result<(), crate::Error> {
    |                                    ^^^^^^ help: if this is intentional, prefix it with an underscore: `_buffer`
    |
    = note: `#[warn(unused_variables)]` on by default
 
 warning: `ebyte-e32` (lib test) generated 1 warning
 warning: `ebyte-e32` (lib) generated 1 warning (1 duplicate)
-    Finished test [unoptimized + debuginfo] target(s) in 0.27s
-     Running unittests (target/debug/deps/ebyte_e32-d32ca24a8eb391c6)
+    Finished test [unoptimized + debuginfo] target(s) in 0.24s
+     Running unittests (target/debug/deps/ebyte_e32-fa871f114a226b67)
 
-running 18 tests
+running 17 tests
 test mode::test::id ... ok
-test mode::test::pins_powerdown ... ok
 test mode::test::pins_normal ... ok
 test mode::test::pins_program ... ok
 test mode::test::pins_wakeup ... ok
-test test::acquire_release ... ok
+test mode::test::pins_powerdown ... ok
 test test::flushes ... ok
+test test::acquire_release ... ok
 test test::resets ... ok
 test test::writes_buffer ... FAILED
 test model_data::test::model_data_from_to_bytes_roundtrip ... ok
-test test::reads_byte ... ok
 test test::writes_byte ... ok
+test test::reads_byte ... ok
 test test::reads_buffer ... ok
 test test::read_model::reads_model_data ... ok
 test parameters::test::from_to_bytes_roundtrip ... ok
-test test::parameters::read_params::sets_parameters ... ok
-test test::parameters::read_params::reads_parameters ... ok
-test test::parameters::set_params::sets_parameters ... ok
+test test::parameters::read::reads_parameters ... ok
+test test::parameters::write::sets_parameters ... ok
 
 failures:
 
@@ -207,12 +206,12 @@ thread 'test::writes_buffer' panicked at 'Test failed: serial mock has unsatisfi
 	successes: 0
 	local rejects: 0
 	global rejects: 0
-', src/test/mod.rs:104:1
+', src/test/mod.rs:100:1
 
 
 failures:
     test::writes_buffer
 
-test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.72s
+test result: FAILED. 16 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.90s
 
 error: test failed, to rerun pass '--lib'
