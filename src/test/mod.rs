@@ -1,7 +1,4 @@
-use crate::{
-    mode::{Normal, Program},
-    Ebyte,
-};
+use crate::{mode::Normal, Ebyte};
 use embedded_hal::serial::{Read, Write};
 use embedded_hal_mock::{
     delay,
@@ -27,7 +24,7 @@ fn acquire_release() {
     ]);
     let m0 = Pin::new(&vec![PinTransaction::set(Low)]);
     let m1 = Pin::new(&vec![PinTransaction::set(Low)]);
-    let serial = Serial::<u8>::new(&[]);
+    let serial = Serial::new(&[]);
     let delay = delay::MockNoop;
 
     let mock = Ebyte::new(serial, aux, m0, m1, delay).unwrap();
@@ -43,7 +40,7 @@ use proptest::prelude::*;
 
 #[test]
 fn flushes() {
-    let serial = Serial::<u8>::new(&[SerialTransaction::flush()]);
+    let serial = Serial::new(&[SerialTransaction::flush()]);
     let aux = Pin::new(&vec![]);
     let m0 = Pin::new(&vec![]);
     let m1 = Pin::new(&vec![]);
@@ -68,7 +65,7 @@ fn flushes() {
 
 #[test]
 fn resets() {
-    let serial = Serial::<u8>::new(&[
+    let serial = Serial::new(&[
         SerialTransaction::write(0xC4),
         SerialTransaction::write(0xC4),
         SerialTransaction::write(0xC4),
@@ -79,8 +76,8 @@ fn resets() {
         PinTransaction::get(Low),
         PinTransaction::get(High),
     ]);
-    let m0 = Pin::new(&vec![PinTransaction::set(Low)]);
-    let m1 = Pin::new(&vec![PinTransaction::set(Low)]);
+    let m0 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
+    let m1 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
 
     let mut ebyte = Ebyte {
         serial,
@@ -88,11 +85,10 @@ fn resets() {
         m0,
         m1,
         delay: delay::MockNoop,
-        mode: PhantomData::<Program>,
+        mode: PhantomData::<Normal>,
     };
 
-    ebyte.reset();
-    let ebyte = ebyte.into_normal_mode();
+    ebyte.reset().unwrap();
 
     let (mut s, mut aux, mut m0, mut m1, _delay) = ebyte.release();
     s.done();
@@ -105,7 +101,7 @@ proptest! {
 
     #[test]
     fn reads_byte(byte in any::<u8>()) {
-        let serial = Serial::<u8>::new(
+        let serial = Serial::new(
             &[SerialTransaction::read(byte)]
         );
         let aux = Pin::new(&vec![]);
@@ -133,7 +129,7 @@ proptest! {
 
     #[test]
     fn writes_byte(byte in any::<u8>()) {
-        let serial = Serial::<u8>::new(
+        let serial = Serial::new(
             &[SerialTransaction::write(byte)]
         );
         let aux = Pin::new(&vec![]);
@@ -160,7 +156,7 @@ proptest! {
 
     #[test]
     fn reads_buffer(buffer in any::<[u8; 16]>()) {
-        let serial = Serial::<u8>::new(
+        let serial = Serial::new(
             &buffer.iter().copied().map(SerialTransaction::read).collect::<Vec<_>>()[..]
         );
         let aux = Pin::new(&vec![]);
@@ -189,7 +185,7 @@ proptest! {
 
     #[test]
     fn writes_buffer(buffer in any::<[u8; 16]>()) {
-        let serial = Serial::<u8>::new(
+        let serial = Serial::new(
             &buffer.iter().copied().map(SerialTransaction::write).collect::<Vec<_>>()[..]
         );
         let aux = Pin::new(&vec![]);

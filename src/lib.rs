@@ -50,9 +50,6 @@ where
         mut m1: M1,
         mut delay: D,
     ) -> Result<Self, Error> {
-        // // Let pins settle.
-        //delay.delay_ms(10);
-
         Normal::set_pins(&mut aux, &mut m0, &mut m1, &mut delay);
 
         let ebyte = Self {
@@ -64,31 +61,7 @@ where
             mode: PhantomData::<Normal>,
         };
 
-        //let mut ebyte = ebyte.into_program_mode();
-
-        // Supposedly these have to be queried on startup.
-        // TODO is this true?
-        //let _model_data = ebyte.read_model_data()?;
-
-        //let ebyte = ebyte.into_normal_mode();
-        //let mut ebyte = ebyte.into_program_mode();
-
-        //let _parameters = ebyte.read_parameters()?;
-        //let ebyte = ebyte.into_normal_mode();
-
         Ok(ebyte)
-    }
-
-    pub fn into_program_mode(mut self) -> Ebyte<S, Aux, M0, M1, D, Program> {
-        Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
-        Ebyte {
-            serial: self.serial,
-            aux: self.aux,
-            m0: self.m0,
-            m1: self.m1,
-            delay: self.delay,
-            mode: PhantomData::<Program>,
-        }
     }
 
     /// Write entire buffer to serial port
@@ -104,6 +77,108 @@ where
         for byte in buffer {
             *byte = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
         }
+        Ok(())
+    }
+
+    pub fn model_data(&mut self) -> Result<ModelData, Error> {
+        Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+        let result = self.read_model_data();
+        Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+        result
+    }
+
+    fn read_model_data(&mut self) -> Result<ModelData, Error> {
+        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
+
+        let save = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        let model = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        let version = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        let features = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+
+        if save == 0xC3 {
+            Ok(ModelData {
+                model,
+                version,
+                features,
+            })
+        } else {
+            Err(Error::ReadModelData)
+        }
+    }
+
+    pub fn parameters(&mut self) -> Result<Parameters, Error> {
+        Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+        let result = self.read_parameters();
+        Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+        result
+    }
+
+    fn read_parameters(&mut self) -> Result<Parameters, Error> {
+        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
+        let save = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        let mut bytes = [0u8; 5];
+        for byte in &mut bytes {
+            *byte = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        }
+        if save != 0xC0 {
+            return Err(Error::ReadParameters);
+        }
+        let params = Parameters::from_bytes(&bytes)?;
+        Ok(params)
+    }
+
+    pub fn set_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
+        Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+        let result = self.write_parameters(params, mode);
+        Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+        result
+    }
+
+    fn write_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
+        let persistence = u8::from(mode);
+        block!(self.serial.write(persistence)).map_err(|_| Error::SerialWrite)?;
+
+        let bytes: [u8; 5] = params.to_bytes();
+        block!(self.serial.write(bytes[0])).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(bytes[1])).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(bytes[2])).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(bytes[3])).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(bytes[4])).map_err(|_| Error::SerialWrite)?;
+
+        let response_prefix = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        let mut response = [0u8; 5];
+        for byte in &mut response {
+            *byte = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
+        }
+        if response_prefix != 0xC0 {
+            return Err(Error::SetParameters);
+        }
+
+        if response != bytes {
+            return Err(Error::SetParameters);
+        }
+
+        self.delay.delay_ms(40);
+
+        Ok(())
+    }
+
+    pub fn reset(&mut self) -> Result<(), Error> {
+        Program::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+        let result = self.perform_reset();
+        Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
+        result
+    }
+
+    fn perform_reset(&mut self) -> Result<(), Error> {
+        block!(self.serial.write(0xC4)).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(0xC4)).map_err(|_| Error::SerialWrite)?;
+        block!(self.serial.write(0xC4)).map_err(|_| Error::SerialWrite)?;
+
         Ok(())
     }
 
@@ -145,119 +220,5 @@ where
 
     fn flush(&mut self) -> nb::Result<(), Self::Error> {
         self.serial.flush()
-    }
-}
-
-impl<S, Aux, M0, M1, D> Ebyte<S, Aux, M0, M1, D, Program>
-where
-    S: Read<u8> + Write<u8>,
-    Aux: InputPin,
-    M0: OutputPin,
-    M1: OutputPin,
-    D: DelayMs<u32>,
-{
-    pub fn read_model_data(&mut self) -> Result<ModelData, Error> {
-        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
-        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
-        block!(self.serial.write(0xC3)).map_err(|_| Error::SerialWrite)?;
-
-        let save = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
-        let model = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
-        let version = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
-        let features = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
-
-        if save == 0xC3 {
-            Ok(ModelData {
-                model,
-                version,
-                features,
-            })
-        } else {
-            Err(Error::ReadModelData)
-        }
-    }
-
-    pub fn read_parameters(&mut self) -> Result<Parameters, Error> {
-        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
-        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
-        block!(self.serial.write(0xC1)).map_err(|_| Error::SerialWrite)?;
-
-        let save = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
-
-        let mut bytes = [0u8; 5];
-        for byte in &mut bytes {
-            *byte = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
-        }
-
-        if save != 0xC0 {
-            return Err(Error::ReadParameters);
-        }
-
-        let params = Parameters::from_bytes(&bytes)?;
-
-        Ok(params)
-    }
-
-    pub fn set_parameters(&mut self, params: &Parameters, mode: Persistence) -> Result<(), Error> {
-        let persistence = u8::from(mode);
-        block!(self.serial.write(persistence)).map_err(|_| Error::SerialWrite)?;
-
-        let bytes: [u8; 5] = params.to_bytes();
-        block!(self.serial.write(bytes[0])).map_err(|_| Error::SerialWrite)?;
-        block!(self.serial.write(bytes[1])).map_err(|_| Error::SerialWrite)?;
-        block!(self.serial.write(bytes[2])).map_err(|_| Error::SerialWrite)?;
-        block!(self.serial.write(bytes[3])).map_err(|_| Error::SerialWrite)?;
-        block!(self.serial.write(bytes[4])).map_err(|_| Error::SerialWrite)?;
-
-        let response_prefix = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
-        let mut response = [0u8; 5];
-        for byte in &mut response {
-            *byte = block!(self.serial.read()).map_err(|_| Error::SerialRead)?;
-        }
-        if response_prefix != 0xC0 {
-            return Err(Error::SetParameters);
-        }
-
-        if response != bytes {
-            return Err(Error::SetParameters);
-        }
-
-        self.delay.delay_ms(40);
-
-        self.until_aux();
-
-        Ok(())
-    }
-
-    pub fn reset(&mut self) {
-        let _ = block!(self.serial.write(0xC4));
-        let _ = block!(self.serial.write(0xC4));
-        let _ = block!(self.serial.write(0xC4));
-
-        self.until_aux();
-    }
-
-    fn until_aux(&mut self) {
-        loop {
-            // TODO timeouts?
-            match self.aux.is_low() {
-                Ok(true) => continue,
-                Ok(false) => break,
-                // TODO error handling.
-                Err(_e) => panic!("failed to wait for aux pin"),
-            }
-        }
-    }
-
-    pub fn into_normal_mode(mut self) -> Ebyte<S, Aux, M0, M1, D, Normal> {
-        Normal::set_pins(&mut self.aux, &mut self.m0, &mut self.m1, &mut self.delay);
-        Ebyte {
-            serial: self.serial,
-            aux: self.aux,
-            m0: self.m0,
-            m1: self.m1,
-            delay: self.delay,
-            mode: PhantomData::<Normal>,
-        }
     }
 }

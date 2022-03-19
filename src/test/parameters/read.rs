@@ -1,4 +1,4 @@
-use crate::{mode::Program, parameters::Parameters, Ebyte};
+use crate::{mode::Normal, parameters::Parameters, Ebyte};
 use embedded_hal_mock::{
     common::Generic,
     delay,
@@ -37,9 +37,11 @@ fn read_parameters_expectations(parameters: &Parameters) -> ReadParameterExpecta
         PinTransaction::get(Low),
         PinTransaction::get(Low),
         PinTransaction::get(High),
+        PinTransaction::get(Low),
+        PinTransaction::get(High),
     ]);
-    let m0 = Pin::new(&vec![PinTransaction::set(Low)]);
-    let m1 = Pin::new(&vec![PinTransaction::set(Low)]);
+    let m0 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
+    let m1 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
     ReadParameterExpectations {
         serial,
         aux,
@@ -70,39 +72,9 @@ proptest! {
             m0,
             m1,
             delay: delay::MockNoop,
-            mode: PhantomData::<Program>,
+            mode: PhantomData::<Normal>,
         };
-        let response = ebyte.read_parameters().unwrap();
-        let ebyte = ebyte.into_normal_mode();
-
-        assert_eq!(response, parameters);
-
-        let (mut s, mut aux, mut m0, mut m1, _delay) = ebyte.release();
-        s.done();
-        aux.done();
-        m0.done();
-        m1.done();
-    }
-
-    #[test]
-    fn sets_parameters(parameters in any::<Parameters>()) {
-        let ReadParameterExpectations {
-            serial,
-            aux,
-            m0,
-            m1,
-        } = read_parameters_expectations(&parameters);
-
-        let mut ebyte = Ebyte {
-            serial,
-            aux,
-            m0,
-            m1,
-            delay: delay::MockNoop,
-            mode: PhantomData::<Program>,
-        };
-        let response = ebyte.read_parameters().unwrap();
-        let ebyte = ebyte.into_normal_mode();
+        let response = ebyte.parameters().unwrap();
 
         assert_eq!(response, parameters);
 

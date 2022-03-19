@@ -1,5 +1,5 @@
 use crate::{
-    mode::Program,
+    mode::Normal,
     parameters::{Parameters, Persistence},
     Ebyte,
 };
@@ -53,8 +53,8 @@ fn set_parameters_expectations(
         PinTransaction::get(Low),
         PinTransaction::get(High),
     ]);
-    let m0 = Pin::new(&vec![PinTransaction::set(Low)]);
-    let m1 = Pin::new(&vec![PinTransaction::set(Low)]);
+    let m0 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
+    let m1 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
     SetParameterExpectations {
         serial,
         aux,
@@ -85,10 +85,9 @@ proptest! {
             m0,
             m1,
             delay: delay::MockNoop,
-            mode: PhantomData::<Program>,
+            mode: PhantomData::<Normal>,
         };
         ebyte.set_parameters(&parameters, persistence).unwrap();
-        let ebyte = ebyte.into_normal_mode();
 
         let (mut s, mut aux, mut m0, mut m1, _delay) = ebyte.release();
         s.done();

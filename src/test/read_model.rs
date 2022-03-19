@@ -1,4 +1,4 @@
-use crate::{mode::Program, model_data::ModelData, Ebyte};
+use crate::{mode::Normal, model_data::ModelData, Ebyte};
 use embedded_hal_mock::{
     common::Generic,
     delay,
@@ -35,9 +35,11 @@ fn read_model_data_expectations(model_data: ModelData) -> ReadModelDataExpectati
         PinTransaction::get(Low),
         PinTransaction::get(Low),
         PinTransaction::get(High),
+        PinTransaction::get(Low),
+        PinTransaction::get(High),
     ]);
-    let m0 = Pin::new(&vec![PinTransaction::set(Low)]);
-    let m1 = Pin::new(&vec![PinTransaction::set(Low)]);
+    let m0 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
+    let m1 = Pin::new(&vec![PinTransaction::set(High), PinTransaction::set(Low)]);
     ReadModelDataExpectations {
         serial,
         aux,
@@ -68,10 +70,9 @@ proptest! {
             m0,
             m1,
             delay: delay::MockNoop,
-            mode: PhantomData::<Program>,
+            mode: PhantomData::<Normal>,
         };
-        let model = ebyte.read_model_data().unwrap();
-        let ebyte = ebyte.into_normal_mode();
+        let model = ebyte.model_data().unwrap();
 
         assert_eq!(model, model_data);
 

@@ -17,6 +17,9 @@ pub enum Error {
     #[snafu(display("Failed to write serial port"))]
     SerialWrite,
 
+    #[snafu(display("Failed to wait for AUX pin"))]
+    AuxPin,
+
     #[snafu(display("Invalid UART parity {value}"))]
     InvalidUartParity { value: u8 },
 
