@@ -1,7 +1,7 @@
 # ebyte-e32-rs
 
 This driver requires a serial port, 2 output pins, and 1 input pin. It drives an ebyte E32 LoRa module.
-I tested so far with an E32-433T30D, but they seem to be pretty similar across the board. Please report or PR if something doesn't work.
+I tested so far with an E32-433T30D and an E32-868T20D. According to the datasheet, the differences between the modules are minor, but do check the datasheet: chapter 11 "E32 series" lists some differences. For example, E32-170T30D only supports baud rates up to 9.6k. Please report or PR if you find something that doesn't work.
 
 # [Demo Project](https://github.com/barafael/ebyte-e32-demo)
 
