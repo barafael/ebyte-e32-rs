@@ -1,8 +1,12 @@
 use crate::error::Error;
 use smart_default::SmartDefault;
 
+#[cfg(feature = "param_fromstr")]
+use strum_macros::EnumString;
+
 #[derive(Copy, Clone, Debug, PartialEq, Eq, SmartDefault)]
 #[cfg_attr(test, derive(proptest_derive::Arbitrary))]
+#[cfg_attr(feature = "param_fromstr", derive(EnumString))]
 pub enum IoDriveMode {
     #[default]
     PushPull,

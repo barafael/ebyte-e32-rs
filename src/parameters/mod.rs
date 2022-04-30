@@ -11,6 +11,9 @@ use crate::error::Error;
 use smart_default::SmartDefault;
 pub use typed_builder::TypedBuilder;
 
+#[cfg(feature = "param_fromstr")]
+use strum_macros::EnumString;
+
 pub mod air_baudrate;
 pub mod baudrate;
 pub mod option;
@@ -18,6 +21,7 @@ pub mod uart_parity;
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, SmartDefault)]
 #[cfg_attr(test, derive(proptest_derive::Arbitrary))]
+#[cfg_attr(feature = "param_fromstr", derive(EnumString))]
 pub enum Persistence {
     #[default]
     Temporary,
