@@ -1,7 +1,6 @@
-#![cfg_attr(not(test), no_std)]
+#![cfg_attr(not(any(test, feature = "arg_enum")), no_std)]
 
 use core::marker::PhantomData;
-use ebyte_e32_parameters::{Parameters, Persistence};
 use embedded_hal::{
     blocking::delay::DelayMs,
     digital::v2::{InputPin, OutputPin},
@@ -11,10 +10,12 @@ use error::Error;
 use mode::{Mode, Normal, Program};
 use model_data::ModelData;
 use nb::block;
+use parameters::{Parameters, Persistence};
 
 mod error;
 mod mode;
 mod model_data;
+pub mod parameters;
 #[cfg(test)]
 mod test;
 

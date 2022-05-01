@@ -22,6 +22,6 @@ pub enum Error {
 
     #[snafu(display("Parameter error {source}"))]
     Parameter {
-        source: ebyte_e32_parameters::error::Error,
+        source: crate::parameters::error::Error,
     },
 }

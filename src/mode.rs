@@ -46,8 +46,8 @@ macro_rules! impl_mode {
                         // TODO check if delay times can be reduced.
                             delay.delay_ms(40);
                             // TODO handle errors here.
-                            let _ = m0.set_state($m0_state);
-                            let _ = m1.set_state($m1_state);
+                            let _m0 = m0.set_state($m0_state);
+                            let _m1 = m1.set_state($m1_state);
                             delay.delay_ms(40);
 
                             loop {
