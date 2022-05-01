@@ -11,7 +11,6 @@ use embedded_hal_mock::{
 };
 use std::marker::PhantomData;
 
-mod parameters;
 mod read_model;
 
 #[test]

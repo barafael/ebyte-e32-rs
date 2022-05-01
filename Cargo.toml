@@ -6,22 +6,16 @@ description = "Platform-agnostic driver for Ebyte E32 LoRa modules"
 license-file = "LICENSE"
 repository = "https://github.com/barafael/ebyte-e32-rs"
 
-[features]
-param_fromstr = ["dep:strum", "dep:strum_macros"]
-
 [dev-dependencies]
 embedded-hal-mock = "0.8.0"
 proptest = "1.0.0"
 proptest-derive = "0.3.0"
 
 [dependencies]
+ebyte-e32-parameters = { git = "https://github.com/barafael/ebyte-e32-parameters" }
 embedded-hal = { version = "0.2.7", features = ["unproven"] }
+mutants = "0.0.3"
 nb = "1.0.0"
 snafu = { version = "0.7.0", features = [
     "rust_1_46",
 ], default-features = false }
-typed-builder = "0.10.0"
-smart-default = "0.6.0"
-mutants = "0.0.3"
-strum = { version = "0.24.0", optional = true }
-strum_macros = { version = "0.24.0", optional = true }

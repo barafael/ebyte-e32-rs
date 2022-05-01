@@ -1,6 +1,7 @@
 #![cfg_attr(not(test), no_std)]
 
 use core::marker::PhantomData;
+use ebyte_e32_parameters::{Parameters, Persistence};
 use embedded_hal::{
     blocking::delay::DelayMs,
     digital::v2::{InputPin, OutputPin},
@@ -10,12 +11,10 @@ use error::Error;
 use mode::{Mode, Normal, Program};
 use model_data::ModelData;
 use nb::block;
-use parameters::{Parameters, Persistence};
 
 mod error;
 mod mode;
 mod model_data;
-pub mod parameters;
 #[cfg(test)]
 mod test;
 
@@ -127,7 +126,7 @@ where
         if save != 0xC0 {
             return Err(Error::ReadParameters);
         }
-        let params = Parameters::from_bytes(&bytes)?;
+        let params = Parameters::from_bytes(&bytes).map_err(|e| Error::Parameter { source: e })?;
         Ok(params)
     }
 
@@ -202,7 +201,7 @@ where
     }
 }
 
-/// Implement Write for Hc12 in normal mode.
+/// Implement Write for Ebyte in normal mode.
 /// This just defers to the underlying serial implementation.
 impl<S, Aux, M0, M1, D> Write<u8> for Ebyte<S, Aux, M0, M1, D, Normal>
 where
