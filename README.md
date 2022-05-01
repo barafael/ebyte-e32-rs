@@ -37,6 +37,9 @@ loop {
 }
 ```
 
+# Crate Features
+* arg_enum: enable deriving `clap::ArgEnum` for the enums inside `ebyte_e32::parameters::Parameters`. This disables `no_std`, but one can make nice CLIs with this: https://github.com/barafael/ebyte-e32-cli
+
 # Known limitations
 * Driver is completely blocking and relies on blocking delay, blocking sometimes for 40ms
 * AUX is not monitored while writing serial data. This would be important when filling the module buffer which has space for 512 bytes.
