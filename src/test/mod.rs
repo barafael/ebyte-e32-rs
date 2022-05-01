@@ -9,7 +9,7 @@ use embedded_hal_mock::{
     },
     serial::Mock as Serial,
 };
-use std::marker::PhantomData;
+use core::marker::PhantomData;
 
 mod read_model;
 
