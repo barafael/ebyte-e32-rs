@@ -38,7 +38,7 @@ loop {
 ```
 
 # Crate Features
-* arg_enum: enable deriving `clap::ArgEnum` for the enums inside `ebyte_e32::parameters::Parameters`. This disables `no_std`, but one can make nice CLIs with this: https://github.com/barafael/ebyte-e32-cli
+* arg_enum: enable deriving `clap::ArgEnum` for the enums inside `ebyte_e32::parameters::Parameters`. This disables `no_std`, but one can make nice CLIs with this: [ebyte-e32-ui](https://github.com/barafael/ebyte-e32-ui)
 
 # Known limitations
 * Driver is completely blocking and relies on blocking delay, blocking sometimes for 40ms
