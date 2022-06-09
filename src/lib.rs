@@ -6,7 +6,7 @@ use embedded_hal::{
     digital::v2::{InputPin, OutputPin},
     serial::{Read, Write},
 };
-use error::Error;
+pub use error::Error;
 use mode::{Mode, Normal, Program};
 use model_data::ModelData;
 use nb::block;

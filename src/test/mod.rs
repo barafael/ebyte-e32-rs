@@ -1,4 +1,5 @@
 use crate::{mode::Normal, Ebyte};
+use core::marker::PhantomData;
 use embedded_hal::serial::{Read, Write};
 use embedded_hal_mock::{
     delay,
@@ -9,7 +10,6 @@ use embedded_hal_mock::{
     },
     serial::Mock as Serial,
 };
-use core::marker::PhantomData;
 
 mod read_model;
 

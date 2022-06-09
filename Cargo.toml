@@ -15,6 +15,7 @@ proptest = "1.0.0"
 proptest-derive = "0.3.0"
 
 [dependencies]
+clap = { version = "3.1.13", features = ["derive"], optional = true }
 embedded-hal = { version = "0.2.7", features = ["unproven"] }
 mutants = "0.0.3"
 nb = "1.0.0"
@@ -23,4 +24,3 @@ snafu = { version = "0.7.0", features = [
     "rust_1_46",
 ], default-features = false }
 typed-builder = "0.10.0"
-clap = { version = "3.1.13", features = ["derive"], optional = true }

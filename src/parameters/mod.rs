@@ -7,7 +7,7 @@ use self::{
     },
     uart_parity::Parity,
 };
-use error::Error;
+pub use error::Error;
 use smart_default::SmartDefault;
 pub use typed_builder::TypedBuilder;
 
