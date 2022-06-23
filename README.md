@@ -5,6 +5,8 @@ I tested so far with an E32-433T30D and an E32-868T20D. According to the datashe
 
 # [Demo Project](https://github.com/barafael/ebyte-e32-demo)
 
+# [CLI and GUI frontends for the driver](https://github.com/barafael/ebyte-e32-ui)
+
 # Example
 
 ```rust
