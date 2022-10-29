@@ -10,8 +10,8 @@ use self::{
 pub use error::Error;
 pub use typed_builder::TypedBuilder;
 
-#[cfg(feature = "arg_enum")]
-use clap::ArgEnum;
+#[cfg(feature = "value_enum")]
+use clap::ValueEnum;
 
 pub mod air_baudrate;
 pub mod baudrate;
@@ -26,7 +26,7 @@ mod write;
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Default)]
 #[cfg_attr(test, derive(proptest_derive::Arbitrary))]
-#[cfg_attr(feature = "arg_enum", derive(ArgEnum))]
+#[cfg_attr(feature = "value_enum", derive(ValueEnum))]
 pub enum Persistence {
     #[default]
     Temporary,
@@ -155,11 +155,11 @@ mod test {
     }
 }
 
-#[cfg(all(feature = "arg_enum", test))]
-mod arg_enum_test {
+#[cfg(all(feature = "value_enum", test))]
+mod value_enum_test {
     #[test]
-    fn arg_enum_persistence() {
-        let persistence = <crate::Persistence as clap::ArgEnum>::value_variants();
+    fn value_enum_persistence() {
+        let persistence = <crate::Persistence as clap::ValueEnum>::value_variants();
         assert_eq!(
             persistence,
             [crate::Persistence::Temporary, crate::Persistence::Permanent]

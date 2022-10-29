@@ -1,4 +1,4 @@
-#![cfg_attr(not(any(test, feature = "arg_enum")), no_std)]
+#![cfg_attr(not(any(test, feature = "value_enum")), no_std)]
 
 use core::marker::PhantomData;
 use embedded_hal::{

@@ -1,11 +1,11 @@
 use crate::parameters::error::Error;
 
-#[cfg(feature = "arg_enum")]
-use clap::ArgEnum;
+#[cfg(feature = "value_enum")]
+use clap::ValueEnum;
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Default)]
 #[cfg_attr(test, derive(proptest_derive::Arbitrary))]
-#[cfg_attr(feature = "arg_enum", derive(ArgEnum))]
+#[cfg_attr(feature = "value_enum", derive(ValueEnum))]
 pub enum Parity {
     #[default]
     None,
@@ -36,7 +36,7 @@ impl From<Parity> for u8 {
     }
 }
 
-#[cfg(feature = "arg_enum")]
+#[cfg(feature = "value_enum")]
 #[cfg(test)]
 mod test {
     use super::*;
