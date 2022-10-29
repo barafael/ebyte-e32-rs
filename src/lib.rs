@@ -13,7 +13,7 @@ use nb::block;
 use parameters::{Parameters, Persistence};
 
 mod error;
-mod mode;
+pub mod mode;
 mod model_data;
 pub mod parameters;
 #[cfg(test)]
