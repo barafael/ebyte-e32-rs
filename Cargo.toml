@@ -22,4 +22,4 @@ nb = "1.0.0"
 snafu = { version = "0.7.0", features = [
     "rust_1_46",
 ], default-features = false }
-typed-builder = "0.10.0"
+typed-builder = "0.11.0"
