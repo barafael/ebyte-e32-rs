@@ -3,11 +3,11 @@
 This driver requires a serial port, 2 output pins, and 1 input pin. It drives an ebyte E32 LoRa module.
 I tested so far with an E32-433T30D and an E32-868T20D. According to the datasheet, the differences between the modules are minor, but do check the datasheet: chapter 11 "E32 series" lists some differences. For example, E32-170T30D only supports baud rates up to 9.6k. Please report or PR if you find something that doesn't work.
 
-# [Demo Project](https://github.com/barafael/ebyte-e32-demo)
+## [Demo Project](https://github.com/barafael/ebyte-e32-demo)
 
-# [CLI and GUI frontends for the driver](https://github.com/barafael/ebyte-e32-ui)
+## [CLI and GUI frontends for the driver](https://github.com/barafael/ebyte-e32-ui)
 
-# Example
+## Example
 
 ```rust
 // aux: InputPin
@@ -39,11 +39,11 @@ loop {
 }
 ```
 
-# Crate Features
+## Crate Features
 
-* value_enum: enable deriving `clap::ValueEnum` for the enums inside `ebyte_e32::parameters::Parameters`. This disables `no_std`, but one can make nice CLIs with this: [ebyte-e32-ui](https://github.com/barafael/ebyte-e32-ui)
+* value_enum: enable deriving `clap::ValueEnum` for the enums inside `ebyte_e32::parameters::Parameters`. This disables `no_std`, but one can make nice CLIs and GUIs with this: [ebyte-e32-ui](https://github.com/barafael/ebyte-e32-ui)
 
-# Known limitations
+## Known limitations
 
 * Driver is completely blocking and relies on blocking delay, blocking sometimes for 40ms
 * AUX is not monitored while writing serial data. This would be important when filling the module buffer which has space for 512 bytes.
