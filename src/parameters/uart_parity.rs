@@ -1,10 +1,9 @@
 use crate::parameters::error::Error;
-use smart_default::SmartDefault;
 
 #[cfg(feature = "arg_enum")]
 use clap::ArgEnum;
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq, SmartDefault)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Default)]
 #[cfg_attr(test, derive(proptest_derive::Arbitrary))]
 #[cfg_attr(feature = "arg_enum", derive(ArgEnum))]
 pub enum Parity {

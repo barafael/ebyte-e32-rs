@@ -8,7 +8,6 @@ use self::{
     uart_parity::Parity,
 };
 pub use error::Error;
-use smart_default::SmartDefault;
 pub use typed_builder::TypedBuilder;
 
 #[cfg(feature = "arg_enum")]
@@ -25,7 +24,7 @@ mod read;
 #[cfg(test)]
 mod write;
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq, SmartDefault)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Default)]
 #[cfg_attr(test, derive(proptest_derive::Arbitrary))]
 #[cfg_attr(feature = "arg_enum", derive(ArgEnum))]
 pub enum Persistence {
