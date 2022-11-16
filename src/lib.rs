@@ -1,4 +1,5 @@
 #![cfg_attr(not(any(test, feature = "value_enum")), no_std)]
+#![doc = include_str!("../README.md")]
 
 use core::marker::PhantomData;
 use embedded_hal::{
