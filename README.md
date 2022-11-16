@@ -11,28 +11,56 @@ Uses [embedded-hal](https://github.com/rust-embedded/embedded-hal) for interfaci
 ## Example
 
 ```rust, no_run
-let ebyte = Ebyte::new(serial, aux, m0, m1, delay).unwrap();
-let model_data = ebyte.read_model_data().unwrap();
-let mut params = ebyte.read_parameters().unwrap();
+use ebyte_e32::{
+    mode::Normal,
+    parameters::{air_baudrate::AirBaudRate, Persistence},
+    Ebyte,
+};
+use embedded_hal::{
+    blocking::delay,
+    digital::v2::{InputPin, OutputPin},
+    serial,
+};
+use embedded_hal::digital::v2::ToggleableOutputPin;
+use std::fmt::Debug;
 
-println!("{model_data:#?}");
-println!("{params:#?}");
+pub fn simple_test_ebyte<S, AUX, M0, M1, D, LED>(
+    mut ebyte: Ebyte<S, AUX, M0, M1, D, Normal>,
+    mut led: LED,
+    mut delay: impl delay::DelayMs<u32>,
+) where
+    S: serial::Read<u8> + serial::Write<u8>,
+    <S as serial::Read<u8>>::Error: Debug,
+    <S as serial::Write<u8>>::Error: Debug,
+    AUX: InputPin,
+    M0: OutputPin,
+    M1: OutputPin,
+    D: delay::DelayMs<u32>,
+    LED: ToggleableOutputPin,
+    LED::Error: Debug,
+{
+    let model_data = ebyte.model_data().unwrap();
+    let mut params = ebyte.parameters().unwrap();
 
-params.air_rate = AirBaudRate::Bps300;
-params.channel = 23;
+    println!("{model_data:#?}");
+    println!("{params:#?}");
 
-ebyte
-    .set_parameters(&params, Persistence::Temporary)
-    .unwrap();
+    params.air_rate = AirBaudRate::Bps300;
+    params.channel = 23;
 
-let params = ebyte.read_parameters().unwrap();
-println!("{:#?}", params);
+    ebyte
+        .set_parameters(&params, Persistence::Temporary)
+        .unwrap();
 
-loop {
-    delay.delay_ms(5000u32);
-    println!("Sending it!");
-    ebyte.write_buffer(b"it").unwrap();
-    led.toggle();
+    let params = ebyte.parameters().unwrap();
+    println!("{:#?}", params);
+
+    loop {
+        delay.delay_ms(5000u32);
+        println!("Sending it!");
+        ebyte.write_buffer(b"it").unwrap();
+        led.toggle().unwrap();
+    }
 }
 ```
 
