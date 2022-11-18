@@ -9,14 +9,16 @@ use embedded_hal::{
 };
 pub use error::Error;
 use mode::{Mode, Normal, Program};
-use model_data::ModelData;
+pub use model_data::ModelData;
 use nb::block;
-use parameters::{Parameters, Persistence};
+pub use parameters::Parameters;
+use parameters::Persistence;
 
 mod error;
 pub mod mode;
 mod model_data;
 pub mod parameters;
+
 #[cfg(test)]
 mod test;
 

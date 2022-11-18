@@ -1,4 +1,4 @@
-use self::{
+pub use self::{
     air_baudrate::AirBaudRate,
     baudrate::BaudRate,
     option::{
@@ -13,11 +13,11 @@ pub use typed_builder::TypedBuilder;
 #[cfg(feature = "value_enum")]
 use clap::ValueEnum;
 
-pub mod air_baudrate;
-pub mod baudrate;
-pub mod error;
-pub mod option;
-pub mod uart_parity;
+mod air_baudrate;
+mod baudrate;
+mod error;
+mod option;
+mod uart_parity;
 
 #[cfg(test)]
 mod read;

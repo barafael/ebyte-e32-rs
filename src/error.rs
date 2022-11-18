@@ -28,7 +28,5 @@ pub enum Error {
 
     /// Failed to process parameters.
     #[snafu(display("Parameter error {source}"))]
-    Parameter {
-        source: crate::parameters::error::Error,
-    },
+    Parameter { source: crate::parameters::Error },
 }

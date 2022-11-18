@@ -13,7 +13,7 @@ Uses [embedded-hal](https://github.com/rust-embedded/embedded-hal) for interfaci
 ```rust, no_run
 use ebyte_e32::{
     mode::Normal,
-    parameters::{air_baudrate::AirBaudRate, Persistence},
+    parameters::{AirBaudRate, Persistence},
     Ebyte,
 };
 use embedded_hal::{
