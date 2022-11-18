@@ -7,7 +7,7 @@ license-file = "LICENSE"
 repository = "https://github.com/barafael/ebyte-e32-rs"
 
 [features]
-value_enum = ["dep:clap"]
+value_enum = ["dep:clap", "snafu/std"]
 
 [dev-dependencies]
 embedded-hal-mock = "0.8.0"
