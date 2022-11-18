@@ -77,3 +77,13 @@ I tested so far with an `E32-433T30D` and an `E32-868T20D`. According to the dat
 * Driver is completely blocking and relies on blocking delay, blocking sometimes for 40ms.
 * AUX is not monitored while writing serial data. This would be important when filling the module buffer which has space for 512 bytes.
 * Transmission power, frequency, baudrate and probably some other definitions are generally not applicable for every single E32 model. See datasheet for table with module specialties. E.g., some few modules do not support all air baud rates.
+
+## Module Graph
+
+![modules](https://user-images.githubusercontent.com/6966738/202765422-106b0da6-9136-48f3-ab67-071cfa037c59.png)
+
+## Dependency Graph
+
+(Note this doesn't include the optional feature `value_enum`)
+
+![dependencies](https://user-images.githubusercontent.com/6966738/202765372-d2616ffa-bdbc-4ad6-bdac-d88a307dd320.png)
