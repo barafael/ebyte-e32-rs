@@ -4,9 +4,11 @@ Platform-agnostic driver for Ebyte E32 LoRa modules.
 
 Uses [embedded-hal](https://github.com/rust-embedded/embedded-hal) for interfacing with a serial port, an input pin (AUX), and two output pins(M0, M1).
 
-## [CLI and GUI frontends for the driver (Linux)](https://github.com/barafael/ebyte-e32-ui)
+## [Demo Project (ESP32)](https://github.com/gustavobat/esp32-ebyte-e32)
 
 ## [Demo Project (STM32F411)](https://github.com/barafael/ebyte-e32-demo)
+
+## [CLI and GUI frontends for the driver (Linux)](https://github.com/barafael/ebyte-e32-ui)
 
 ## Example
 
