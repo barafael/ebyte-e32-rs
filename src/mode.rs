@@ -44,23 +44,23 @@ macro_rules! impl_mode {
                     M1: OutputPin,
                     D: DelayMs<u32> {
                         // TODO check if delay times can be reduced.
-                            delay.delay_ms(40);
-                            // TODO handle errors here.
-                            let _m0 = m0.set_state($m0_state);
-                            let _m1 = m1.set_state($m1_state);
-                            delay.delay_ms(40);
+                        delay.delay_ms(40);
+                        // TODO handle errors here.
+                        let _m0 = m0.set_state($m0_state);
+                        let _m1 = m1.set_state($m1_state);
+                        delay.delay_ms(40);
 
-                            loop {
-                                // TODO timeouts?
-                                match aux.is_low() {
-                                    Ok(true) => continue,
-                                    Ok(false) => break,
-                                    // TODO error handling.
-                                    Err(_e) => panic!("failed to wait for aux pin"),
-                                }
+                        loop {
+                            // TODO timeouts?
+                            match aux.is_low() {
+                                Ok(true) => continue,
+                                Ok(false) => break,
+                                // TODO error handling.
+                                Err(_e) => panic!("failed to wait for aux pin"),
                             }
-                    }
+                        }
                 }
+            }
         )*
     };
 }
