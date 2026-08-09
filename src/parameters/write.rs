@@ -2,13 +2,13 @@ use crate::{mode::Normal, Ebyte, Parameters, Persistence};
 use core::marker::PhantomData;
 use embedded_hal_mock::{
     common::Generic,
-    delay,
-    pin::{
+    eh1::delay,
+    eh1::digital::{
         Mock as Pin,
         State::{High, Low},
         Transaction as PinTransaction,
     },
-    serial::{Mock as Serial, Transaction as SerialTransaction},
+    eh1::serial::{Mock as Serial, Transaction as SerialTransaction},
 };
 
 struct SetParameterExpectations {
@@ -81,7 +81,7 @@ proptest! {
             aux,
             m0,
             m1,
-            delay: delay::MockNoop,
+            delay: delay::NoopDelay::new(),
             mode: PhantomData::<Normal>,
         };
         ebyte.set_parameters(&parameters, persistence).unwrap();

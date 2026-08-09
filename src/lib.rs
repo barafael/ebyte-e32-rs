@@ -3,10 +3,10 @@
 
 use core::marker::PhantomData;
 use embedded_hal::{
-    blocking::delay::DelayMs,
-    digital::v2::{InputPin, OutputPin},
-    serial::{Read, Write},
+    delay::DelayNs,
+    digital::{InputPin, OutputPin},
 };
+use embedded_hal_nb::serial::{ErrorType, Read, Write};
 pub use error::Error;
 use mode::{Mode, Normal, Program};
 pub use model_data::ModelData;
@@ -28,7 +28,7 @@ where
     Aux: InputPin,
     M0: OutputPin,
     M1: OutputPin,
-    D: DelayMs<u32>,
+    D: DelayNs,
 {
     serial: S,
     aux: Aux,
@@ -44,7 +44,7 @@ where
     Aux: InputPin,
     M0: OutputPin,
     M1: OutputPin,
-    D: DelayMs<u32>,
+    D: DelayNs,
 {
     pub fn new(
         serial: S,
@@ -190,16 +190,25 @@ where
     }
 }
 
+impl<S, Aux, M0, M1, D> ErrorType for Ebyte<S, Aux, M0, M1, D, Normal>
+where
+    S: Read<u8> + Write<u8>,
+    Aux: InputPin,
+    M0: OutputPin,
+    M1: OutputPin,
+    D: DelayNs,
+{
+    type Error = <S as ErrorType>::Error;
+}
+
 impl<S, Aux, M0, M1, D> Read<u8> for Ebyte<S, Aux, M0, M1, D, Normal>
 where
     S: Read<u8> + Write<u8>,
     Aux: InputPin,
     M0: OutputPin,
     M1: OutputPin,
-    D: DelayMs<u32>,
+    D: DelayNs,
 {
-    type Error = <S as Read<u8>>::Error;
-
     fn read(&mut self) -> nb::Result<u8, Self::Error> {
         self.serial.read()
     }
@@ -213,10 +222,8 @@ where
     Aux: InputPin,
     M0: OutputPin,
     M1: OutputPin,
-    D: DelayMs<u32>,
+    D: DelayNs,
 {
-    type Error = <S as Write<u8>>::Error;
-
     fn write(&mut self, word: u8) -> nb::Result<(), Self::Error> {
         self.serial.write(word)
     }

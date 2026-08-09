@@ -1,6 +1,6 @@
-use embedded_hal::blocking::delay::DelayMs;
-use embedded_hal::digital::v2::PinState::{High, Low};
-use embedded_hal::digital::v2::{InputPin, OutputPin};
+use embedded_hal::delay::DelayNs;
+use embedded_hal::digital::PinState::{High, Low};
+use embedded_hal::digital::{InputPin, OutputPin};
 
 /// Send and receive.
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
@@ -26,7 +26,7 @@ pub trait Mode {
         Aux: InputPin,
         M0: OutputPin,
         M1: OutputPin,
-        D: DelayMs<u32>;
+        D: DelayNs;
 }
 
 macro_rules! impl_mode {
@@ -42,7 +42,7 @@ macro_rules! impl_mode {
                     Aux: InputPin,
                     M0: OutputPin,
                     M1: OutputPin,
-                    D: DelayMs<u32> {
+                    D: DelayNs {
                         // TODO check if delay times can be reduced.
                         delay.delay_ms(40);
                         // TODO handle errors here.
@@ -73,9 +73,9 @@ impl_mode!(Program, 3, High, High);
 #[cfg(test)]
 mod test {
     use super::*;
-    use embedded_hal_mock::delay::MockNoop;
-    use embedded_hal_mock::pin::Mock as Pin;
-    use embedded_hal_mock::pin::{
+    use embedded_hal_mock::eh1::delay::NoopDelay;
+    use embedded_hal_mock::eh1::digital::Mock as Pin;
+    use embedded_hal_mock::eh1::digital::{
         State::{High, Low},
         Transaction,
     };
@@ -104,7 +104,7 @@ mod test {
             Transaction::get(Low),
             Transaction::get(High),
         ]);
-        Normal::set_pins(&mut aux, &mut m0, &mut m1, &mut MockNoop);
+        Normal::set_pins(&mut aux, &mut m0, &mut m1, &mut NoopDelay::new());
         m0.done();
         m1.done();
         aux.done();
@@ -119,7 +119,7 @@ mod test {
             Transaction::get(Low),
             Transaction::get(High),
         ]);
-        Wakeup::set_pins(&mut aux, &mut m0, &mut m1, &mut MockNoop);
+        Wakeup::set_pins(&mut aux, &mut m0, &mut m1, &mut NoopDelay::new());
         m0.done();
         m1.done();
         aux.done();
@@ -134,7 +134,7 @@ mod test {
             Transaction::get(Low),
             Transaction::get(High),
         ]);
-        Monitor::set_pins(&mut aux, &mut m0, &mut m1, &mut MockNoop);
+        Monitor::set_pins(&mut aux, &mut m0, &mut m1, &mut NoopDelay::new());
         m0.done();
         m1.done();
         aux.done();
@@ -149,7 +149,7 @@ mod test {
             Transaction::get(Low),
             Transaction::get(High),
         ]);
-        Program::set_pins(&mut aux, &mut m0, &mut m1, &mut MockNoop);
+        Program::set_pins(&mut aux, &mut m0, &mut m1, &mut NoopDelay::new());
         m0.done();
         m1.done();
         aux.done();

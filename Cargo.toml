@@ -10,16 +10,17 @@ repository = "https://github.com/barafael/ebyte-e32-rs"
 value_enum = ["dep:clap", "snafu/std"]
 
 [dev-dependencies]
-embedded-hal-mock = "0.8.0"
-proptest = "1.0.0"
-proptest-derive = "0.3.0"
+embedded-hal-mock = { version = "0.11", features = ["eh1"] }
+proptest = "1"
+proptest-derive = "0.4"
 
 [dependencies]
-clap = { version = "3.2.23", features = ["derive"], optional = true }
-embedded-hal = { version = "0.2.7", features = ["unproven"] }
-mutants = "0.0.3"
-nb = "1.0.0"
-snafu = { version = "0.7.3", features = [
+clap = { version = "4", features = ["derive"], optional = true }
+embedded-hal = "1"
+embedded-hal-nb = "1"
+mutants = "0.0.4"
+nb = "1"
+snafu = { version = "0.8", features = [
     "rust_1_61",
 ], default-features = false }
-typed-builder = "0.11.0"
+typed-builder = "0.23"

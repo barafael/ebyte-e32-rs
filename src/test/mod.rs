@@ -1,14 +1,14 @@
 use crate::{mode::Normal, Ebyte};
 use core::marker::PhantomData;
-use embedded_hal::serial::{Read, Write};
+use embedded_hal_nb::serial::{Read, Write};
 use embedded_hal_mock::{
-    delay,
-    pin::{
+    eh1::delay,
+    eh1::digital::{
         Mock as Pin,
         State::{High, Low},
         Transaction as PinTransaction,
     },
-    serial::Mock as Serial,
+    eh1::serial::Mock as Serial,
 };
 
 mod read_model;
@@ -24,7 +24,7 @@ fn acquire_release() {
     let m0 = Pin::new(&vec![PinTransaction::set(Low)]);
     let m1 = Pin::new(&vec![PinTransaction::set(Low)]);
     let serial = Serial::new(&[]);
-    let delay = delay::MockNoop;
+    let delay = delay::NoopDelay::new();
 
     let mock = Ebyte::new(serial, aux, m0, m1, delay).unwrap();
     let (mut s, mut aux, mut m0, mut m1, _delay) = mock.release();
@@ -34,7 +34,7 @@ fn acquire_release() {
     m1.done();
 }
 
-use embedded_hal_mock::serial::Transaction as SerialTransaction;
+use embedded_hal_mock::eh1::serial::Transaction as SerialTransaction;
 use proptest::prelude::*;
 
 #[test]
@@ -49,7 +49,7 @@ fn flushes() {
         aux,
         m0,
         m1,
-        delay: delay::MockNoop,
+        delay: delay::NoopDelay::new(),
         mode: PhantomData::<Normal>,
     };
 
@@ -83,7 +83,7 @@ fn resets() {
         aux,
         m0,
         m1,
-        delay: delay::MockNoop,
+        delay: delay::NoopDelay::new(),
         mode: PhantomData::<Normal>,
     };
 
@@ -112,7 +112,7 @@ proptest! {
             aux,
             m0,
             m1,
-            delay: delay::MockNoop,
+            delay: delay::NoopDelay::new(),
             mode: PhantomData::<Normal>,
         };
 
@@ -140,7 +140,7 @@ proptest! {
             aux,
             m0,
             m1,
-            delay: delay::MockNoop,
+            delay: delay::NoopDelay::new(),
             mode: PhantomData::<Normal>,
         };
 
@@ -167,7 +167,7 @@ proptest! {
             aux,
             m0,
             m1,
-            delay: delay::MockNoop,
+            delay: delay::NoopDelay::new(),
             mode: PhantomData::<Normal>,
         };
 
@@ -196,7 +196,7 @@ proptest! {
             aux,
             m0,
             m1,
-            delay: delay::MockNoop,
+            delay: delay::NoopDelay::new(),
             mode: PhantomData::<Normal>,
         };
 

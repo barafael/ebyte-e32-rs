@@ -19,26 +19,24 @@ use ebyte_e32::{
     Ebyte,
 };
 use embedded_hal::{
-    blocking::delay,
-    digital::v2::{InputPin, OutputPin},
-    serial,
+    delay::DelayNs,
+    digital::{InputPin, OutputPin},
 };
-use embedded_hal::digital::v2::ToggleableOutputPin;
+use embedded_hal_nb::serial::{Read, Write};
 use std::fmt::Debug;
 
 pub fn simple_test_ebyte<S, AUX, M0, M1, D, LED>(
     mut ebyte: Ebyte<S, AUX, M0, M1, D, Normal>,
     mut led: LED,
-    mut delay: impl delay::DelayMs<u32>,
+    mut delay: impl DelayNs,
 ) where
-    S: serial::Read<u8> + serial::Write<u8>,
-    <S as serial::Read<u8>>::Error: Debug,
-    <S as serial::Write<u8>>::Error: Debug,
+    S: Read<u8> + Write<u8>,
+    <S as embedded_hal_nb::serial::ErrorType>::Error: Debug,
     AUX: InputPin,
     M0: OutputPin,
     M1: OutputPin,
-    D: delay::DelayMs<u32>,
-    LED: ToggleableOutputPin,
+    D: DelayNs,
+    LED: embedded_hal::digital::StatefulOutputPin,
     LED::Error: Debug,
 {
     let model_data = ebyte.model_data().unwrap();

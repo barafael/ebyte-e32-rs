@@ -1,13 +1,13 @@
 use crate::{mode::Normal, model_data::ModelData, Ebyte};
 use embedded_hal_mock::{
     common::Generic,
-    delay,
-    pin::{
+    eh1::delay,
+    eh1::digital::{
         Mock as Pin,
         State::{High, Low},
         Transaction as PinTransaction,
     },
-    serial::{Mock as Serial, Transaction as SerialTransaction},
+    eh1::serial::{Mock as Serial, Transaction as SerialTransaction},
 };
 use std::marker::PhantomData;
 
@@ -69,7 +69,7 @@ proptest! {
             aux,
             m0,
             m1,
-            delay: delay::MockNoop,
+            delay: delay::NoopDelay::new(),
             mode: PhantomData::<Normal>,
         };
         let model = ebyte.model_data().unwrap();
